@@ -27,11 +27,6 @@ namespace IntelligentRestaurantManager.DAL
             return SQLHelper.ExecuteNonQuery("delete from T_CustomerInfo where [WaitingNumber]=@WaitingNumber", new SqlParameter("WaitingNumber", waitingNumber));
         }
         
-        //public int DeleteByName(string name)
-        //{
-        //    return SQLHelper.ExecuteNonQuery("delete from T_CustomerInfo where [Name]=@Name", new SqlParameter("Name", name));
-        //}
-        
         public int DeleteAll()
         {
             return SQLHelper.ExecuteNonQuery("delete from T_CustomerInfo");
