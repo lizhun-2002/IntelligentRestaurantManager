@@ -135,6 +135,31 @@ namespace IntelligentRestaurantManager.DAL
             return list;
         }
 
+        public IEnumerable<Table> GetByTableCustomerId(int customerId)
+        {
+            DataTable dt = new DataTable();
+            dt = SQLHelper.ExecuteDataTable("select * from T_TableInfo where [CustomerId]=@CustomerId", new SqlParameter("CustomerId", customerId));
+            List<Table> list = new List<Table>();
+            foreach (DataRow row in dt.Rows)
+            {
+                Table table = new Table();
+                table.TableId = (int)row["TableId"];
+                table.Capacity = (int)row["Capacity"];
+                table.LinkableTableId1 = (int)row["LinkableTableId1"];
+                table.LinkableTableId2 = (int)row["LinkableTableId2"];
+                table.LinkableTableId3 = (int)row["LinkableTableId3"];
+                table.LinkableTableId4 = (int)row["LinkableTableId4"];
+                table.CountDown = (DateTime)row["CountDown"];
+                table.TableStatus = (TableStatus)row["TableStatus"];
+                table.ReservationInfo = (string)row["ReservationInfo"];
+                table.CustomerId = (int)row["CustomerId"];
+                table.WaiterName = (string)row["WaiterName"];
+                table.OrderId = (int)row["OrderId"];
+                list.Add(table);
+            }
+            return list;
+        }
+
         public Table GetByTableId(int tableId)
         {
             DataTable dt = new DataTable();

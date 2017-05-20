@@ -64,6 +64,11 @@ namespace IntelligentRestaurantManager.BLL
             return tableService.GetByTableStatus(tableStatus);
         }
 
+        public IEnumerable<Table> GetByTableCustomerId(int customerId)
+        {
+            return tableService.GetByTableCustomerId(customerId);
+        }
+
         public Table GetByTableId(int tableId)
         {
             return tableService.GetByTableId(tableId);

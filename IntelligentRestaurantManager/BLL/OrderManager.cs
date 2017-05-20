@@ -83,5 +83,10 @@ namespace IntelligentRestaurantManager.BLL
         {
             return orderService.GetCountByDate(date);
         }
+
+        public int GetMaxOrderId()
+        {
+            return orderService.GetMaxOrderId();
+        }
     }
 }

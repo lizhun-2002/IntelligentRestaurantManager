@@ -25,12 +25,12 @@ namespace IntelligentRestaurantManager.BLL
 
         void InitDiningArea(Staff staff)
         {
-            new System.NotImplementedException();
+            throw new System.NotImplementedException();
         }
 
         void CloseDiningArea()
         {
-            new System.NotImplementedException();
+            throw new System.NotImplementedException();
         }
     }
 }

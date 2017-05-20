@@ -172,7 +172,6 @@ namespace IntelligentRestaurantManager.DAL
             }
         }
 
-
         public int GetCount()
         {
             return (int)SQLHelper.ExecuteScalar("select COUNT(*) from T_OrderFlow");
@@ -181,6 +180,11 @@ namespace IntelligentRestaurantManager.DAL
         public int GetCountByDate(DateTime date)
         {
             return (int)SQLHelper.ExecuteScalar("select COUNT(*) from T_OrderFlow where [StartTime]=@StartTime", new SqlParameter("StartTime", date));
+        }
+
+        public int GetMaxOrderId()
+        {
+            return (int)SQLHelper.ExecuteScalar("select MAX([OrderId]) from T_OrderFlow");
         }
     }
 }
