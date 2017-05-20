@@ -15,22 +15,59 @@ namespace IntelligentRestaurantManager.BLL
         public List<Order> Orders { get; set; }
         public List<Customer> Customers { get; set; }
         public List<Waiter> Waiters { get; set; }
-        IPlacementAlgorithm PlacementOptimizer { get; set; }
-        IPredictionAlgorithm WaitingTimePredictor { get; set; }
+        IPlacementAlgorithm APlacementOptimizer { get; set; }
+        IPredictionAlgorithm AWaitingTimePredictor { get; set; }
 
         public DiningArea(Staff staff)
         {
             InitDiningArea(staff);
         }
 
-        void InitDiningArea(Staff staff)
+        public void InitDiningArea(Staff staff)
         {
-            throw new System.NotImplementedException();
+            CurrentStaff = staff;
+            Tables = (List<Table>)new TableManager().GetAll();
+            Orders = (List<Order>)new OrderManager().GetByOrderStatus(OrderStatus.Start);
+            Customers = (List<Customer>)new CustomerManager().GetAll();
+            Waiters = (List<Waiter>)new StaffManager().GetByRole(StaffRole.Waiter);
+            APlacementOptimizer = new PlacementOptimizer();
+            AWaitingTimePredictor = new WaitingTimePredictor();
         }
 
-        void CloseDiningArea()
+        public void CloseDiningArea()
         {
-            throw new System.NotImplementedException();
+            //only waiter can close dining area
+            if (!(CurrentStaff is Waiter)) return;
+
+            foreach (Table table in Tables)
+            {
+                //reset countDown time
+                table.CountDown = DateTime.MinValue;
+                //activate table
+                if (table.TableStatus != TableStatus.Breakdown)
+                {
+                    table.TableStatus = TableStatus.Active;
+                }
+                table.ReservationInfo = "";
+                table.CustomerId = -1;
+                table.WaiterName = "";
+                table.OrderId = -1;
+                new TableManager().Update(table);
+            }
+
+            foreach (Order order in Orders)
+            {
+                if (order.OrderStatus == OrderStatus.Start)
+                {
+                    order.OrderStatus = OrderStatus.Finish;
+                    order.FinishTime = DateTime.Now;
+                    new OrderManager().Update(order);
+                }
+            }
+
+            //clear waiting list
+            new CustomerManager().DeleteAll();
+
         }
     }
 }

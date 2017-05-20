@@ -39,7 +39,7 @@ namespace IntelligentRestaurantManager.BLL
 
         }
 
-        public int DeleteByRole(string role)
+        public int DeleteByRole(StaffRole role)
         {
             return staffService.DeleteByRole(role);
         }
@@ -64,7 +64,7 @@ namespace IntelligentRestaurantManager.BLL
             return staffService.GetAll();
         }
 
-        public IEnumerable<Staff> GetByRole(string role)
+        public IEnumerable<Staff> GetByRole(StaffRole role)
         {
             return staffService.GetByRole(role);
         }

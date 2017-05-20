@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace IntelligentRestaurantManager.Model
 {
+    enum StaffRole
+    {
+        Staff, Manager, Waiter, Cook
+    }
+
     class Staff
     {
 
@@ -25,9 +30,9 @@ namespace IntelligentRestaurantManager.Model
             set { password = value; }
         }
 
-        private string role;
+        private StaffRole role;
 
-        public string Role
+        public StaffRole Role
         {
             get { return role; }
             set { role = value; }

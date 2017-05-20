@@ -8,7 +8,7 @@ using IntelligentRestaurantManager.DAL;
 
 namespace IntelligentRestaurantManager.BLL
 {
-    class Manager: Staff
+    class Manager: Waiter
     {
         /// <summary>
         /// Add data

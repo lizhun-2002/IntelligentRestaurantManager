@@ -20,7 +20,7 @@ namespace IntelligentRestaurantManager.DAL
                 );
         }
 
-        public int DeleteByRole(string role)
+        public int DeleteByRole(StaffRole role)
         {
             return SQLHelper.ExecuteNonQuery("delete from T_StaffInfo where [Role]=@Role", new SqlParameter("Role", role));
         }
@@ -54,13 +54,13 @@ namespace IntelligentRestaurantManager.DAL
                 Staff staff = new Staff();
                 staff.Name = (string)row["Name"];
                 staff.Password = (string)row["Password"];
-                staff.Role = (string)row["Role"];
+                staff.Role = (StaffRole)row["Role"];
                 list.Add(staff);
             }
             return list;
         }
 
-        public IEnumerable<Staff> GetByRole(string role)
+        public IEnumerable<Staff> GetByRole(StaffRole role)
         {
             DataTable dt = new DataTable();
             dt = SQLHelper.ExecuteDataTable("select * from T_StaffInfo where [Role]=@Role", new SqlParameter("Role", role));
@@ -70,7 +70,7 @@ namespace IntelligentRestaurantManager.DAL
                 Staff staff = new Staff();
                 staff.Name = (string)row["Name"];
                 staff.Password = (string)row["Password"];
-                staff.Role = (string)row["Role"];
+                staff.Role = (StaffRole)row["Role"];
                 list.Add(staff);
             }
             return list;
@@ -86,7 +86,7 @@ namespace IntelligentRestaurantManager.DAL
                 Staff staff = new Staff();
                 staff.Name = (string)row["Name"];
                 staff.Password = (string)row["Password"];
-                staff.Role = (string)row["Role"];
+                staff.Role = (StaffRole)row["Role"];
                 return staff;
             }
             else if (dt.Rows.Count > 1)
