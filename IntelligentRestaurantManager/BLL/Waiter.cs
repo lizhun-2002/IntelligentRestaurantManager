@@ -86,7 +86,10 @@ namespace IntelligentRestaurantManager.BLL
 
         public int CreateOrder(List<Order> orders, Table table, List<Item> items, int numberofPeople)
         {
-            if (table.CustomerId == null) return 0;
+            if (table.CustomerId <= 0) 
+            { 
+                return 0; 
+            }
             List<Table> tables = (List<Table>)new TableManager().GetByTableCustomerId(table.CustomerId);
             Order order = new Order();
             order.OrderId = new OrderManager().GetMaxOrderId() + 1;

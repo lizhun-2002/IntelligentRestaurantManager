@@ -6,13 +6,21 @@ using System.Threading.Tasks;
 
 namespace IntelligentRestaurantManager.Model
 {
-    enum TableStatus
+    public enum TableStatus
     {
         Active,Ordering,Cleaning,Reserved,Breakdown
     }
 
-    class Table
+    public class Table
     {
+        public Table()
+        {
+            CountDown = DateTime.MinValue;
+            ReservationInfo = "";
+            CustomerId = -1;
+            WaiterName = "";
+            OrderId = -1;
+        }
         private int tableId;
 
         public int TableId

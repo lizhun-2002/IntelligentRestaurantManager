@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace IntelligentRestaurantManager.Model
 {
-    enum StaffRole
+    public enum StaffRole
     {
         Staff, Manager, Waiter, Cook
     }
 
-    class Staff
+    public class Staff
     {
 
         private string name;

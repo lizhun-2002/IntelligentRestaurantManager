@@ -8,13 +8,13 @@ using IntelligentRestaurantManager.DAL;
 
 namespace IntelligentRestaurantManager.BLL
 {
-    class DiningArea
+    public class DiningArea
     {
         public Staff CurrentStaff { get; set; }
         public List<Table> Tables { get; set; }
         public List<Order> Orders { get; set; }
         public List<Customer> Customers { get; set; }
-        public List<Waiter> Waiters { get; set; }
+        public List<Staff> Waiters { get; set; }
         IPlacementAlgorithm APlacementOptimizer { get; set; }
         IPredictionAlgorithm AWaitingTimePredictor { get; set; }
 
@@ -29,7 +29,7 @@ namespace IntelligentRestaurantManager.BLL
             Tables = (List<Table>)new TableManager().GetAll();
             Orders = (List<Order>)new OrderManager().GetByOrderStatus(OrderStatus.Start);
             Customers = (List<Customer>)new CustomerManager().GetAll();
-            Waiters = (List<Waiter>)new StaffManager().GetByRole(StaffRole.Waiter);
+            Waiters = (List<Staff>)new StaffManager().GetByRole(StaffRole.Waiter);
             APlacementOptimizer = new PlacementOptimizer();
             AWaitingTimePredictor = new WaitingTimePredictor();
         }

@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace IntelligentRestaurantManager.Model
 {
-    class Customer
+    public class Customer
     {
+        public Customer()
+        {
+            RecommendedTableId = -1;
+            EstimatedWaitingTime = -1;
+        }
         private int waitingNumber;
 
         public int WaitingNumber

@@ -6,13 +6,17 @@ using System.Threading.Tasks;
 
 namespace IntelligentRestaurantManager.Model
 {
-    enum OrderStatus
+    public enum OrderStatus
     {
         Start, Cancel, Finish
     }
 
-    class Order
+    public class Order
     {
+        public Order()
+        {
+            FinishTime = DateTime.MinValue;
+        }
         private int orderId;
 
         public int OrderId

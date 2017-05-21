@@ -45,10 +45,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\CodeRules.cs" />
-    <Compile Include="Common\CSVUtility.cs" />
-    <Compile Include="Common\DateRules.cs" />
-    <Compile Include="Common\TXTUtility.cs" />
+    <Compile Include="BLL\Cook.cs" />
+    <Compile Include="BLL\CustomerManager.cs" />
+    <Compile Include="BLL\DiningArea.cs" />
+    <Compile Include="BLL\IPlacementAlgorithm.cs" />
+    <Compile Include="BLL\IPredictionAlgorithm.cs" />
+    <Compile Include="BLL\ItemManager.cs" />
+    <Compile Include="BLL\Manager.cs" />
+    <Compile Include="BLL\OrderManager.cs" />
+    <Compile Include="BLL\PlacementOptimizer.cs" />
+    <Compile Include="BLL\StaffManager.cs" />
+    <Compile Include="BLL\TableManager.cs" />
+    <Compile Include="BLL\Waiter.cs" />
+    <Compile Include="BLL\WaitingTimePredictor.cs" />
     <Compile Include="DAL\CustomerService.cs" />
     <Compile Include="DAL\ItemService.cs" />
     <Compile Include="DAL\OrderService.cs">
@@ -57,11 +66,11 @@
     <Compile Include="DAL\SQLHelper.cs" />
     <Compile Include="DAL\StaffService.cs" />
     <Compile Include="DAL\TableService.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="UI\TabelStatusForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="UI\TabelStatusForm.Designer.cs">
+      <DependentUpon>TabelStatusForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\Item.cs" />
@@ -70,6 +79,15 @@
     <Compile Include="Model\Staff.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="UI\TabelStatusForm.resx">
+      <DependentUpon>TabelStatusForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -79,6 +97,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UI\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -95,7 +116,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="BLL\" />
+    <Folder Include="Common\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

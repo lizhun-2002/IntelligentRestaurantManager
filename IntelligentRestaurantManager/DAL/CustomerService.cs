@@ -46,7 +46,7 @@ namespace IntelligentRestaurantManager.DAL
         public IEnumerable<Customer> GetAll()
         {
             DataTable dt = new DataTable();
-            dt = SQLHelper.ExecuteDataTable("select * from T_CustomerInfo order by [CustomerId]");
+            dt = SQLHelper.ExecuteDataTable("select * from T_CustomerInfo order by [WaitingNumber]");
             List<Customer> list = new List<Customer>();
             foreach (DataRow row in dt.Rows)
             {

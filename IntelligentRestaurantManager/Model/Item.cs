@@ -6,13 +6,17 @@ using System.Threading.Tasks;
 
 namespace IntelligentRestaurantManager.Model
 {
-    enum ItemStatus
+    public enum ItemStatus
     {
         Wait,Start,Cancel,Finish
     }
 
-    class Item
+    public class Item
     {
+        public Item()
+        {
+            ItemStatus = ItemStatus.Wait;
+        }
         private int itemId;
 
         public int ItemId
