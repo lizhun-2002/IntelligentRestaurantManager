@@ -15,7 +15,7 @@ namespace IntelligentRestaurantManager.Model
     {
         public Table()
         {
-            CountDown = DateTime.MinValue;
+            CountDown = System.Data.SqlTypes.SqlDateTime.MinValue.Value;
             ReservationInfo = "";
             CustomerId = -1;
             WaiterName = "";

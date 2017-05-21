@@ -15,7 +15,7 @@ namespace IntelligentRestaurantManager.Model
     {
         public Order()
         {
-            FinishTime = DateTime.MinValue;
+            FinishTime = System.Data.SqlTypes.SqlDateTime.MinValue.Value;
         }
         private int orderId;
 
