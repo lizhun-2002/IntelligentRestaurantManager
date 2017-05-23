@@ -66,6 +66,12 @@
     <Compile Include="DAL\SQLHelper.cs" />
     <Compile Include="DAL\StaffService.cs" />
     <Compile Include="DAL\TableService.cs" />
+    <Compile Include="UI\OrderListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\OrderListForm.Designer.cs">
+      <DependentUpon>OrderListForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\ReservationsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,6 +109,9 @@
     <Compile Include="UI\WaitlistForm.Designer.cs">
       <DependentUpon>WaitlistForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UI\OrderListForm.resx">
+      <DependentUpon>OrderListForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\ReservationsForm.resx">
       <DependentUpon>ReservationsForm.cs</DependentUpon>
     </EmbeddedResource>
