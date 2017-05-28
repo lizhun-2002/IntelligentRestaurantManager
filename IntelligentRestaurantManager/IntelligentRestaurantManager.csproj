@@ -58,6 +58,7 @@
     <Compile Include="BLL\TableManager.cs" />
     <Compile Include="BLL\Waiter.cs" />
     <Compile Include="BLL\WaitingTimePredictor.cs" />
+    <Compile Include="Common\DataValidity.cs" />
     <Compile Include="DAL\CustomerService.cs" />
     <Compile Include="DAL\ItemService.cs" />
     <Compile Include="DAL\OrderService.cs">
@@ -66,6 +67,12 @@
     <Compile Include="DAL\SQLHelper.cs" />
     <Compile Include="DAL\StaffService.cs" />
     <Compile Include="DAL\TableService.cs" />
+    <Compile Include="UI\OrderEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\OrderEditForm.Designer.cs">
+      <DependentUpon>OrderEditForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\OrderListForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,12 +110,21 @@
     <Compile Include="UI\TableEditForm.Designer.cs">
       <DependentUpon>TableEditForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\WaitinglistScreenForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\WaitinglistScreenForm.designer.cs">
+      <DependentUpon>WaitinglistScreenForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\WaitlistForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\WaitlistForm.Designer.cs">
       <DependentUpon>WaitlistForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UI\OrderEditForm.resx">
+      <DependentUpon>OrderEditForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\OrderListForm.resx">
       <DependentUpon>OrderListForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -133,6 +149,9 @@
     <EmbeddedResource Include="UI\TableEditForm.resx">
       <DependentUpon>TableEditForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\WaitinglistScreenForm.resx">
+      <DependentUpon>WaitinglistScreenForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\WaitlistForm.resx">
       <DependentUpon>WaitlistForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -151,9 +170,7 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Common\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

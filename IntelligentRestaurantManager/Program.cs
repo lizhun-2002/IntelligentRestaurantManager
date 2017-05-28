@@ -40,6 +40,7 @@ namespace IntelligentRestaurantManager
                 }
                 else if (currentStaff.Role == StaffRole.Waiter)
                 {
+                    //main form for waiter
                     Application.Run(new TabelStatusForm(diningArea));
                 }
                 else if (currentStaff.Role == StaffRole.Cook)
