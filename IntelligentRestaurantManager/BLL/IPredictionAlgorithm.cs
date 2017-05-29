@@ -10,6 +10,10 @@ namespace IntelligentRestaurantManager.BLL
 {
     interface IPredictionAlgorithm
     {
-        void PredictWaitingTime(List<Table> tables, List<Customer> customers);
+        int Max_Active_Seat(List<Table> tables, int currID);
+
+        int Max_Active_Cleaning_Seat(List<Table> tables, int currID);
+
+        void PredictWaitingTime(List<Table> ptables, List<Customer> pcustomers);
     }
 }
