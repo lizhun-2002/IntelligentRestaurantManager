@@ -12,13 +12,13 @@ using IntelligentRestaurantManager.Model;
 
 namespace IntelligentRestaurantManager.UI
 {
-    public partial class TableEditForm : Form
+    public partial class ItemEditForm : Form
     {
-        public TableEditForm()
+        public ItemEditForm()
         {
             InitializeComponent();
         }
-        public TableEditForm(Table table)
+        public ItemEditForm(Item item)
         {
             InitializeComponent();
         }

@@ -22,13 +22,13 @@ namespace IntelligentRestaurantManager
 
             Staff currentStaff = new Staff();
             LoginForm loginForm = new LoginForm();
-            ReservationsForm resForm = new ReservationsForm();
+            //ReservationsForm resForm = new ReservationsForm();
 
             // TEST PURPOSE CODE BELOW
             // Application.Run(resForm);
             // TEST PURPOSE CODE ABOVE
 
-            /*
+            
             if (loginForm.ShowDialog() == DialogResult.OK)
             {
                 currentStaff = loginForm.currentStaff;
@@ -36,7 +36,9 @@ namespace IntelligentRestaurantManager
                 loginForm.Close();
                 if (currentStaff.Role == StaffRole.Manager)
                 {
-                    MessageBox.Show(string.Format("Welcome {0}! Your role is {1}", currentStaff.Name, currentStaff.Role));
+                    //MessageBox.Show(string.Format("Welcome {0}! Your role is {1}", currentStaff.Name, currentStaff.Role));
+                    //main form for Manager
+                    Application.Run(new AdminForm());
                 }
                 else if (currentStaff.Role == StaffRole.Waiter)
                 {
@@ -52,7 +54,7 @@ namespace IntelligentRestaurantManager
                     MessageBox.Show(string.Format("Welcome {0}! Your role is {1}. And you will see customer UI.", currentStaff.Name, currentStaff.Role));
                 }
             }
-            */
+            
 
             ////test db
             //IntelligentRestaurantManager.Model.Staff staff = new Model.Staff();

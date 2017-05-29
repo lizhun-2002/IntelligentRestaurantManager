@@ -222,18 +222,20 @@
             // 
             // btnCreateEdit
             // 
+            this.btnCreateEdit.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreateEdit.Location = new System.Drawing.Point(16, 308);
             this.btnCreateEdit.Name = "btnCreateEdit";
-            this.btnCreateEdit.Size = new System.Drawing.Size(144, 23);
+            this.btnCreateEdit.Size = new System.Drawing.Size(144, 30);
             this.btnCreateEdit.TabIndex = 8;
             this.btnCreateEdit.Text = "Create and Edit Order";
             this.btnCreateEdit.UseVisualStyleBackColor = true;
             // 
             // btnCreateOrder
             // 
+            this.btnCreateOrder.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreateOrder.Location = new System.Drawing.Point(16, 255);
             this.btnCreateOrder.Name = "btnCreateOrder";
-            this.btnCreateOrder.Size = new System.Drawing.Size(144, 23);
+            this.btnCreateOrder.Size = new System.Drawing.Size(144, 30);
             this.btnCreateOrder.TabIndex = 7;
             this.btnCreateOrder.Text = "Create Order";
             this.btnCreateOrder.UseVisualStyleBackColor = true;
