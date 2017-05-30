@@ -10,7 +10,7 @@ namespace IntelligentRestaurantManager.Model
     {
         public Customer()
         {
-            RecommendedTableId = -1;
+            RecommendedTableId = new int[] {-1};
             EstimatedWaitingTime = -1;
         }
         private int waitingNumber;
@@ -34,9 +34,9 @@ namespace IntelligentRestaurantManager.Model
             get { return arriveTime; }
             set { arriveTime = value; }
         }
-        private int recommendedTableId;
+        private int[] recommendedTableId;
 
-        public int RecommendedTableId
+        public int[] RecommendedTableId
         {
             get { return recommendedTableId; }
             set { recommendedTableId = value; }

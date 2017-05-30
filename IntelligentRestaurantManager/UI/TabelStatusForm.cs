@@ -12,20 +12,35 @@ using IntelligentRestaurantManager.Model;
 
 namespace IntelligentRestaurantManager.UI
 {
+    //TabelStatusForm is main form for waiter
     public partial class TabelStatusForm : Form
     {
+        DiningArea diningArea;
+        //WaitlistForm is a part of waiter main form, so...it's here
+        WaitlistForm waitlistForm;
+            
         public TabelStatusForm(DiningArea diningArea)
         {
             InitializeComponent();
             this.diningArea = diningArea;
             this.Text = string.Format("Welcome {0}! Your role is {1}", diningArea.CurrentStaff.Name, diningArea.CurrentStaff.Role);
+            InitTablePosition_Simple();
         }
-
-        DiningArea diningArea;
 
         private void TabelStatusForm_Load(object sender, EventArgs e)
         {
-            InitTablePosition_Simple();
+            waitlistForm = new WaitlistForm(diningArea);
+            //set TabelStatusForm location
+            int x = (System.Windows.Forms.SystemInformation.WorkingArea.Width - this.Width + waitlistForm.Width) / 2;
+            int y = (System.Windows.Forms.SystemInformation.WorkingArea.Height - this.Height) / 2;
+            this.StartPosition = FormStartPosition.Manual; 
+            this.Location = (Point)new Size(x, y);
+            //set waitlistForm location
+            waitlistForm.ShowInTaskbar = false;
+            waitlistForm.StartPosition = FormStartPosition.Manual;
+            waitlistForm.Location = new Point(this.Location.X - waitlistForm.Width, this.Location.Y);
+            waitlistForm.Height = this.Height;
+            waitlistForm.Show();
         }
 
         //Simplely initialize tables position order by table ID.
@@ -45,32 +60,31 @@ namespace IntelligentRestaurantManager.UI
                 //btn.ContextMenuStrip = contextMenuStrip1;
                 btn.MouseDown += btn_MouseDown;
                 btn.Click += btn_Click;
+                btn.MouseEnter += btn_MouseEnter;
 
-
-                //btn.MouseMove += new MouseEventHandler(button_MouseMove);
-                //btn.MouseLeave += new EventHandler(button_MouseLeave);
-                //btn.Image = Image.FromFile(@"F:/VS2008ImageLibrary/Actions/AddTableHH.bmp");
-                //btn.ImageAlign = ContentAlignment.MiddleCenter;
-                //for (int j = 0; j < 3; j++)
-                //{
-                //    Label lb1 = new Label();
-                //    lb1.BackColor = Color.SlateGray;
-                //    lb1.Location = new Point(j * 20 + 7, 60);
-                //    lb1.Width = 10;
-                //    lb1.Height = 11;
-                //    lb.Controls.Add(lb1);
-                //}
                 this.flowLayoutPanel1.Controls.Add(btn);
             }
         }
 
-        void btn_Click(object sender, EventArgs e)
+        void btn_MouseEnter(object sender, EventArgs e)
         {
             Table table = (Table)(sender as Button).Tag;
-            string text = string.Format("Table ID: {0}\nCapacity: {1}\nTable Status: {2}\nOrder ID: {3}\nWaiter Name: {4}\nReservation Information: {5}", 
-                table.TableId, table.Capacity,table.TableStatus,table.OrderId,table.WaiterName,table.ReservationInfo);
-            //toolTip1.SetToolTip()
-            toolTip1.Show(text, (sender as Button));
+            string text = string.Format("Table ID: {0}\nCapacity: {1}\nTable Status: {2}\nOrder ID: {3}\nWaiter Name: {4}\nReservation Information: {5}",
+                table.TableId, table.Capacity, table.TableStatus, table.OrderId, table.WaiterName, table.ReservationInfo);
+            toolTip1.SetToolTip((sender as Button), text);
+            //toolTip1.Show(text, (sender as Button));
+        }
+
+        void btn_Click(object sender, EventArgs e)
+        {
+            //labelTabelId.Tag save selected Table object
+            labelTabelId.Tag = (sender as Button).Tag;
+            comboBoxCustomerId.DataSource = null;
+            comboBoxCustomerId.DataSource = diningArea.Customers.Select(customer => customer.WaitingNumber).ToList();
+            comboBoxWaiterId.DataSource = null;
+            comboBoxWaiterId.DataSource = diningArea.Waiters.Select(waiter=>waiter.Name).ToList();
+            //Todo: waiter name order by workload, i.e. sum of customers 
+
         }
 
         void btn_MouseDown(object sender, MouseEventArgs e)
@@ -111,6 +125,30 @@ namespace IntelligentRestaurantManager.UI
             Table table = contextMenuStrip1.Tag as Table;
             MessageBox.Show(string.Format("Table ID is {0}! It's capacity {1}", table.TableId, table.Capacity));
 
+        }
+
+        private void waitingListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (waitlistForm == null || waitlistForm.IsDisposed)
+            {
+                waitlistForm = new WaitlistForm(diningArea);
+                waitlistForm.ShowInTaskbar = false;
+                waitlistForm.StartPosition = FormStartPosition.Manual;
+                waitlistForm.Location = new Point(this.Location.X + this.Size.Width, this.Location.Y);
+                waitlistForm.Show();
+            }
+            else
+            {
+                waitlistForm.WindowState = FormWindowState.Normal;
+                waitlistForm.Activate();
+                waitlistForm.Show();
+            }
+        }
+
+        private void btnCreateOrder_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(string.Format("There are {0} customers waiting.", diningArea.Customers.Count));
+            //(diningArea.CurrentStaff as Waiter).CreateOrder(diningArea.Orders,(Table)labelTabelId.Tag,
         }
     }
 }

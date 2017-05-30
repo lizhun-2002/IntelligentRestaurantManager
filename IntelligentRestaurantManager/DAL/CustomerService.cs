@@ -17,7 +17,7 @@ namespace IntelligentRestaurantManager.DAL
                 new SqlParameter("WaitingNumber", customer.WaitingNumber),
                 new SqlParameter("NumberofPeople", customer.NumberofPeople),
                 new SqlParameter("ArriveTime", customer.ArriveTime),
-                new SqlParameter("RecommendedTableId", customer.RecommendedTableId),
+                new SqlParameter("RecommendedTableId", string.Join(",", customer.RecommendedTableId)),
                 new SqlParameter("EstimatedWaitingTime", customer.EstimatedWaitingTime)
                 );
         }
@@ -38,7 +38,7 @@ namespace IntelligentRestaurantManager.DAL
                 new SqlParameter("WaitingNumber", customer.WaitingNumber),
                 new SqlParameter("NumberofPeople", customer.NumberofPeople),
                 new SqlParameter("ArriveTime", customer.ArriveTime),
-                new SqlParameter("RecommendedTableId", customer.RecommendedTableId),
+                new SqlParameter("RecommendedTableId", string.Join(",", customer.RecommendedTableId)),
                 new SqlParameter("EstimatedWaitingTime", customer.EstimatedWaitingTime)
                 );
         }
@@ -54,7 +54,10 @@ namespace IntelligentRestaurantManager.DAL
                 customer.WaitingNumber = (int)row["WaitingNumber"];
                 customer.NumberofPeople = (int)row["NumberofPeople"];
                 customer.ArriveTime = (DateTime)row["ArriveTime"];
-                customer.RecommendedTableId = (int)row["RecommendedTableId"];
+
+                string[] strArray = ((string)row["RecommendedTableId"]).Split(new char[] { ',' });
+                customer.RecommendedTableId = Array.ConvertAll<string, int>(strArray, s => int.Parse(s));
+
                 customer.EstimatedWaitingTime = (int)row["EstimatedWaitingTime"];
                 list.Add(customer);
             }
@@ -72,7 +75,10 @@ namespace IntelligentRestaurantManager.DAL
                 customer.WaitingNumber = (int)row["WaitingNumber"];
                 customer.NumberofPeople = (int)row["NumberofPeople"];
                 customer.ArriveTime = (DateTime)row["ArriveTime"];
-                customer.RecommendedTableId = (int)row["RecommendedTableId"];
+
+                string[] strArray = ((string)row["RecommendedTableId"]).Split(new char[] { ',' });
+                customer.RecommendedTableId = Array.ConvertAll<string, int>(strArray, s => int.Parse(s));
+
                 customer.EstimatedWaitingTime = (int)row["EstimatedWaitingTime"];
                 list.Add(customer);
             }
@@ -90,7 +96,10 @@ namespace IntelligentRestaurantManager.DAL
                 customer.WaitingNumber = (int)row["WaitingNumber"];
                 customer.NumberofPeople = (int)row["NumberofPeople"];
                 customer.ArriveTime = (DateTime)row["ArriveTime"];
-                customer.RecommendedTableId = (int)row["RecommendedTableId"];
+
+                string[] strArray = ((string)row["RecommendedTableId"]).Split(new char[] { ',' });
+                customer.RecommendedTableId = Array.ConvertAll<string, int>(strArray, s => int.Parse(s));
+
                 customer.EstimatedWaitingTime = (int)row["EstimatedWaitingTime"];
                 return customer;
             }

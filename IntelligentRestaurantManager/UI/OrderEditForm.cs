@@ -7,18 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using IntelligentRestaurantManager.BLL;
-using IntelligentRestaurantManager.Model;
 
 namespace IntelligentRestaurantManager.UI
 {
-    public partial class TableEditForm : Form
+    public partial class OrderEditForm : Form
     {
-        public TableEditForm()
-        {
-            InitializeComponent();
-        }
-        public TableEditForm(Table table)
+        public OrderEditForm()
         {
             InitializeComponent();
         }

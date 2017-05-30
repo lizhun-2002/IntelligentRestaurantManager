@@ -58,6 +58,7 @@
     <Compile Include="BLL\TableManager.cs" />
     <Compile Include="BLL\Waiter.cs" />
     <Compile Include="BLL\WaitingTimePredictor.cs" />
+    <Compile Include="Common\DataValidity.cs" />
     <Compile Include="DAL\CustomerService.cs" />
     <Compile Include="DAL\ItemService.cs" />
     <Compile Include="DAL\OrderService.cs">
@@ -66,6 +67,24 @@
     <Compile Include="DAL\SQLHelper.cs" />
     <Compile Include="DAL\StaffService.cs" />
     <Compile Include="DAL\TableService.cs" />
+    <Compile Include="UI\AdminForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\AdminForm.Designer.cs">
+      <DependentUpon>AdminForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ItemEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ItemEditForm.Designer.cs">
+      <DependentUpon>ItemEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\OrderEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\OrderEditForm.Designer.cs">
+      <DependentUpon>OrderEditForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\OrderListForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +96,12 @@
     </Compile>
     <Compile Include="UI\ReservationsForm.Designer.cs">
       <DependentUpon>ReservationsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\StaffEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\StaffEditForm.Designer.cs">
+      <DependentUpon>StaffEditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\TabelStatusForm.cs">
       <SubType>Form</SubType>
@@ -97,11 +122,23 @@
     <Compile Include="UI\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\TableEditForm%28old version%29.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\TableEditForm%28old version%29.Designer.cs">
+      <DependentUpon>TableEditForm%28old version%29.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\TableEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\TableEditForm.Designer.cs">
       <DependentUpon>TableEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\WaitinglistScreenForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\WaitinglistScreenForm.designer.cs">
+      <DependentUpon>WaitinglistScreenForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\WaitlistForm.cs">
       <SubType>Form</SubType>
@@ -109,11 +146,23 @@
     <Compile Include="UI\WaitlistForm.Designer.cs">
       <DependentUpon>WaitlistForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UI\AdminForm.resx">
+      <DependentUpon>AdminForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ItemEditForm.resx">
+      <DependentUpon>ItemEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\OrderEditForm.resx">
+      <DependentUpon>OrderEditForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\OrderListForm.resx">
       <DependentUpon>OrderListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ReservationsForm.resx">
       <DependentUpon>ReservationsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\StaffEditForm.resx">
+      <DependentUpon>StaffEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\TabelStatusForm.resx">
       <DependentUpon>TabelStatusForm.cs</DependentUpon>
@@ -130,8 +179,14 @@
     <EmbeddedResource Include="UI\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\TableEditForm%28old version%29.resx">
+      <DependentUpon>TableEditForm%28old version%29.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\TableEditForm.resx">
       <DependentUpon>TableEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\WaitinglistScreenForm.resx">
+      <DependentUpon>WaitinglistScreenForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\WaitlistForm.resx">
       <DependentUpon>WaitlistForm.cs</DependentUpon>
@@ -151,9 +206,7 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Common\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
