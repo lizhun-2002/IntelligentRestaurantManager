@@ -28,16 +28,17 @@ namespace IntelligentRestaurantManager
             // TEST PURPOSE CODE ABOVE
 
             /*
+>>>>>>> origin/master
             if (loginForm.ShowDialog() == DialogResult.OK)
             {
                 currentStaff = loginForm.currentStaff;
                 DiningArea diningArea = new DiningArea(currentStaff);
-                loginForm.Close();
+                loginForm.Dispose();
                 if (currentStaff.Role == StaffRole.Manager)
                 {
                     //MessageBox.Show(string.Format("Welcome {0}! Your role is {1}", currentStaff.Name, currentStaff.Role));
                     //main form for Manager
-                    Application.Run(new AdminForm());
+                    Application.Run(new AdminForm(diningArea));
                 }
                 else if (currentStaff.Role == StaffRole.Waiter)
                 {

@@ -18,12 +18,16 @@ namespace IntelligentRestaurantManager.UI
     {
         DiningArea diningArea;
         int maxWaitID;
-        CustomerManager customerMng;
+        private CustomerManager customerManager;
+        private TableManager tableManager;
+
         public WaitlistForm(DiningArea diningArea)
         {
             InitializeComponent();
             this.diningArea = diningArea;
             maxWaitID = 1;
+            customerManager = new CustomerManager();
+            tableManager = new TableManager();
             foreach (Customer customer in diningArea.Customers)
             {
                 lbList.Items.Add("Number " + customer.WaitingNumber.ToString("000") + ":  " + customer.NumberofPeople.ToString("000") + " Customer");
@@ -32,29 +36,41 @@ namespace IntelligentRestaurantManager.UI
                     maxWaitID = customer.WaitingNumber;
                 }
             }
-            customerMng = new CustomerManager();
             nudNumber.Value = 2;
+            txtCustomerId.Enabled = false;
+            txtCustomerId.BackColor = Color.White;
+            txtNoOfPeople.Enabled = false;
+            txtNoOfPeople.BackColor = Color.White;
         }
+
+        //define an EventArgs and an event
+        public class AllocateEventArgs : EventArgs
+        {
+            private string title = "";
+            public string Title
+            {
+                get { return title; }
+                set { title = value; }
+            }
+        }
+        public delegate void AllocateEventHandler(object sender, AllocateEventArgs e);
+        public event AllocateEventHandler OnAllocate;
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (Convert.ToInt32(nudNumber.Value)>0)
+            if (Convert.ToInt32(nudNumber.Value) > 0)
             {
                 Customer item_Customer = new Customer();
                 item_Customer.WaitingNumber = ++maxWaitID;
                 item_Customer.NumberofPeople = Convert.ToInt32(nudNumber.Value);
                 item_Customer.ArriveTime = DateTime.Now;
                 //update data base
-                int flag = customerMng.AddNew(item_Customer);
+                int flag = (diningArea.CurrentStaff as Waiter).AddCustomer(diningArea.Customers, item_Customer);
                 //if update success
                 if (flag == 1)
                 {
                     //update listbox control
-                    lbList.Items.Add("Number " + item_Customer.WaitingNumber.ToString("000") + ":  " + item_Customer.NumberofPeople.ToString("000") + " Customer  " + txtName.Text);
-                    //update customer list
-                    diningArea.Customers.Add(item_Customer);
-
-                    txtName.Clear();
+                    lbList.Items.Add("Number " + item_Customer.WaitingNumber.ToString("000") + ":  " + item_Customer.NumberofPeople.ToString("00") + " Customer");
                     nudNumber.Value = 2;
                 }
             }
@@ -62,38 +78,93 @@ namespace IntelligentRestaurantManager.UI
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            RemoveListBoxItem();
+            RemoveCustomer();
         }
 
-        private void RemoveListBoxItem()
+        //remove customer from db,list,listBox
+        private void RemoveCustomer()
         {
             int selected_idx = lbList.SelectedIndex;
             if (selected_idx != -1)
             {
                 string str = (string)lbList.Items[selected_idx];
                 int waitingNumber = Convert.ToInt32(str.Substring(7, 3));
-                int flag = customerMng.DeleteByWaitingNumber(waitingNumber);
+                int flag = customerManager.DeleteByWaitingNumber(waitingNumber);
                 if (flag == 1)
                 {
-                    //update listbox control
-                    lbList.Items.RemoveAt(selected_idx);
                     //update customer list
                     diningArea.Customers.RemoveAt(selected_idx);
+                    //update listbox control
+                    lbList.Items.RemoveAt(selected_idx);
                 }
             }
         }
+
         private void btnAllocate_Click(object sender, EventArgs e)
         {
-            RemoveListBoxItem();
-            //(diningArea.CurrentStaff as Waiter).AllocateTableWaiter();
+            //var table = from tab in diningArea.Tables
+            //            where tab.TableId == int.Parse(txtTableId.Text)
+            //              //orderby tab.score
+            //              select tab;
+            //Table selectedTable = diningArea.Tables.Where(t => t.TableId == int.Parse(txtTableId.Text)) as Table;
+            if (!string.IsNullOrWhiteSpace(txtCustomerId.Text) && !string.IsNullOrWhiteSpace(nudTableId1.Text))//!!nudTableId1.Text is usable!
+            {
+                int flag=0;
+                List<NumericUpDown> nudTableIds = this.groupBox1.Controls.OfType<NumericUpDown>().ToList();
+                foreach(NumericUpDown nud in nudTableIds)
+                {
+                    flag += (diningArea.CurrentStaff as Waiter).AllocateTableWaiter(diningArea.Tables, int.Parse(nud.Text), int.Parse(txtCustomerId.Text), int.Parse(txtNoOfPeople.Text), comboBoxWaiterName.Text);
+                }
+                if (flag > 0)
+                {
+                    RemoveCustomer();
+                    txtCustomerId.Text = "";
+                    txtNoOfPeople.Text = "";
+                    comboBoxWaiterName.Text = "";
+                    nudTableId3.Value = 0;
+                    nudTableId2.Value = 0;
+                    nudTableId1.Value = 0;
+
+                    //call the OnAllcate event
+                    AllocateEventArgs allocateE = new AllocateEventArgs();
+                    if (this.OnAllocate != null)
+                    {
+                        OnAllocate(this, allocateE);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(string.Format("Table is used or not exist! Please try again.", nudTableId1.Text));
+                }
+            }
         }
 
         private void lbList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            comboBoxCustomerId.DataSource = null;
-            comboBoxCustomerId.DataSource = diningArea.Customers.Select(customer => customer.WaitingNumber).ToList();
-            comboBoxWaiterId.DataSource = null;
-            comboBoxWaiterId.DataSource = diningArea.Waiters.Select(waiter => waiter.Name).ToList();
+            if (lbList.SelectedIndex != -1)
+            {
+                //clear data
+                txtCustomerId.Text = "";
+                txtNoOfPeople.Text = "";
+                comboBoxWaiterName.Text = "";
+                nudTableId3.Value = 0;
+                nudTableId2.Value = 0;
+                nudTableId1.Value = 0;
+                //set new data
+                Customer selectedCustomer = diningArea.Customers[lbList.SelectedIndex];
+                txtCustomerId.Text = selectedCustomer.WaitingNumber.ToString();
+                txtNoOfPeople.Text = selectedCustomer.NumberofPeople.ToString();
+                comboBoxWaiterName.DataSource = diningArea.Waiters.Select(waiter => waiter.Name).ToList();
+                //get all NumericUpDown contral in groupBox1: 3
+                List<NumericUpDown> nudTableIds = this.groupBox1.Controls.OfType<NumericUpDown>().ToList();
+                for (int i = 0; i < selectedCustomer.RecommendedTableId.Length; i++)
+                {
+                    if (selectedCustomer.RecommendedTableId[i] > 0)
+                    {
+                        nudTableIds[i].Value = selectedCustomer.RecommendedTableId[i];
+                    }
+                }
+            }
             //Todo: waiter name order by workload, i.e. sum of customers 
         }
     }

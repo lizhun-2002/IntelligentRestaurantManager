@@ -16,6 +16,9 @@ namespace IntelligentRestaurantManager.UI
     public partial class TabelStatusForm : Form
     {
         DiningArea diningArea;
+        private StaffManager staffManager;
+        private TableManager tableManager;
+        private ItemManager itemManager;
         //WaitlistForm is a part of waiter main form, so...it's here
         WaitlistForm waitlistForm;
             
@@ -23,13 +26,14 @@ namespace IntelligentRestaurantManager.UI
         {
             InitializeComponent();
             this.diningArea = diningArea;
-            this.Text = string.Format("Welcome {0}! Your role is {1}", diningArea.CurrentStaff.Name, diningArea.CurrentStaff.Role);
+            staffManager = new StaffManager();
+            tableManager = new TableManager();
+            itemManager = new ItemManager();
+            this.Text = this.Text + string.Format("  ({0}: {1})", diningArea.CurrentStaff.Role, diningArea.CurrentStaff.Name);
             InitTablePosition_Simple();
-        }
 
-        private void TabelStatusForm_Load(object sender, EventArgs e)
-        {
             waitlistForm = new WaitlistForm(diningArea);
+            waitlistForm.OnAllocate += waitlistForm_OnAllocate;
             //set TabelStatusForm location
             int x = (System.Windows.Forms.SystemInformation.WorkingArea.Width - this.Width + waitlistForm.Width) / 2;
             int y = (System.Windows.Forms.SystemInformation.WorkingArea.Height - this.Height) / 2;
@@ -41,6 +45,18 @@ namespace IntelligentRestaurantManager.UI
             waitlistForm.Location = new Point(this.Location.X - waitlistForm.Width, this.Location.Y);
             waitlistForm.Height = this.Height;
             waitlistForm.Show();
+        }
+
+        void waitlistForm_OnAllocate(object sender, WaitlistForm.AllocateEventArgs e)
+        {
+            this.flowLayoutPanel1.Controls.Clear();
+            InitTablePosition_Simple();
+            //flowLayoutPanel1.Refresh();
+            //diningArea.Tables = (List<Table>)tableManager.GetAll();
+        }
+
+        private void TabelStatusForm_Load(object sender, EventArgs e)
+        {
         }
 
         //Simplely initialize tables position order by table ID.
@@ -69,8 +85,8 @@ namespace IntelligentRestaurantManager.UI
         void btn_MouseEnter(object sender, EventArgs e)
         {
             Table table = (Table)(sender as Button).Tag;
-            string text = string.Format("Table ID: {0}\nCapacity: {1}\nTable Status: {2}\nOrder ID: {3}\nWaiter Name: {4}\nReservation Information: {5}",
-                table.TableId, table.Capacity, table.TableStatus, table.OrderId, table.WaiterName, table.ReservationInfo);
+            string text = string.Format("Table ID: {0}\nCapacity: {1}\nTable Status: {2}\nCustomer ID: {3}\nOrder ID: {4}\nWaiter Name: {5}\nReservation Information: {6}",
+                table.TableId, table.Capacity, table.TableStatus,table.CustomerId, table.OrderId, table.WaiterName, table.ReservationInfo);
             toolTip1.SetToolTip((sender as Button), text);
             //toolTip1.Show(text, (sender as Button));
         }
@@ -82,7 +98,8 @@ namespace IntelligentRestaurantManager.UI
             comboBoxCustomerId.DataSource = null;
             comboBoxCustomerId.DataSource = diningArea.Customers.Select(customer => customer.WaitingNumber).ToList();
             comboBoxWaiterId.DataSource = null;
-            comboBoxWaiterId.DataSource = diningArea.Waiters.Select(waiter=>waiter.Name).ToList();
+            //comboBoxWaiterId.DataSource = diningArea.Waiters.Select(waiter=>waiter.Name).ToList();
+            comboBoxWaiterId.DataSource = diningArea.Tables.Select(waiter => waiter.TableStatus).ToList();
             //Todo: waiter name order by workload, i.e. sum of customers 
 
         }
@@ -134,7 +151,8 @@ namespace IntelligentRestaurantManager.UI
                 waitlistForm = new WaitlistForm(diningArea);
                 waitlistForm.ShowInTaskbar = false;
                 waitlistForm.StartPosition = FormStartPosition.Manual;
-                waitlistForm.Location = new Point(this.Location.X + this.Size.Width, this.Location.Y);
+                waitlistForm.Location = new Point(this.Location.X - waitlistForm.Size.Width, this.Location.Y);
+                waitlistForm.Height = this.Height; 
                 waitlistForm.Show();
             }
             else
@@ -145,10 +163,22 @@ namespace IntelligentRestaurantManager.UI
             }
         }
 
+        private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ProfileEditForm profileEditForm = new ProfileEditForm(diningArea.CurrentStaff);
+            if (profileEditForm.ShowDialog() == DialogResult.OK)
+            {
+                diningArea.CurrentStaff = staffManager.GetByName(diningArea.CurrentStaff.Name);
+                profileEditForm.Dispose();
+            }
+        }
+
         private void btnCreateOrder_Click(object sender, EventArgs e)
         {
             MessageBox.Show(string.Format("There are {0} customers waiting.", diningArea.Customers.Count));
             //(diningArea.CurrentStaff as Waiter).CreateOrder(diningArea.Orders,(Table)labelTabelId.Tag,
+            MessageBox.Show(diningArea.Tables.Select(t => t.TableStatus).ToString());
         }
+
     }
 }

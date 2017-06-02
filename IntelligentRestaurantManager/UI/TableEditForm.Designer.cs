@@ -30,24 +30,24 @@
         {
             this.labelCapacity = new System.Windows.Forms.Label();
             this.labelTabelId = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.labelLink1 = new System.Windows.Forms.Label();
+            this.labelLink2 = new System.Windows.Forms.Label();
+            this.labelLink3 = new System.Windows.Forms.Label();
+            this.labelLink4 = new System.Windows.Forms.Label();
+            this.nudTableId = new System.Windows.Forms.NumericUpDown();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
+            this.nudCapacity = new System.Windows.Forms.NumericUpDown();
+            this.nudLink2 = new System.Windows.Forms.NumericUpDown();
+            this.nudLink1 = new System.Windows.Forms.NumericUpDown();
+            this.nudLink4 = new System.Windows.Forms.NumericUpDown();
+            this.nudLink3 = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.nudTableId)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCapacity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLink2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLink1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLink4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLink3)).BeginInit();
             this.SuspendLayout();
             // 
             // labelCapacity
@@ -70,135 +70,137 @@
             this.labelTabelId.TabIndex = 4;
             this.labelTabelId.Text = "Tabel Id:";
             // 
-            // label3
+            // labelLink1
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(12, 102);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(130, 19);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Linkable Table Id1:";
+            this.labelLink1.AutoSize = true;
+            this.labelLink1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelLink1.Location = new System.Drawing.Point(12, 102);
+            this.labelLink1.Name = "labelLink1";
+            this.labelLink1.Size = new System.Drawing.Size(130, 19);
+            this.labelLink1.TabIndex = 7;
+            this.labelLink1.Text = "Linkable Table Id1:";
             // 
-            // label1
+            // labelLink2
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 141);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(130, 19);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Linkable Table Id2:";
+            this.labelLink2.AutoSize = true;
+            this.labelLink2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelLink2.Location = new System.Drawing.Point(12, 141);
+            this.labelLink2.Name = "labelLink2";
+            this.labelLink2.Size = new System.Drawing.Size(130, 19);
+            this.labelLink2.TabIndex = 8;
+            this.labelLink2.Text = "Linkable Table Id2:";
             // 
-            // label2
+            // labelLink3
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(12, 180);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(130, 19);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "Linkable Table Id3:";
+            this.labelLink3.AutoSize = true;
+            this.labelLink3.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelLink3.Location = new System.Drawing.Point(12, 180);
+            this.labelLink3.Name = "labelLink3";
+            this.labelLink3.Size = new System.Drawing.Size(130, 19);
+            this.labelLink3.TabIndex = 9;
+            this.labelLink3.Text = "Linkable Table Id3:";
             // 
-            // label4
+            // labelLink4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(12, 219);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(130, 19);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Linkable Table Id4:";
+            this.labelLink4.AutoSize = true;
+            this.labelLink4.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelLink4.Location = new System.Drawing.Point(12, 219);
+            this.labelLink4.Name = "labelLink4";
+            this.labelLink4.Size = new System.Drawing.Size(130, 19);
+            this.labelLink4.TabIndex = 10;
+            this.labelLink4.Text = "Linkable Table Id4:";
             // 
-            // numericUpDown1
+            // nudTableId
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(179, 22);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 21);
-            this.numericUpDown1.TabIndex = 11;
+            this.nudTableId.Location = new System.Drawing.Point(179, 22);
+            this.nudTableId.Name = "nudTableId";
+            this.nudTableId.Size = new System.Drawing.Size(120, 21);
+            this.nudTableId.TabIndex = 11;
             // 
             // btnCancel
             // 
             this.btnCancel.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(196, 282);
+            this.btnCancel.Location = new System.Drawing.Point(179, 282);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(103, 30);
             this.btnCancel.TabIndex = 19;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnOk
             // 
             this.btnOk.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOk.Location = new System.Drawing.Point(72, 282);
+            this.btnOk.Location = new System.Drawing.Point(55, 282);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(103, 30);
             this.btnOk.TabIndex = 18;
             this.btnOk.Text = "OK";
             this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
-            // numericUpDown2
+            // nudCapacity
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(179, 61);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(120, 21);
-            this.numericUpDown2.TabIndex = 20;
+            this.nudCapacity.Location = new System.Drawing.Point(179, 61);
+            this.nudCapacity.Name = "nudCapacity";
+            this.nudCapacity.Size = new System.Drawing.Size(120, 21);
+            this.nudCapacity.TabIndex = 20;
             // 
-            // numericUpDown3
+            // nudLink2
             // 
-            this.numericUpDown3.Location = new System.Drawing.Point(179, 139);
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(120, 21);
-            this.numericUpDown3.TabIndex = 22;
+            this.nudLink2.Location = new System.Drawing.Point(179, 139);
+            this.nudLink2.Name = "nudLink2";
+            this.nudLink2.Size = new System.Drawing.Size(120, 21);
+            this.nudLink2.TabIndex = 22;
             // 
-            // numericUpDown4
+            // nudLink1
             // 
-            this.numericUpDown4.Location = new System.Drawing.Point(179, 100);
-            this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Size = new System.Drawing.Size(120, 21);
-            this.numericUpDown4.TabIndex = 21;
+            this.nudLink1.Location = new System.Drawing.Point(179, 100);
+            this.nudLink1.Name = "nudLink1";
+            this.nudLink1.Size = new System.Drawing.Size(120, 21);
+            this.nudLink1.TabIndex = 21;
             // 
-            // numericUpDown5
+            // nudLink4
             // 
-            this.numericUpDown5.Location = new System.Drawing.Point(179, 217);
-            this.numericUpDown5.Name = "numericUpDown5";
-            this.numericUpDown5.Size = new System.Drawing.Size(120, 21);
-            this.numericUpDown5.TabIndex = 24;
+            this.nudLink4.Location = new System.Drawing.Point(179, 217);
+            this.nudLink4.Name = "nudLink4";
+            this.nudLink4.Size = new System.Drawing.Size(120, 21);
+            this.nudLink4.TabIndex = 24;
             // 
-            // numericUpDown6
+            // nudLink3
             // 
-            this.numericUpDown6.Location = new System.Drawing.Point(179, 178);
-            this.numericUpDown6.Name = "numericUpDown6";
-            this.numericUpDown6.Size = new System.Drawing.Size(120, 21);
-            this.numericUpDown6.TabIndex = 23;
+            this.nudLink3.Location = new System.Drawing.Point(179, 178);
+            this.nudLink3.Name = "nudLink3";
+            this.nudLink3.Size = new System.Drawing.Size(120, 21);
+            this.nudLink3.TabIndex = 23;
             // 
             // TableEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(363, 345);
-            this.Controls.Add(this.numericUpDown5);
-            this.Controls.Add(this.numericUpDown6);
-            this.Controls.Add(this.numericUpDown3);
-            this.Controls.Add(this.numericUpDown4);
-            this.Controls.Add(this.numericUpDown2);
+            this.ClientSize = new System.Drawing.Size(333, 345);
+            this.Controls.Add(this.nudLink4);
+            this.Controls.Add(this.nudLink3);
+            this.Controls.Add(this.nudLink2);
+            this.Controls.Add(this.nudLink1);
+            this.Controls.Add(this.nudCapacity);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
-            this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.nudTableId);
+            this.Controls.Add(this.labelLink4);
+            this.Controls.Add(this.labelLink3);
+            this.Controls.Add(this.labelLink2);
+            this.Controls.Add(this.labelLink1);
             this.Controls.Add(this.labelCapacity);
             this.Controls.Add(this.labelTabelId);
             this.Name = "TableEditForm";
             this.Text = "Input Table Information";
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudTableId)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCapacity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLink2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLink1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLink4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLink3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -208,17 +210,17 @@
 
         private System.Windows.Forms.Label labelCapacity;
         private System.Windows.Forms.Label labelTabelId;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Label labelLink1;
+        private System.Windows.Forms.Label labelLink2;
+        private System.Windows.Forms.Label labelLink3;
+        private System.Windows.Forms.Label labelLink4;
+        private System.Windows.Forms.NumericUpDown nudTableId;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnOk;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.NumericUpDown numericUpDown3;
-        private System.Windows.Forms.NumericUpDown numericUpDown4;
-        private System.Windows.Forms.NumericUpDown numericUpDown5;
-        private System.Windows.Forms.NumericUpDown numericUpDown6;
+        private System.Windows.Forms.NumericUpDown nudCapacity;
+        private System.Windows.Forms.NumericUpDown nudLink2;
+        private System.Windows.Forms.NumericUpDown nudLink1;
+        private System.Windows.Forms.NumericUpDown nudLink4;
+        private System.Windows.Forms.NumericUpDown nudLink3;
     }
 }

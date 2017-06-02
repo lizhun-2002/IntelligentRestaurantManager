@@ -41,6 +41,14 @@ namespace IntelligentRestaurantManager.UI
                 comboBoxRole.SelectedIndex = (int)staff.Role;
             }
         }
+        //construct function for edit staff: forbid editing current user's role
+        public StaffEditForm(Staff staff, DiningArea diningArea):this(staff)
+        {
+            if (staff.Name==diningArea.CurrentStaff.Name)
+            {
+                comboBoxRole.Enabled = false;
+            }
+        }
 
         private void btnOk_Click(object sender, EventArgs e)
         {
@@ -77,6 +85,7 @@ namespace IntelligentRestaurantManager.UI
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
     }
 }

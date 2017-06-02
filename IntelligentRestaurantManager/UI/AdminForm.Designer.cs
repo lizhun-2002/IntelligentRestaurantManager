@@ -36,27 +36,27 @@
             this.btnDeleteStaff = new System.Windows.Forms.Button();
             this.btnAddStaff = new System.Windows.Forms.Button();
             this.tabPageTable = new System.Windows.Forms.TabPage();
-            this.tabPageItem = new System.Windows.Forms.TabPage();
+            this.dgvTable = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnEditTable = new System.Windows.Forms.Button();
             this.btnDeleteTable = new System.Windows.Forms.Button();
             this.btnAddTable = new System.Windows.Forms.Button();
-            this.dgvTable = new System.Windows.Forms.DataGridView();
+            this.tabPageItem = new System.Windows.Forms.TabPage();
+            this.dgvItem = new System.Windows.Forms.DataGridView();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnEditItem = new System.Windows.Forms.Button();
             this.btnDeleteItem = new System.Windows.Forms.Button();
             this.btnAddItem = new System.Windows.Forms.Button();
-            this.dgvItem = new System.Windows.Forms.DataGridView();
             this.tabControl1.SuspendLayout();
             this.tabPageStaff.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStaff)).BeginInit();
             this.panel1.SuspendLayout();
             this.tabPageTable.SuspendLayout();
-            this.tabPageItem.SuspendLayout();
-            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTable)).BeginInit();
-            this.panel3.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.tabPageItem.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItem)).BeginInit();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -68,7 +68,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(721, 476);
+            this.tabControl1.Size = new System.Drawing.Size(770, 470);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPageStaff
@@ -78,7 +78,7 @@
             this.tabPageStaff.Location = new System.Drawing.Point(4, 22);
             this.tabPageStaff.Name = "tabPageStaff";
             this.tabPageStaff.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageStaff.Size = new System.Drawing.Size(576, 522);
+            this.tabPageStaff.Size = new System.Drawing.Size(762, 444);
             this.tabPageStaff.TabIndex = 0;
             this.tabPageStaff.Text = "Staff";
             this.tabPageStaff.UseVisualStyleBackColor = true;
@@ -95,7 +95,7 @@
             this.dgvStaff.Location = new System.Drawing.Point(3, 3);
             this.dgvStaff.Name = "dgvStaff";
             this.dgvStaff.RowTemplate.Height = 23;
-            this.dgvStaff.Size = new System.Drawing.Size(463, 516);
+            this.dgvStaff.Size = new System.Drawing.Size(649, 438);
             this.dgvStaff.TabIndex = 2;
             // 
             // panel1
@@ -105,9 +105,9 @@
             this.panel1.Controls.Add(this.btnDeleteStaff);
             this.panel1.Controls.Add(this.btnAddStaff);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(466, 3);
+            this.panel1.Location = new System.Drawing.Point(652, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(107, 516);
+            this.panel1.Size = new System.Drawing.Size(107, 438);
             this.panel1.TabIndex = 1;
             // 
             // btnEditStaff
@@ -150,22 +150,25 @@
             this.tabPageTable.Location = new System.Drawing.Point(4, 22);
             this.tabPageTable.Name = "tabPageTable";
             this.tabPageTable.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageTable.Size = new System.Drawing.Size(576, 522);
+            this.tabPageTable.Size = new System.Drawing.Size(762, 444);
             this.tabPageTable.TabIndex = 1;
             this.tabPageTable.Text = "Table";
             this.tabPageTable.UseVisualStyleBackColor = true;
             // 
-            // tabPageItem
+            // dgvTable
             // 
-            this.tabPageItem.Controls.Add(this.dgvItem);
-            this.tabPageItem.Controls.Add(this.panel3);
-            this.tabPageItem.Location = new System.Drawing.Point(4, 22);
-            this.tabPageItem.Name = "tabPageItem";
-            this.tabPageItem.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageItem.Size = new System.Drawing.Size(713, 450);
-            this.tabPageItem.TabIndex = 2;
-            this.tabPageItem.Text = "Item";
-            this.tabPageItem.UseVisualStyleBackColor = true;
+            this.dgvTable.AllowUserToDeleteRows = false;
+            this.dgvTable.AllowUserToOrderColumns = true;
+            this.dgvTable.AllowUserToResizeColumns = false;
+            this.dgvTable.AllowUserToResizeRows = false;
+            this.dgvTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvTable.Location = new System.Drawing.Point(3, 3);
+            this.dgvTable.Name = "dgvTable";
+            this.dgvTable.RowTemplate.Height = 23;
+            this.dgvTable.Size = new System.Drawing.Size(649, 438);
+            this.dgvTable.TabIndex = 3;
             // 
             // panel2
             // 
@@ -174,9 +177,9 @@
             this.panel2.Controls.Add(this.btnDeleteTable);
             this.panel2.Controls.Add(this.btnAddTable);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(466, 3);
+            this.panel2.Location = new System.Drawing.Point(652, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(107, 516);
+            this.panel2.Size = new System.Drawing.Size(107, 438);
             this.panel2.TabIndex = 2;
             // 
             // btnEditTable
@@ -212,20 +215,32 @@
             this.btnAddTable.UseVisualStyleBackColor = true;
             this.btnAddTable.Click += new System.EventHandler(this.btnAddTable_Click);
             // 
-            // dgvTable
+            // tabPageItem
             // 
-            this.dgvTable.AllowUserToDeleteRows = false;
-            this.dgvTable.AllowUserToOrderColumns = true;
-            this.dgvTable.AllowUserToResizeColumns = false;
-            this.dgvTable.AllowUserToResizeRows = false;
-            this.dgvTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvTable.Location = new System.Drawing.Point(3, 3);
-            this.dgvTable.Name = "dgvTable";
-            this.dgvTable.RowTemplate.Height = 23;
-            this.dgvTable.Size = new System.Drawing.Size(463, 516);
-            this.dgvTable.TabIndex = 3;
+            this.tabPageItem.Controls.Add(this.dgvItem);
+            this.tabPageItem.Controls.Add(this.panel3);
+            this.tabPageItem.Location = new System.Drawing.Point(4, 22);
+            this.tabPageItem.Name = "tabPageItem";
+            this.tabPageItem.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageItem.Size = new System.Drawing.Size(762, 444);
+            this.tabPageItem.TabIndex = 2;
+            this.tabPageItem.Text = "Item";
+            this.tabPageItem.UseVisualStyleBackColor = true;
+            // 
+            // dgvItem
+            // 
+            this.dgvItem.AllowUserToDeleteRows = false;
+            this.dgvItem.AllowUserToOrderColumns = true;
+            this.dgvItem.AllowUserToResizeColumns = false;
+            this.dgvItem.AllowUserToResizeRows = false;
+            this.dgvItem.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvItem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvItem.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvItem.Location = new System.Drawing.Point(3, 3);
+            this.dgvItem.Name = "dgvItem";
+            this.dgvItem.RowTemplate.Height = 23;
+            this.dgvItem.Size = new System.Drawing.Size(649, 438);
+            this.dgvItem.TabIndex = 4;
             // 
             // panel3
             // 
@@ -234,9 +249,9 @@
             this.panel3.Controls.Add(this.btnDeleteItem);
             this.panel3.Controls.Add(this.btnAddItem);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(603, 3);
+            this.panel3.Location = new System.Drawing.Point(652, 3);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(107, 444);
+            this.panel3.Size = new System.Drawing.Size(107, 438);
             this.panel3.TabIndex = 3;
             // 
             // btnEditItem
@@ -272,40 +287,25 @@
             this.btnAddItem.UseVisualStyleBackColor = true;
             this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
             // 
-            // dgvItem
-            // 
-            this.dgvItem.AllowUserToDeleteRows = false;
-            this.dgvItem.AllowUserToOrderColumns = true;
-            this.dgvItem.AllowUserToResizeColumns = false;
-            this.dgvItem.AllowUserToResizeRows = false;
-            this.dgvItem.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvItem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvItem.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvItem.Location = new System.Drawing.Point(3, 3);
-            this.dgvItem.Name = "dgvItem";
-            this.dgvItem.RowTemplate.Height = 23;
-            this.dgvItem.Size = new System.Drawing.Size(600, 444);
-            this.dgvItem.TabIndex = 4;
-            // 
             // AdminForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(721, 476);
+            this.ClientSize = new System.Drawing.Size(770, 470);
             this.Controls.Add(this.tabControl1);
             this.Name = "AdminForm";
-            this.Text = "AdminForm";
+            this.Text = "Intelligent Restaurant Manager 2017";
             this.Load += new System.EventHandler(this.AdminForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPageStaff.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvStaff)).EndInit();
             this.panel1.ResumeLayout(false);
             this.tabPageTable.ResumeLayout(false);
-            this.tabPageItem.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTable)).EndInit();
-            this.panel3.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.tabPageItem.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvItem)).EndInit();
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
