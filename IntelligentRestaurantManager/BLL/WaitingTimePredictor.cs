@@ -22,19 +22,19 @@ namespace IntelligentRestaurantManager.BLL
             is_visit.Add(currID);
             n = currTable.Capacity;
 
-            if (currTable.LinkableTableId1 != -1)
+            if (currTable.LinkableTableId1 != 0)
             {
                 n += Max_Active_Seat(tables, currTable.LinkableTableId1);
             }
-            if (currTable.LinkableTableId2 != -1)
+            if (currTable.LinkableTableId2 != 0)
             {
                 n += Max_Active_Seat(tables, currTable.LinkableTableId2);
             }
-            if (currTable.LinkableTableId3 != -1)
+            if (currTable.LinkableTableId3 != 0)
             {
                 n += Max_Active_Seat(tables, currTable.LinkableTableId3);
             }
-            if (currTable.LinkableTableId4 != -1)
+            if (currTable.LinkableTableId4 != 0)
             {
                 n += Max_Active_Seat(tables, currTable.LinkableTableId4);
             }
@@ -52,19 +52,19 @@ namespace IntelligentRestaurantManager.BLL
             is_visit.Add(currID);
             n = currTable.Capacity;
 
-            if (currTable.LinkableTableId1 != -1)
+            if (currTable.LinkableTableId1 != 0)
             {
                 n += Max_Active_Seat(tables, currTable.LinkableTableId1);
             }
-            if (currTable.LinkableTableId2 != -1)
+            if (currTable.LinkableTableId2 != 0)
             {
                 n += Max_Active_Seat(tables, currTable.LinkableTableId2);
             }
-            if (currTable.LinkableTableId3 != -1)
+            if (currTable.LinkableTableId3 != 0)
             {
                 n += Max_Active_Seat(tables, currTable.LinkableTableId3);
             }
-            if (currTable.LinkableTableId4 != -1)
+            if (currTable.LinkableTableId4 != 0)
             {
                 n += Max_Active_Seat(tables, currTable.LinkableTableId4);
             }
