@@ -14,17 +14,20 @@ namespace IntelligentRestaurantManager.UI
 {
     public partial class AdminForm : Form
     {
+        DiningArea diningArea;
         private StaffManager staffManager;
         private TableManager tableManager;
         private ItemManager itemManager;
 
-        public AdminForm()
+        public AdminForm(DiningArea diningArea)
         {
             InitializeComponent();
+            this.diningArea = diningArea;
             this.StartPosition = FormStartPosition.CenterScreen;
             staffManager = new StaffManager();
             tableManager = new TableManager();
             itemManager = new ItemManager();
+            this.Text = this.Text + string.Format("  ({0}: {1})", diningArea.CurrentStaff.Role, diningArea.CurrentStaff.Name);
         }
 
         private void AdminForm_Load(object sender, EventArgs e)
@@ -41,6 +44,7 @@ namespace IntelligentRestaurantManager.UI
             dgvTable.Columns["OrderId"].Visible = false;
             dgvItem.DataSource = itemManager.GetAll();
             dgvItem.ReadOnly = true;
+            dgvItem.Columns["ItemStatus"].Visible = false;
         }
 
         #region Staff tab
@@ -50,6 +54,7 @@ namespace IntelligentRestaurantManager.UI
             if (staffEditForm.ShowDialog() == DialogResult.OK)
             {
                 dgvStaff.DataSource = staffManager.GetAll();
+                staffEditForm.Dispose();
             }
         }
 
@@ -75,10 +80,11 @@ namespace IntelligentRestaurantManager.UI
             //if update success
             if (staff != null)
             {
-                StaffEditForm staffEditForm = new StaffEditForm(staff);
+                StaffEditForm staffEditForm = new StaffEditForm(staff,diningArea);
                 if (staffEditForm.ShowDialog() == DialogResult.OK)
                 {
                     dgvStaff.DataSource = staffManager.GetAll();
+                    staffEditForm.Dispose();
                 }
             }
         }
@@ -91,6 +97,7 @@ namespace IntelligentRestaurantManager.UI
             if (tableEditForm.ShowDialog() == DialogResult.OK)
             {
                 dgvTable.DataSource = tableManager.GetAll();
+                tableEditForm.Dispose();
             }
         }
 
@@ -120,6 +127,7 @@ namespace IntelligentRestaurantManager.UI
                 if (tableEditForm.ShowDialog() == DialogResult.OK)
                 {
                     dgvTable.DataSource = tableManager.GetAll();
+                    tableEditForm.Dispose();
                 }
             }
         }
@@ -132,6 +140,7 @@ namespace IntelligentRestaurantManager.UI
             if (itemEditForm.ShowDialog() == DialogResult.OK)
             {
                 dgvItem.DataSource = itemManager.GetAll();
+                itemEditForm.Dispose();
             }
         }
 
@@ -161,6 +170,7 @@ namespace IntelligentRestaurantManager.UI
                 if (itemEditForm.ShowDialog() == DialogResult.OK)
                 {
                     dgvItem.DataSource = itemManager.GetAll();
+                    itemEditForm.Dispose();
                 }
             }
         }

@@ -55,6 +55,50 @@ namespace IntelligentRestaurantManager.BLL
             return 0;
         }
 
+        public int AllocateTableWaiter(List<Table> tables, Table table, int waitingNumber, string waiterName)
+        {
+            if (table.TableStatus == TableStatus.Active)
+            {
+                table.TableStatus = TableStatus.Ordering;
+                table.CustomerId = waitingNumber;
+                table.WaiterName = waiterName;
+
+                for (int i = 0; i < tables.Count;i++ )
+                {
+                    if (tables[i].TableId == table.TableId)
+                    {
+                        tables[i] = table;
+                    }
+                }
+
+                return new TableManager().Update(table);
+            }
+            return 0;
+        }
+
+        public int AllocateTableWaiter(List<Table> tables, int tableId, int waitingNumber, int noOfPeople, string waiterName)
+        {
+            Table table = new TableManager().GetByTableId(tableId);
+            if (table != null && table.TableStatus == TableStatus.Active)
+            {
+                table.TableStatus = TableStatus.Ordering;
+                table.CustomerId = waitingNumber;
+                table.WaiterName = waiterName;
+                table.OrderId = noOfPeople;//not good. (save number of people in orderId before create order)
+
+                for (int i = 0; i < tables.Count; i++)
+                {
+                    if (tables[i].TableId == table.TableId)
+                    {
+                        tables[i] = table;
+                    }
+                }
+
+                return new TableManager().Update(table);
+            }
+            return 0;
+        }
+
         public bool SetTableStatus(Table table, TableStatus tableStatus)
         {
             bool result = false;

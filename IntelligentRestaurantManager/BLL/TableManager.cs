@@ -71,7 +71,14 @@ namespace IntelligentRestaurantManager.BLL
 
         public Table GetByTableId(int tableId)
         {
-            return tableService.GetByTableId(tableId);
+            try
+            {
+                return tableService.GetByTableId(tableId);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public IEnumerable<Table> GetByCapacity(int capacity)

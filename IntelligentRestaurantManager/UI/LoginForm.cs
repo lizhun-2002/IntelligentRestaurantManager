@@ -22,10 +22,10 @@ namespace IntelligentRestaurantManager.UI
         {
             InitializeComponent();
 #if DEBUG
-            //txtPassword.Text = "2";
-            //txtUsername.Text = "w";
-            txtPassword.Text = "1";
-            txtUsername.Text = "m";
+            txtPassword.Text = "2";
+            txtUsername.Text = "w";
+            //txtPassword.Text = "1";
+            //txtUsername.Text = "m";
 #endif
 
         }
