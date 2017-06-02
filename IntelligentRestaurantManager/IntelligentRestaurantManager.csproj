@@ -66,7 +66,9 @@
     </Compile>
     <Compile Include="DAL\SQLHelper.cs" />
     <Compile Include="DAL\StaffService.cs" />
+    <Compile Include="DAL\ReservationService.cs" />
     <Compile Include="DAL\TableService.cs" />
+    <Compile Include="Model\Reservation.cs" />
     <Compile Include="UI\AdminForm.cs">
       <SubType>Form</SubType>
     </Compile>
