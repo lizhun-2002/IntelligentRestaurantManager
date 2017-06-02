@@ -22,12 +22,13 @@ namespace IntelligentRestaurantManager
 
             Staff currentStaff = new Staff();
             LoginForm loginForm = new LoginForm();
-            //ReservationsForm resForm = new ReservationsForm();
 
             // TEST PURPOSE CODE BELOW
-            // Application.Run(resForm);
+            Application.Run(new OrderListForm());
             // TEST PURPOSE CODE ABOVE
 
+            /*
+>>>>>>> origin/master
             if (loginForm.ShowDialog() == DialogResult.OK)
             {
                 currentStaff = loginForm.currentStaff;
@@ -47,12 +48,13 @@ namespace IntelligentRestaurantManager
                 else if (currentStaff.Role == StaffRole.Cook)
                 {
                     MessageBox.Show(string.Format("Welcome {0}! Your role is {1}", currentStaff.Name, currentStaff.Role));
+                    Application.Run(new OrderListForm());
                 }
                 else
                 {
                     MessageBox.Show(string.Format("Welcome {0}! Your role is {1}. And you will see customer UI.", currentStaff.Name, currentStaff.Role));
                 }
-            }
+            }*/
             
 
             ////test db

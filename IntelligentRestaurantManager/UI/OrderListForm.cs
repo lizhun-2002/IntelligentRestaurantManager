@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace IntelligentRestaurantManager2017
+namespace IntelligentRestaurantManager
 {
     public partial class OrderListForm : Form
     {
@@ -100,8 +100,10 @@ namespace IntelligentRestaurantManager2017
 
         private void listBox1_DoubleClick(object sender, EventArgs e)
         {
-            listBox2.Items.Add(listBox1.SelectedItem);
-            listBox1.Items.RemoveAt(listBox1.SelectedIndex);
+            if (listBox1.SelectedItem != null) { 
+                listBox2.Items.Add(listBox1.SelectedItem);
+                listBox1.Items.RemoveAt(listBox1.SelectedIndex);
+            }
         }
 
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
