@@ -171,7 +171,6 @@
             this.tableComboBox.Name = "tableComboBox";
             this.tableComboBox.Size = new System.Drawing.Size(95, 26);
             this.tableComboBox.TabIndex = 15;
-            this.tableComboBox.Text = "001";
             // 
             // partyNumberUd
             // 

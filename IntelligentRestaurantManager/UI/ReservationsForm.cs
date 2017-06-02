@@ -10,17 +10,21 @@ using System.Windows.Forms;
 
 /*******************************
  * TODO:
- * 1. Refresh (get) reservation information from DB
- * 2. Refresh (get) table information from DB
- * 3. Send reservation information to DB
- * 4. Search for reservation info in DB and remove it
+ * 1. Refresh (get) reservation information from DB -> OK
+ * 2. Refresh (get) table information from DB -> OK
+ * 3. Send reservation information to DB -> OK
+ * 4. Search for reservation info in DB and remove it -> OK
  * 5. Check mechanism to ensure that table is not already reserved
+ * 5.1 Autoallocation
+ * 6. Unique ID?
  * ****************************/
 
 namespace IntelligentRestaurantManager
 {
     public partial class ReservationsForm : Form
     {
+        IEnumerable<Model.Table> myTable;
+        IEnumerable<Model.Reservation> myReservation;
         public ReservationsForm()
         {
             InitializeComponent();
@@ -34,28 +38,64 @@ namespace IntelligentRestaurantManager
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
             // TODO: Refresh reservation information from DB to the listbox 
+            refreshReservationsList(monthCalendar1.SelectionStart.Year,
+                monthCalendar1.SelectionStart.Month,
+                monthCalendar1.SelectionStart.Day);
         }
 
-        // Refresh Reservation and Table information from DB
-        private void refreshReservationList()
+        // get Table info
+        private void refreshTableList()
         {
+            myTable = new BLL.TableManager().GetAll();
+            tableComboBox.Items.Clear();
+            foreach (Model.Table t in myTable)
+            {
+                tableComboBox.Items.Add(t.TableId);
+            }
 
+        }
+
+        private void refreshReservationsList(int year, int month, int day)
+        {
+            myReservation = new DAL.ReservationService().GetAll();
+            listBox1.Items.Clear();
+            foreach (Model.Reservation r in myReservation)
+            {
+                if (r.year == year && r.month == month && r.day == day)
+                {
+                    listBox1.Items.Add(r.getId() + " " + r.getName() + r.getHour() + ":00 At table" + r.getTableId());
+                }
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // TODO: send reservation info(Name, Table#, Time, Number of people) to DB
-
             // Check that party name is valid
-            if (textBox1.Text != "")
+            if (textBox1.Text != "" && tableComboBox.Text != "")
             {
                 // TODO : Check selected table is not reserved already!
 
                 // Confirm Reservation
                 if (MessageBox.Show("Confirm Reservation for " + textBox1.Text + "\nSize of Party : " + partyNumberUd.Value + "\nDate : " + monthCalendar1.SelectionRange.Start.ToShortDateString() +"\nTime : " + timeUd.Value +":00\n Table : " + tableComboBox.Text, "Confirm Reservation" , MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    // TODO: Send information to DB
-                    // TODO: Get information from DB and load to listbox
+                    // Send information to DB
+                    DAL.ReservationService r = new DAL.ReservationService();
+                    Model.Reservation res = new Model.Reservation();
+                    // need a better way to allocate unique IDs!
+                    res.id = (int)partyNumberUd.Value * textBox1.Text.Length * (int)timeUd.Value;
+                    res.name = textBox1.Text;
+                    res.tableId = int.Parse(tableComboBox.Text);
+                    res.year = monthCalendar1.SelectionStart.Year;
+                    res.month = monthCalendar1.SelectionStart.Month;
+                    res.day = monthCalendar1.SelectionStart.Day;
+                    res.hour = (int)timeUd.Value;
+                    res.number = (int)partyNumberUd.Value;
+                    r.AddNew(res);
+
+                    // Get information from DB and load to listbox
+                    refreshReservationsList(monthCalendar1.SelectionStart.Year,
+                        monthCalendar1.SelectionStart.Month,
+                        monthCalendar1.SelectionStart.Day);
                     MessageBox.Show("Reservation Successful");
 
                     // Reset all values
@@ -80,7 +120,15 @@ namespace IntelligentRestaurantManager
                 if (MessageBox.Show("Confirm reservation cancellation.", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     // TODO : Search for selected info in DB and remove it
-                    // TODO : Refresh the listbox from DB
+                    DAL.ReservationService r = new DAL.ReservationService();
+                    string s = listBox1.SelectedItem.ToString();
+                    string[] strarray = s.Split(' ');
+                    r.DeleteByReservationId(int.Parse(strarray[0]));
+
+                    // Refresh the listbox from DB
+                    refreshReservationsList(monthCalendar1.SelectionStart.Year,
+                        monthCalendar1.SelectionStart.Month,
+                        monthCalendar1.SelectionStart.Day);
                     MessageBox.Show("Reservation Canceled.");
                 }
             } else
@@ -95,17 +143,32 @@ namespace IntelligentRestaurantManager
             // Algorithm : from reservation info, get list of reserved tables
             //             then from table info, get a table of appropriate size
             //             if all tables are reserved, return an error message
-
             // Check if the checkbox is checked
+            List<Model.Reservation> reslist = new List<Model.Reservation>();
+            List<int> alreadyTakenTables = new List<int>();
+
             if (checkBox1.Checked == true)
             {
+                refreshTableList();
+                foreach (Model.Reservation r in myReservation) {
+                    if (r.day == monthCalendar1.SelectionStart.Day && r.month == monthCalendar1.SelectionStart.Month) {
+                        reslist.Add(r);
+                    }
+                }
+                foreach (Model.Reservation r in reslist)
+                {
+                    alreadyTakenTables.Add(r.getId());
+                }
                 MessageBox.Show("Table allocated to PLACEHOLDER");
             }
         }
 
         private void ReservationsForm_Load(object sender, EventArgs e)
         {
-            refreshReservationList();
+            refreshTableList();
+            refreshReservationsList(monthCalendar1.SelectionStart.Year,
+                monthCalendar1.SelectionStart.Month,
+                monthCalendar1.SelectionStart.Day);
         }
     }
 }

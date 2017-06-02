@@ -1,4 +1,4 @@
-﻿namespace IntelligentRestaurantManager2017
+﻿namespace IntelligentRestaurantManager
 {
     partial class OrderListForm
     {
