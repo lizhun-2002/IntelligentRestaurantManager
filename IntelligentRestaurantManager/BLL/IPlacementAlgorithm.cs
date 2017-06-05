@@ -10,13 +10,12 @@ namespace IntelligentRestaurantManager.BLL
 {
     interface IPlacementAlgorithm
     {
-        int n_Active_Set(List<Table> tables, int currID);
-        int Pick_customers(int upper_bnd, List<Customer> pcustomers);
-        void flood_fill(List<Table> ptables, Table tb, HashSet<int> visited);
-        bool Check_Division(List<Table> ptables);
-        bool Place_one_Party(List<Table> ptables, Table tb, int num);
-        bool PlacementSuccess(List<Table> ptables);
+        void flood_fill(List<Table> ptables, Table tb, HashSet<int> visited, List<int> partition);
+        int n_flood_fill(List<Table> ptables, Table curr_table, HashSet<int> prev_visited, HashSet<int> new_visited);
+        bool is_still_connected(List<Table> ptables, HashSet<int> visited);
+        void Place_customer(List<Table> ptables, Table curr_table, int curr_occupied, int n_people, HashSet<int> visited);
+        List<Table> Get_opt_seat();
 
-        void PlaceTabletoCustomer(List<Table> tables, List<Customer> customers);
+        void PlaceTabletoCustomer(List<Table> ptables, Customer pcustomer);
     }
 }

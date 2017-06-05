@@ -27,7 +27,6 @@ namespace IntelligentRestaurantManager
             //Application.Run(new OrderListForm());
             // TEST PURPOSE CODE ABOVE
 
-
             if (loginForm.ShowDialog() == DialogResult.OK)
             {
                 currentStaff = loginForm.currentStaff;
@@ -51,7 +50,8 @@ namespace IntelligentRestaurantManager
                 }
                 else
                 {
-                    MessageBox.Show(string.Format("Welcome {0}! Your role is {1}. And you will see customer UI.", currentStaff.Name, currentStaff.Role));
+                    Application.Run(new WaitinglistScreenForm());
+                    //MessageBox.Show(string.Format("Welcome {0}! Your role is {1}. And you will see customer UI.", currentStaff.Name, currentStaff.Role));
                 }
             }
             

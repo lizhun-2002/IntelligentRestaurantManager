@@ -31,16 +31,15 @@
             this.lbNumWaiting = new System.Windows.Forms.Label();
             this.lbWaitingPerson = new System.Windows.Forms.ListBox();
             this.lbCurrentTime = new System.Windows.Forms.Label();
-            this.lbWaitTime = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbNumWaiting
             // 
             this.lbNumWaiting.AutoSize = true;
-            this.lbNumWaiting.Font = new System.Drawing.Font("굴림", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lbNumWaiting.Location = new System.Drawing.Point(12, 27);
+            this.lbNumWaiting.Font = new System.Drawing.Font("Calibri", 20.25F);
+            this.lbNumWaiting.Location = new System.Drawing.Point(17, 68);
             this.lbNumWaiting.Name = "lbNumWaiting";
-            this.lbNumWaiting.Size = new System.Drawing.Size(86, 27);
+            this.lbNumWaiting.Size = new System.Drawing.Size(81, 33);
             this.lbNumWaiting.TabIndex = 0;
             this.lbNumWaiting.Text = "label1";
             // 
@@ -48,41 +47,30 @@
             // 
             this.lbWaitingPerson.BackColor = System.Drawing.SystemColors.MenuBar;
             this.lbWaitingPerson.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbWaitingPerson.Font = new System.Drawing.Font("굴림", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lbWaitingPerson.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbWaitingPerson.FormattingEnabled = true;
-            this.lbWaitingPerson.ItemHeight = 19;
-            this.lbWaitingPerson.Location = new System.Drawing.Point(17, 70);
+            this.lbWaitingPerson.ItemHeight = 23;
+            this.lbWaitingPerson.Location = new System.Drawing.Point(23, 125);
             this.lbWaitingPerson.Name = "lbWaitingPerson";
-            this.lbWaitingPerson.Size = new System.Drawing.Size(263, 209);
+            this.lbWaitingPerson.Size = new System.Drawing.Size(428, 391);
             this.lbWaitingPerson.TabIndex = 1;
             // 
             // lbCurrentTime
             // 
             this.lbCurrentTime.AutoSize = true;
-            this.lbCurrentTime.Font = new System.Drawing.Font("굴림", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lbCurrentTime.Font = new System.Drawing.Font("Calibri", 20.25F);
             this.lbCurrentTime.ForeColor = System.Drawing.Color.Blue;
-            this.lbCurrentTime.Location = new System.Drawing.Point(372, 0);
+            this.lbCurrentTime.Location = new System.Drawing.Point(17, 21);
             this.lbCurrentTime.Name = "lbCurrentTime";
-            this.lbCurrentTime.Size = new System.Drawing.Size(86, 27);
+            this.lbCurrentTime.Size = new System.Drawing.Size(81, 33);
             this.lbCurrentTime.TabIndex = 2;
             this.lbCurrentTime.Text = "label2";
-            // 
-            // lbWaitTime
-            // 
-            this.lbWaitTime.AutoSize = true;
-            this.lbWaitTime.Font = new System.Drawing.Font("굴림", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lbWaitTime.Location = new System.Drawing.Point(372, 27);
-            this.lbWaitTime.Name = "lbWaitTime";
-            this.lbWaitTime.Size = new System.Drawing.Size(86, 27);
-            this.lbWaitTime.TabIndex = 3;
-            this.lbWaitTime.Text = "label3";
             // 
             // WaitinglistScreenForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(709, 307);
-            this.Controls.Add(this.lbWaitTime);
+            this.ClientSize = new System.Drawing.Size(477, 535);
             this.Controls.Add(this.lbCurrentTime);
             this.Controls.Add(this.lbWaitingPerson);
             this.Controls.Add(this.lbNumWaiting);
@@ -99,6 +87,5 @@
         private System.Windows.Forms.Label lbNumWaiting;
         private System.Windows.Forms.ListBox lbWaitingPerson;
         private System.Windows.Forms.Label lbCurrentTime;
-        private System.Windows.Forms.Label lbWaitTime;
     }
 }
