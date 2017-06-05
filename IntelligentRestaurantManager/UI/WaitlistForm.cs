@@ -30,7 +30,7 @@ namespace IntelligentRestaurantManager.UI
             tableManager = new TableManager();
             foreach (Customer customer in diningArea.Customers)
             {
-                lbList.Items.Add("Number " + customer.WaitingNumber.ToString("000") + ":  " + customer.NumberofPeople.ToString("000") + " Customer");
+                lbList.Items.Add("Number " + customer.WaitingNumber.ToString("000") + ":  " + customer.NumberofPeople.ToString("00") + " Customer");
                 if (customer.WaitingNumber > maxWaitID)
                 {
                     maxWaitID = customer.WaitingNumber;
@@ -107,7 +107,7 @@ namespace IntelligentRestaurantManager.UI
             //              //orderby tab.score
             //              select tab;
             //Table selectedTable = diningArea.Tables.Where(t => t.TableId == int.Parse(txtTableId.Text)) as Table;
-            if (!string.IsNullOrWhiteSpace(txtCustomerId.Text) && !string.IsNullOrWhiteSpace(nudTableId1.Text))//!!nudTableId1.Text is usable!
+            if (!string.IsNullOrWhiteSpace(txtCustomerId.Text) && !string.IsNullOrWhiteSpace(nudTableId1.Text))
             {
                 int flag=0;
                 List<NumericUpDown> nudTableIds = this.groupBox1.Controls.OfType<NumericUpDown>().ToList();
@@ -121,7 +121,7 @@ namespace IntelligentRestaurantManager.UI
                     txtCustomerId.Text = "";
                     txtNoOfPeople.Text = "";
                     comboBoxWaiterName.Text = "";
-                    nudTableId3.Value = 0;
+                    nudTableId3.Value = 0;//!!nudTableId1.Text is usable!
                     nudTableId2.Value = 0;
                     nudTableId1.Value = 0;
 

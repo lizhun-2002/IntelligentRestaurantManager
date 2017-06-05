@@ -84,7 +84,7 @@ namespace IntelligentRestaurantManager.BLL
                 table.TableStatus = TableStatus.Ordering;
                 table.CustomerId = waitingNumber;
                 table.WaiterName = waiterName;
-                table.OrderId = noOfPeople;//not good. (save number of people in orderId before create order)
+                table.OrderId = -noOfPeople;//not good. (save number of people in orderId before create order)
 
                 for (int i = 0; i < tables.Count; i++)
                 {
@@ -162,6 +162,29 @@ namespace IntelligentRestaurantManager.BLL
             if (result == 1)
             {
                 orders.Add(order);
+                for (int i = 0; i < orders.Count; i++)
+                {
+                    if (orders[i].OrderId == order.OrderId)
+                    {
+                        orders[i] = order;
+                    }
+                }
+            }
+            return result;
+        }
+
+        public int UpdateTable(List<Table> tables, Table table)
+        {
+            int result = new TableManager().Update(table);
+            if (result == 1)
+            {
+                for (int i = 0; i < tables.Count; i++)
+                {
+                    if (tables[i].TableId == table.TableId)
+                    {
+                        tables[i] = table;
+                    }
+                }
             }
             return result;
         }

@@ -73,14 +73,14 @@
             // 
             this.txtDescription.Location = new System.Drawing.Point(181, 162);
             this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(100, 21);
+            this.txtDescription.Size = new System.Drawing.Size(120, 21);
             this.txtDescription.TabIndex = 23;
             // 
             // txtName
             // 
             this.txtName.Location = new System.Drawing.Point(181, 61);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(100, 21);
+            this.txtName.Size = new System.Drawing.Size(120, 21);
             this.txtName.TabIndex = 22;
             // 
             // labelPass

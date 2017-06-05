@@ -45,6 +45,7 @@ namespace IntelligentRestaurantManager.UI
             dgvItem.DataSource = itemManager.GetAll();
             dgvItem.ReadOnly = true;
             dgvItem.Columns["ItemStatus"].Visible = false;
+            dgvItem.Columns["ItemAmount"].Visible = false;
         }
 
         #region Staff tab
