@@ -16,6 +16,7 @@ namespace IntelligentRestaurantManager.Model
         public Item()
         {
             ItemStatus = ItemStatus.Wait;
+            ItemAmount = 1;
         }
         private int itemId;
 
@@ -59,6 +60,8 @@ namespace IntelligentRestaurantManager.Model
             get { return itemStatus; }
             set { itemStatus = value; }
         }
+
+        public int ItemAmount { get; set; }
 
     }
 }

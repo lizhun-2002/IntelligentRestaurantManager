@@ -30,8 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.allocateTableWaiterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.createOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setTableStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.activeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.orderingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,62 +57,56 @@
             this.btnLegend2 = new System.Windows.Forms.Button();
             this.btnLegend1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.txtNoOfPeople = new System.Windows.Forms.TextBox();
-            this.labelTableIds = new System.Windows.Forms.Label();
-            this.labelNoOfPeople = new System.Windows.Forms.Label();
-            this.labelOrderStatus = new System.Windows.Forms.Label();
-            this.labelReservationInfo = new System.Windows.Forms.Label();
-            this.listBoxItems = new System.Windows.Forms.ListBox();
-            this.comboBoxWaiterId = new System.Windows.Forms.ComboBox();
-            this.tabControlMenu = new System.Windows.Forms.TabControl();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.btnCreateEdit = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.btnCreateOrder = new System.Windows.Forms.Button();
-            this.txtTableId = new System.Windows.Forms.TextBox();
-            this.labelOrderId = new System.Windows.Forms.Label();
-            this.txtCapacity = new System.Windows.Forms.TextBox();
-            this.labelWaiterName = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.labelCustomerId = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.labelTableStatus = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.labelCapacity = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.comboBoxWaiterName = new System.Windows.Forms.ComboBox();
+            this.btnSaveTable = new System.Windows.Forms.Button();
+            this.comboBoxTableStatus = new System.Windows.Forms.ComboBox();
             this.labelTabelId = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.comboBoxCustomerId = new System.Windows.Forms.ComboBox();
+            this.labelCapacity = new System.Windows.Forms.Label();
+            this.txtResInfo = new System.Windows.Forms.TextBox();
+            this.labelTableStatus = new System.Windows.Forms.Label();
+            this.labelCustomerId = new System.Windows.Forms.Label();
+            this.txtCustomerId = new System.Windows.Forms.TextBox();
+            this.labelWaiterName = new System.Windows.Forms.Label();
+            this.txtCapacity = new System.Windows.Forms.TextBox();
+            this.txtTableId = new System.Windows.Forms.TextBox();
+            this.labelReservationInfo = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.dgvSelectedItems = new System.Windows.Forms.DataGridView();
+            this.btnSaveOrder = new System.Windows.Forms.Button();
+            this.txtOrderId = new System.Windows.Forms.TextBox();
+            this.txtTableIds = new System.Windows.Forms.TextBox();
+            this.labelOrderId = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tabControlMenu = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dgvItemMenu1 = new System.Windows.Forms.DataGridView();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.comboBoxOrderStatus = new System.Windows.Forms.ComboBox();
+            this.labelOrderStatus = new System.Windows.Forms.Label();
+            this.labelNoOfPeople = new System.Windows.Forms.Label();
+            this.labelTableIds = new System.Windows.Forms.Label();
+            this.txtNoOfPeople = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSelectedItems)).BeginInit();
             this.tabControlMenu.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvItemMenu1)).BeginInit();
             this.SuspendLayout();
             // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.allocateTableWaiterToolStripMenuItem,
-            this.createOrderToolStripMenuItem,
             this.setTableStatusToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(170, 70);
-            // 
-            // allocateTableWaiterToolStripMenuItem
-            // 
-            this.allocateTableWaiterToolStripMenuItem.Name = "allocateTableWaiterToolStripMenuItem";
-            this.allocateTableWaiterToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.allocateTableWaiterToolStripMenuItem.Text = "&Create Order";
-            this.allocateTableWaiterToolStripMenuItem.Click += new System.EventHandler(this.allocateTableWaiterToolStripMenuItem_Click);
-            // 
-            // createOrderToolStripMenuItem
-            // 
-            this.createOrderToolStripMenuItem.Name = "createOrderToolStripMenuItem";
-            this.createOrderToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.createOrderToolStripMenuItem.Text = "&Edit Order";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(170, 26);
             // 
             // setTableStatusToolStripMenuItem
             // 
@@ -166,7 +158,7 @@
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(857, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(964, 25);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -237,7 +229,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(0, 623);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(857, 69);
+            this.groupBox1.Size = new System.Drawing.Size(964, 69);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Legend";
@@ -339,258 +331,54 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.comboBoxCustomerId);
-            this.groupBox2.Controls.Add(this.textBox7);
+            this.groupBox2.Controls.Add(this.comboBoxWaiterName);
+            this.groupBox2.Controls.Add(this.btnSaveTable);
+            this.groupBox2.Controls.Add(this.comboBoxTableStatus);
             this.groupBox2.Controls.Add(this.labelTabelId);
-            this.groupBox2.Controls.Add(this.textBox6);
             this.groupBox2.Controls.Add(this.labelCapacity);
-            this.groupBox2.Controls.Add(this.textBox5);
+            this.groupBox2.Controls.Add(this.txtResInfo);
             this.groupBox2.Controls.Add(this.labelTableStatus);
-            this.groupBox2.Controls.Add(this.textBox4);
             this.groupBox2.Controls.Add(this.labelCustomerId);
-            this.groupBox2.Controls.Add(this.textBox3);
+            this.groupBox2.Controls.Add(this.txtCustomerId);
             this.groupBox2.Controls.Add(this.labelWaiterName);
             this.groupBox2.Controls.Add(this.txtCapacity);
-            this.groupBox2.Controls.Add(this.labelOrderId);
             this.groupBox2.Controls.Add(this.txtTableId);
-            this.groupBox2.Controls.Add(this.btnCreateOrder);
-            this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.btnCreateEdit);
-            this.groupBox2.Controls.Add(this.tabControlMenu);
-            this.groupBox2.Controls.Add(this.comboBoxWaiterId);
-            this.groupBox2.Controls.Add(this.listBoxItems);
             this.groupBox2.Controls.Add(this.labelReservationInfo);
-            this.groupBox2.Controls.Add(this.labelOrderStatus);
-            this.groupBox2.Controls.Add(this.labelNoOfPeople);
-            this.groupBox2.Controls.Add(this.labelTableIds);
-            this.groupBox2.Controls.Add(this.txtNoOfPeople);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(438, 25);
+            this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(419, 598);
+            this.groupBox2.Size = new System.Drawing.Size(531, 228);
             this.groupBox2.TabIndex = 40;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Input Order Information";
+            this.groupBox2.Text = "Input Table Information";
             // 
-            // txtNoOfPeople
+            // comboBoxWaiterName
             // 
-            this.txtNoOfPeople.Location = new System.Drawing.Point(195, 243);
-            this.txtNoOfPeople.Name = "txtNoOfPeople";
-            this.txtNoOfPeople.Size = new System.Drawing.Size(121, 27);
-            this.txtNoOfPeople.TabIndex = 27;
+            this.comboBoxWaiterName.FormattingEnabled = true;
+            this.comboBoxWaiterName.Location = new System.Drawing.Point(397, 70);
+            this.comboBoxWaiterName.Name = "comboBoxWaiterName";
+            this.comboBoxWaiterName.Size = new System.Drawing.Size(121, 27);
+            this.comboBoxWaiterName.TabIndex = 40;
             // 
-            // labelTableIds
+            // btnSaveTable
             // 
-            this.labelTableIds.AutoSize = true;
-            this.labelTableIds.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTableIds.Location = new System.Drawing.Point(22, 272);
-            this.labelTableIds.Name = "labelTableIds";
-            this.labelTableIds.Size = new System.Drawing.Size(71, 19);
-            this.labelTableIds.TabIndex = 28;
-            this.labelTableIds.Text = "Table Ids:";
+            this.btnSaveTable.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSaveTable.Location = new System.Drawing.Point(338, 179);
+            this.btnSaveTable.Name = "btnSaveTable";
+            this.btnSaveTable.Size = new System.Drawing.Size(144, 30);
+            this.btnSaveTable.TabIndex = 51;
+            this.btnSaveTable.Text = "Save";
+            this.btnSaveTable.UseVisualStyleBackColor = true;
+            this.btnSaveTable.Click += new System.EventHandler(this.btnSaveTable_Click);
             // 
-            // labelNoOfPeople
+            // comboBoxTableStatus
             // 
-            this.labelNoOfPeople.AutoSize = true;
-            this.labelNoOfPeople.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNoOfPeople.Location = new System.Drawing.Point(22, 242);
-            this.labelNoOfPeople.Name = "labelNoOfPeople";
-            this.labelNoOfPeople.Size = new System.Drawing.Size(129, 19);
-            this.labelNoOfPeople.TabIndex = 26;
-            this.labelNoOfPeople.Text = "Number of People:";
-            // 
-            // labelOrderStatus
-            // 
-            this.labelOrderStatus.AutoSize = true;
-            this.labelOrderStatus.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelOrderStatus.Location = new System.Drawing.Point(22, 302);
-            this.labelOrderStatus.Name = "labelOrderStatus";
-            this.labelOrderStatus.Size = new System.Drawing.Size(94, 19);
-            this.labelOrderStatus.TabIndex = 29;
-            this.labelOrderStatus.Text = "Order Status:";
-            // 
-            // labelReservationInfo
-            // 
-            this.labelReservationInfo.AutoSize = true;
-            this.labelReservationInfo.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelReservationInfo.Location = new System.Drawing.Point(22, 182);
-            this.labelReservationInfo.Name = "labelReservationInfo";
-            this.labelReservationInfo.Size = new System.Drawing.Size(119, 19);
-            this.labelReservationInfo.TabIndex = 11;
-            this.labelReservationInfo.Text = "Reservation Info:";
-            // 
-            // listBoxItems
-            // 
-            this.listBoxItems.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listBoxItems.FormattingEnabled = true;
-            this.listBoxItems.ItemHeight = 14;
-            this.listBoxItems.Location = new System.Drawing.Point(25, 374);
-            this.listBoxItems.Name = "listBoxItems";
-            this.listBoxItems.Size = new System.Drawing.Size(148, 158);
-            this.listBoxItems.TabIndex = 30;
-            // 
-            // comboBoxWaiterId
-            // 
-            this.comboBoxWaiterId.FormattingEnabled = true;
-            this.comboBoxWaiterId.Location = new System.Drawing.Point(195, 303);
-            this.comboBoxWaiterId.Name = "comboBoxWaiterId";
-            this.comboBoxWaiterId.Size = new System.Drawing.Size(121, 27);
-            this.comboBoxWaiterId.TabIndex = 10;
-            // 
-            // tabControlMenu
-            // 
-            this.tabControlMenu.Controls.Add(this.tabPage1);
-            this.tabControlMenu.Controls.Add(this.tabPage2);
-            this.tabControlMenu.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControlMenu.Location = new System.Drawing.Point(194, 374);
-            this.tabControlMenu.Name = "tabControlMenu";
-            this.tabControlMenu.SelectedIndex = 0;
-            this.tabControlMenu.Size = new System.Drawing.Size(200, 160);
-            this.tabControlMenu.TabIndex = 31;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(192, 134);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 23);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(192, 133);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // btnCreateEdit
-            // 
-            this.btnCreateEdit.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCreateEdit.Location = new System.Drawing.Point(246, 558);
-            this.btnCreateEdit.Name = "btnCreateEdit";
-            this.btnCreateEdit.Size = new System.Drawing.Size(144, 30);
-            this.btnCreateEdit.TabIndex = 8;
-            this.btnCreateEdit.Text = "Create and Edit Order";
-            this.btnCreateEdit.UseVisualStyleBackColor = true;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(8, 352);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(49, 19);
-            this.label4.TabIndex = 32;
-            this.label4.Text = "Items:";
-            // 
-            // btnCreateOrder
-            // 
-            this.btnCreateOrder.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCreateOrder.Location = new System.Drawing.Point(45, 558);
-            this.btnCreateOrder.Name = "btnCreateOrder";
-            this.btnCreateOrder.Size = new System.Drawing.Size(144, 30);
-            this.btnCreateOrder.TabIndex = 7;
-            this.btnCreateOrder.Text = "Create Order";
-            this.btnCreateOrder.UseVisualStyleBackColor = true;
-            this.btnCreateOrder.Click += new System.EventHandler(this.btnCreateOrder_Click);
-            // 
-            // txtTableId
-            // 
-            this.txtTableId.Location = new System.Drawing.Point(195, 34);
-            this.txtTableId.Name = "txtTableId";
-            this.txtTableId.Size = new System.Drawing.Size(121, 27);
-            this.txtTableId.TabIndex = 33;
-            // 
-            // labelOrderId
-            // 
-            this.labelOrderId.AutoSize = true;
-            this.labelOrderId.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelOrderId.Location = new System.Drawing.Point(22, 212);
-            this.labelOrderId.Name = "labelOrderId";
-            this.labelOrderId.Size = new System.Drawing.Size(66, 19);
-            this.labelOrderId.TabIndex = 6;
-            this.labelOrderId.Text = "Order Id:";
-            // 
-            // txtCapacity
-            // 
-            this.txtCapacity.Location = new System.Drawing.Point(195, 64);
-            this.txtCapacity.Name = "txtCapacity";
-            this.txtCapacity.Size = new System.Drawing.Size(121, 27);
-            this.txtCapacity.TabIndex = 34;
-            // 
-            // labelWaiterName
-            // 
-            this.labelWaiterName.AutoSize = true;
-            this.labelWaiterName.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelWaiterName.Location = new System.Drawing.Point(22, 152);
-            this.labelWaiterName.Name = "labelWaiterName";
-            this.labelWaiterName.Size = new System.Drawing.Size(98, 19);
-            this.labelWaiterName.TabIndex = 5;
-            this.labelWaiterName.Text = "Waiter Name:";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(195, 123);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(121, 27);
-            this.textBox3.TabIndex = 35;
-            // 
-            // labelCustomerId
-            // 
-            this.labelCustomerId.AutoSize = true;
-            this.labelCustomerId.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelCustomerId.Location = new System.Drawing.Point(22, 122);
-            this.labelCustomerId.Name = "labelCustomerId";
-            this.labelCustomerId.Size = new System.Drawing.Size(91, 19);
-            this.labelCustomerId.TabIndex = 4;
-            this.labelCustomerId.Text = "Customer Id:";
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(195, 153);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(121, 27);
-            this.textBox4.TabIndex = 36;
-            // 
-            // labelTableStatus
-            // 
-            this.labelTableStatus.AutoSize = true;
-            this.labelTableStatus.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTableStatus.Location = new System.Drawing.Point(22, 92);
-            this.labelTableStatus.Name = "labelTableStatus";
-            this.labelTableStatus.Size = new System.Drawing.Size(92, 19);
-            this.labelTableStatus.TabIndex = 3;
-            this.labelTableStatus.Text = "Table Status:";
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(195, 183);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(121, 27);
-            this.textBox5.TabIndex = 37;
-            // 
-            // labelCapacity
-            // 
-            this.labelCapacity.AutoSize = true;
-            this.labelCapacity.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelCapacity.Location = new System.Drawing.Point(22, 62);
-            this.labelCapacity.Name = "labelCapacity";
-            this.labelCapacity.Size = new System.Drawing.Size(69, 19);
-            this.labelCapacity.TabIndex = 2;
-            this.labelCapacity.Text = "Capacity:";
-            // 
-            // textBox6
-            // 
-            this.textBox6.Location = new System.Drawing.Point(195, 273);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(121, 27);
-            this.textBox6.TabIndex = 38;
+            this.comboBoxTableStatus.FormattingEnabled = true;
+            this.comboBoxTableStatus.Location = new System.Drawing.Point(138, 70);
+            this.comboBoxTableStatus.Name = "comboBoxTableStatus";
+            this.comboBoxTableStatus.Size = new System.Drawing.Size(121, 27);
+            this.comboBoxTableStatus.TabIndex = 9;
             // 
             // labelTabelId
             // 
@@ -602,20 +390,266 @@
             this.labelTabelId.TabIndex = 1;
             this.labelTabelId.Text = "Tabel Id:";
             // 
-            // textBox7
+            // labelCapacity
             // 
-            this.textBox7.Location = new System.Drawing.Point(195, 213);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(121, 27);
-            this.textBox7.TabIndex = 39;
+            this.labelCapacity.AutoSize = true;
+            this.labelCapacity.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelCapacity.Location = new System.Drawing.Point(286, 32);
+            this.labelCapacity.Name = "labelCapacity";
+            this.labelCapacity.Size = new System.Drawing.Size(69, 19);
+            this.labelCapacity.TabIndex = 2;
+            this.labelCapacity.Text = "Capacity:";
             // 
-            // comboBoxCustomerId
+            // txtResInfo
             // 
-            this.comboBoxCustomerId.FormattingEnabled = true;
-            this.comboBoxCustomerId.Location = new System.Drawing.Point(195, 94);
-            this.comboBoxCustomerId.Name = "comboBoxCustomerId";
-            this.comboBoxCustomerId.Size = new System.Drawing.Size(121, 27);
-            this.comboBoxCustomerId.TabIndex = 9;
+            this.txtResInfo.Location = new System.Drawing.Point(138, 145);
+            this.txtResInfo.Name = "txtResInfo";
+            this.txtResInfo.Size = new System.Drawing.Size(121, 27);
+            this.txtResInfo.TabIndex = 37;
+            // 
+            // labelTableStatus
+            // 
+            this.labelTableStatus.AutoSize = true;
+            this.labelTableStatus.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTableStatus.Location = new System.Drawing.Point(22, 73);
+            this.labelTableStatus.Name = "labelTableStatus";
+            this.labelTableStatus.Size = new System.Drawing.Size(92, 19);
+            this.labelTableStatus.TabIndex = 3;
+            this.labelTableStatus.Text = "Table Status:";
+            // 
+            // labelCustomerId
+            // 
+            this.labelCustomerId.AutoSize = true;
+            this.labelCustomerId.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelCustomerId.Location = new System.Drawing.Point(22, 112);
+            this.labelCustomerId.Name = "labelCustomerId";
+            this.labelCustomerId.Size = new System.Drawing.Size(91, 19);
+            this.labelCustomerId.TabIndex = 4;
+            this.labelCustomerId.Text = "Customer Id:";
+            // 
+            // txtCustomerId
+            // 
+            this.txtCustomerId.Location = new System.Drawing.Point(138, 107);
+            this.txtCustomerId.Name = "txtCustomerId";
+            this.txtCustomerId.Size = new System.Drawing.Size(121, 27);
+            this.txtCustomerId.TabIndex = 35;
+            // 
+            // labelWaiterName
+            // 
+            this.labelWaiterName.AutoSize = true;
+            this.labelWaiterName.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelWaiterName.Location = new System.Drawing.Point(286, 73);
+            this.labelWaiterName.Name = "labelWaiterName";
+            this.labelWaiterName.Size = new System.Drawing.Size(98, 19);
+            this.labelWaiterName.TabIndex = 5;
+            this.labelWaiterName.Text = "Waiter Name:";
+            // 
+            // txtCapacity
+            // 
+            this.txtCapacity.Location = new System.Drawing.Point(397, 32);
+            this.txtCapacity.Name = "txtCapacity";
+            this.txtCapacity.Size = new System.Drawing.Size(121, 27);
+            this.txtCapacity.TabIndex = 34;
+            // 
+            // txtTableId
+            // 
+            this.txtTableId.Location = new System.Drawing.Point(138, 29);
+            this.txtTableId.Name = "txtTableId";
+            this.txtTableId.Size = new System.Drawing.Size(121, 27);
+            this.txtTableId.TabIndex = 33;
+            // 
+            // labelReservationInfo
+            // 
+            this.labelReservationInfo.AutoSize = true;
+            this.labelReservationInfo.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelReservationInfo.Location = new System.Drawing.Point(22, 149);
+            this.labelReservationInfo.Name = "labelReservationInfo";
+            this.labelReservationInfo.Size = new System.Drawing.Size(119, 19);
+            this.labelReservationInfo.TabIndex = 11;
+            this.labelReservationInfo.Text = "Reservation Info:";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.groupBox3);
+            this.panel1.Controls.Add(this.groupBox2);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel1.Location = new System.Drawing.Point(433, 25);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(531, 598);
+            this.panel1.TabIndex = 42;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.dgvSelectedItems);
+            this.groupBox3.Controls.Add(this.btnSaveOrder);
+            this.groupBox3.Controls.Add(this.txtOrderId);
+            this.groupBox3.Controls.Add(this.txtTableIds);
+            this.groupBox3.Controls.Add(this.labelOrderId);
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Controls.Add(this.tabControlMenu);
+            this.groupBox3.Controls.Add(this.comboBoxOrderStatus);
+            this.groupBox3.Controls.Add(this.labelOrderStatus);
+            this.groupBox3.Controls.Add(this.labelNoOfPeople);
+            this.groupBox3.Controls.Add(this.labelTableIds);
+            this.groupBox3.Controls.Add(this.txtNoOfPeople);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox3.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox3.Location = new System.Drawing.Point(0, 228);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(531, 370);
+            this.groupBox3.TabIndex = 41;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Input Order Information";
+            // 
+            // dgvSelectedItems
+            // 
+            this.dgvSelectedItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSelectedItems.Location = new System.Drawing.Point(27, 148);
+            this.dgvSelectedItems.Name = "dgvSelectedItems";
+            this.dgvSelectedItems.RowTemplate.Height = 23;
+            this.dgvSelectedItems.Size = new System.Drawing.Size(240, 150);
+            this.dgvSelectedItems.TabIndex = 53;
+            // 
+            // btnSaveOrder
+            // 
+            this.btnSaveOrder.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSaveOrder.Location = new System.Drawing.Point(338, 318);
+            this.btnSaveOrder.Name = "btnSaveOrder";
+            this.btnSaveOrder.Size = new System.Drawing.Size(144, 30);
+            this.btnSaveOrder.TabIndex = 52;
+            this.btnSaveOrder.Text = "Save";
+            this.btnSaveOrder.UseVisualStyleBackColor = true;
+            // 
+            // txtOrderId
+            // 
+            this.txtOrderId.Location = new System.Drawing.Point(138, 29);
+            this.txtOrderId.Name = "txtOrderId";
+            this.txtOrderId.Size = new System.Drawing.Size(121, 27);
+            this.txtOrderId.TabIndex = 50;
+            // 
+            // txtTableIds
+            // 
+            this.txtTableIds.Location = new System.Drawing.Point(138, 62);
+            this.txtTableIds.Name = "txtTableIds";
+            this.txtTableIds.Size = new System.Drawing.Size(121, 27);
+            this.txtTableIds.TabIndex = 49;
+            // 
+            // labelOrderId
+            // 
+            this.labelOrderId.AutoSize = true;
+            this.labelOrderId.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelOrderId.Location = new System.Drawing.Point(22, 32);
+            this.labelOrderId.Name = "labelOrderId";
+            this.labelOrderId.Size = new System.Drawing.Size(66, 19);
+            this.labelOrderId.TabIndex = 40;
+            this.labelOrderId.Text = "Order Id:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(21, 103);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(49, 19);
+            this.label4.TabIndex = 48;
+            this.label4.Text = "Items:";
+            // 
+            // tabControlMenu
+            // 
+            this.tabControlMenu.Controls.Add(this.tabPage1);
+            this.tabControlMenu.Controls.Add(this.tabPage2);
+            this.tabControlMenu.Controls.Add(this.tabPage3);
+            this.tabControlMenu.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControlMenu.Location = new System.Drawing.Point(290, 148);
+            this.tabControlMenu.Name = "tabControlMenu";
+            this.tabControlMenu.SelectedIndex = 0;
+            this.tabControlMenu.Size = new System.Drawing.Size(228, 150);
+            this.tabControlMenu.TabIndex = 47;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.dgvItemMenu1);
+            this.tabPage1.Location = new System.Drawing.Point(4, 23);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(220, 123);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Main Dish";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // dgvItemMenu1
+            // 
+            this.dgvItemMenu1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvItemMenu1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvItemMenu1.Location = new System.Drawing.Point(3, 3);
+            this.dgvItemMenu1.Name = "dgvItemMenu1";
+            this.dgvItemMenu1.RowTemplate.Height = 23;
+            this.dgvItemMenu1.Size = new System.Drawing.Size(214, 117);
+            this.dgvItemMenu1.TabIndex = 0;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 23);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(220, 123);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Beverage";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Location = new System.Drawing.Point(4, 23);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(220, 123);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Dessert";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // comboBoxOrderStatus
+            // 
+            this.comboBoxOrderStatus.FormattingEnabled = true;
+            this.comboBoxOrderStatus.Location = new System.Drawing.Point(397, 62);
+            this.comboBoxOrderStatus.Name = "comboBoxOrderStatus";
+            this.comboBoxOrderStatus.Size = new System.Drawing.Size(121, 27);
+            this.comboBoxOrderStatus.TabIndex = 41;
+            // 
+            // labelOrderStatus
+            // 
+            this.labelOrderStatus.AutoSize = true;
+            this.labelOrderStatus.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelOrderStatus.Location = new System.Drawing.Point(286, 65);
+            this.labelOrderStatus.Name = "labelOrderStatus";
+            this.labelOrderStatus.Size = new System.Drawing.Size(94, 19);
+            this.labelOrderStatus.TabIndex = 45;
+            this.labelOrderStatus.Text = "Order Status:";
+            // 
+            // labelNoOfPeople
+            // 
+            this.labelNoOfPeople.AutoSize = true;
+            this.labelNoOfPeople.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNoOfPeople.Location = new System.Drawing.Point(265, 32);
+            this.labelNoOfPeople.Name = "labelNoOfPeople";
+            this.labelNoOfPeople.Size = new System.Drawing.Size(129, 19);
+            this.labelNoOfPeople.TabIndex = 42;
+            this.labelNoOfPeople.Text = "Number of People:";
+            // 
+            // labelTableIds
+            // 
+            this.labelTableIds.AutoSize = true;
+            this.labelTableIds.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTableIds.Location = new System.Drawing.Point(22, 65);
+            this.labelTableIds.Name = "labelTableIds";
+            this.labelTableIds.Size = new System.Drawing.Size(71, 19);
+            this.labelTableIds.TabIndex = 44;
+            this.labelTableIds.Text = "Table Ids:";
+            // 
+            // txtNoOfPeople
+            // 
+            this.txtNoOfPeople.Location = new System.Drawing.Point(397, 29);
+            this.txtNoOfPeople.Name = "txtNoOfPeople";
+            this.txtNoOfPeople.Size = new System.Drawing.Size(121, 27);
+            this.txtNoOfPeople.TabIndex = 43;
             // 
             // flowLayoutPanel1
             // 
@@ -623,16 +657,16 @@
             this.flowLayoutPanel1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 25);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(438, 598);
-            this.flowLayoutPanel1.TabIndex = 41;
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(433, 598);
+            this.flowLayoutPanel1.TabIndex = 43;
             // 
             // TabelStatusForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(857, 692);
+            this.ClientSize = new System.Drawing.Size(964, 692);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.groupBox1);
             this.MainMenuStrip = this.menuStrip1;
@@ -647,7 +681,13 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSelectedItems)).EndInit();
             this.tabControlMenu.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvItemMenu1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -656,8 +696,6 @@
         #endregion
 
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem allocateTableWaiterToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem createOrderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem setTableStatusToolStripMenuItem;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.MenuStrip menuStrip1;
@@ -685,34 +723,38 @@
         private System.Windows.Forms.ToolStripMenuItem myProfileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem changePasswordToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.ComboBox comboBoxCustomerId;
-        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.ComboBox comboBoxTableStatus;
         private System.Windows.Forms.Label labelTabelId;
-        private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.Label labelCapacity;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox txtResInfo;
         private System.Windows.Forms.Label labelTableStatus;
-        private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label labelCustomerId;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txtCustomerId;
         private System.Windows.Forms.Label labelWaiterName;
         private System.Windows.Forms.TextBox txtCapacity;
-        private System.Windows.Forms.Label labelOrderId;
         private System.Windows.Forms.TextBox txtTableId;
-        private System.Windows.Forms.Button btnCreateOrder;
+        private System.Windows.Forms.Label labelReservationInfo;
+        private System.Windows.Forms.ComboBox comboBoxWaiterName;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TextBox txtOrderId;
+        private System.Windows.Forms.TextBox txtTableIds;
+        private System.Windows.Forms.Label labelOrderId;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button btnCreateEdit;
         private System.Windows.Forms.TabControl tabControlMenu;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.ComboBox comboBoxWaiterId;
-        private System.Windows.Forms.ListBox listBoxItems;
-        private System.Windows.Forms.Label labelReservationInfo;
+        private System.Windows.Forms.ComboBox comboBoxOrderStatus;
         private System.Windows.Forms.Label labelOrderStatus;
         private System.Windows.Forms.Label labelNoOfPeople;
         private System.Windows.Forms.Label labelTableIds;
         private System.Windows.Forms.TextBox txtNoOfPeople;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Button btnSaveTable;
+        private System.Windows.Forms.Button btnSaveOrder;
+        private System.Windows.Forms.DataGridView dgvSelectedItems;
+        private System.Windows.Forms.DataGridView dgvItemMenu1;
+        private System.Windows.Forms.TabPage tabPage3;
     }
 }
 

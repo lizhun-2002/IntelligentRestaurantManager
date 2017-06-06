@@ -30,7 +30,7 @@ namespace IntelligentRestaurantManager.UI
             tableManager = new TableManager();
             foreach (Customer customer in diningArea.Customers)
             {
-                lbList.Items.Add("Number " + customer.WaitingNumber.ToString("000") + ":  " + customer.NumberofPeople.ToString("000") + " Customer");
+                lbList.Items.Add("Number " + customer.WaitingNumber.ToString("000") + ":  " + customer.NumberofPeople.ToString("00") + " Customer");
                 if (customer.WaitingNumber > maxWaitID)
                 {
                     maxWaitID = customer.WaitingNumber;
@@ -107,7 +107,7 @@ namespace IntelligentRestaurantManager.UI
             //              //orderby tab.score
             //              select tab;
             //Table selectedTable = diningArea.Tables.Where(t => t.TableId == int.Parse(txtTableId.Text)) as Table;
-            if (!string.IsNullOrWhiteSpace(txtCustomerId.Text) && !string.IsNullOrWhiteSpace(nudTableId1.Text))//!!nudTableId1.Text is usable!
+            if (!string.IsNullOrWhiteSpace(txtCustomerId.Text) && !string.IsNullOrWhiteSpace(nudTableId1.Text))
             {
                 int flag=0;
                 List<NumericUpDown> nudTableIds = this.groupBox1.Controls.OfType<NumericUpDown>().ToList();
@@ -121,7 +121,7 @@ namespace IntelligentRestaurantManager.UI
                     txtCustomerId.Text = "";
                     txtNoOfPeople.Text = "";
                     comboBoxWaiterName.Text = "";
-                    nudTableId3.Value = 0;
+                    nudTableId3.Value = 0;//!!nudTableId1.Text is usable!
                     nudTableId2.Value = 0;
                     nudTableId1.Value = 0;
 
@@ -143,6 +143,8 @@ namespace IntelligentRestaurantManager.UI
         {
             if (lbList.SelectedIndex != -1)
             {
+                List<Table> opt_seat;
+
                 //clear data
                 txtCustomerId.Text = "";
                 txtNoOfPeople.Text = "";
@@ -155,6 +157,26 @@ namespace IntelligentRestaurantManager.UI
                 txtCustomerId.Text = selectedCustomer.WaitingNumber.ToString();
                 txtNoOfPeople.Text = selectedCustomer.NumberofPeople.ToString();
                 comboBoxWaiterName.DataSource = diningArea.Waiters.Select(waiter => waiter.Name).ToList();
+
+
+                IntelligentRestaurantManager.BLL.PlacementOptimizer opt_place = new IntelligentRestaurantManager.BLL.PlacementOptimizer();
+                opt_place.PlaceTabletoCustomer((List<Table>)tableManager.GetAll(), selectedCustomer);
+                opt_seat = opt_place.Get_opt_seat();
+
+                System.Diagnostics.Debug.WriteLine("debug message");
+                foreach (var k in opt_seat)
+                {
+                    System.Diagnostics.Debug.WriteLine("debug message" + k.TableId);
+                }
+
+                if (opt_seat.Count >= 3)
+                    nudTableId3.Value = opt_seat[2].TableId;
+                if (opt_seat.Count >= 2)
+                    nudTableId2.Value = opt_seat[1].TableId;
+                if (opt_seat.Count >= 1)
+                    nudTableId1.Value = opt_seat[0].TableId;
+                
+
                 //get all NumericUpDown contral in groupBox1: 3
                 List<NumericUpDown> nudTableIds = this.groupBox1.Controls.OfType<NumericUpDown>().ToList();
                 for (int i = 0; i < selectedCustomer.RecommendedTableId.Length; i++)

@@ -21,7 +21,7 @@ namespace IntelligentRestaurantManager.UI
         private ItemManager itemManager;
         //WaitlistForm is a part of waiter main form, so...it's here
         WaitlistForm waitlistForm;
-            
+
         public TabelStatusForm(DiningArea diningArea)
         {
             InitializeComponent();
@@ -37,7 +37,7 @@ namespace IntelligentRestaurantManager.UI
             //set TabelStatusForm location
             int x = (System.Windows.Forms.SystemInformation.WorkingArea.Width - this.Width + waitlistForm.Width) / 2;
             int y = (System.Windows.Forms.SystemInformation.WorkingArea.Height - this.Height) / 2;
-            this.StartPosition = FormStartPosition.Manual; 
+            this.StartPosition = FormStartPosition.Manual;
             this.Location = (Point)new Size(x, y);
             //set waitlistForm location
             waitlistForm.ShowInTaskbar = false;
@@ -45,6 +45,19 @@ namespace IntelligentRestaurantManager.UI
             waitlistForm.Location = new Point(this.Location.X - waitlistForm.Width, this.Location.Y);
             waitlistForm.Height = this.Height;
             waitlistForm.Show();
+
+            //groupbox:table information
+            txtTableId.Enabled = false;
+            txtCapacity.Enabled = false;
+            //groupbox:order information
+            txtOrderId.Enabled = false;
+            dgvItemMenu1.DataSource = itemManager.GetAll();
+            dgvItemMenu1.ReadOnly = true;
+            dgvItemMenu1.Columns["ItemId"].Visible = false;
+            dgvItemMenu1.Columns["AverageTimeCost"].Visible = false;
+            dgvItemMenu1.Columns["ItemStatus"].Visible = false;
+            dgvItemMenu1.Columns["ItemStatus"].Visible = false;
+            dgvItemMenu1.Columns["ItemAmount"].Visible = false;
         }
 
         void waitlistForm_OnAllocate(object sender, WaitlistForm.AllocateEventArgs e)
@@ -86,20 +99,71 @@ namespace IntelligentRestaurantManager.UI
         {
             Table table = (Table)(sender as Button).Tag;
             string text = string.Format("Table ID: {0}\nCapacity: {1}\nTable Status: {2}\nCustomer ID: {3}\nOrder ID: {4}\nWaiter Name: {5}\nReservation Information: {6}",
-                table.TableId, table.Capacity, table.TableStatus,table.CustomerId, table.OrderId, table.WaiterName, table.ReservationInfo);
+                table.TableId, table.Capacity, table.TableStatus, table.CustomerId, table.OrderId, table.WaiterName, table.ReservationInfo);
             toolTip1.SetToolTip((sender as Button), text);
             //toolTip1.Show(text, (sender as Button));
         }
 
         void btn_Click(object sender, EventArgs e)
         {
-            //labelTabelId.Tag save selected Table object
-            labelTabelId.Tag = (sender as Button).Tag;
-            comboBoxCustomerId.DataSource = null;
-            comboBoxCustomerId.DataSource = diningArea.Customers.Select(customer => customer.WaitingNumber).ToList();
-            comboBoxWaiterId.DataSource = null;
+            //clear
+            //comboBoxWaiterName.SelectedItem = null;
+
+            //assign table value
+            Table table = (Table)(sender as Button).Tag;
+            txtTableId.Text = table.TableId.ToString();
+            txtCapacity.Text = table.Capacity.ToString();
+            comboBoxTableStatus.DataSource = System.Enum.GetNames(typeof(TableStatus));
+            comboBoxTableStatus.SelectedIndex = (int)table.TableStatus;
+            comboBoxWaiterName.DataSource = diningArea.Waiters.Select(waiter => waiter.Name).ToList();
+            comboBoxWaiterName.SelectedIndex = diningArea.Waiters.Select(waiter => waiter.Name).ToList().IndexOf(table.WaiterName);
+            txtCustomerId.Text = table.CustomerId.ToString();
+            txtResInfo.Text = table.ReservationInfo;
+
+            //assign order value
+            if (table.OrderId == -1)//there is no order and customer 
+            {
+                txtOrderId.Text = "-1";
+                txtNoOfPeople.Text = "";
+                txtTableIds.Text = "";
+                comboBoxOrderStatus.DataSource = null;
+
+            }
+            else if (table.OrderId < -1)//there is customer, but not order yet
+            {
+                txtOrderId.Text = "-1";
+                txtNoOfPeople.Text = (-table.OrderId).ToString();
+                int[] tableIds = diningArea.Tables.Where(t => t.CustomerId > 0 && t.CustomerId == table.CustomerId).Select(t => t.CustomerId).ToArray();
+                txtTableIds.Text = string.Join(",", tableIds);
+                comboBoxOrderStatus.DataSource = System.Enum.GetNames(typeof(OrderStatus)); ;
+                dgvItemMenu1.DataSource = null;
+                dgvItemMenu1.DataSource = itemManager.GetAll();
+                dgvSelectedItems.DataSource = null;
+                dgvSelectedItems.DataSource = itemManager.GetAll();//new List<Item>() { new Item()};
+            }
+            else//there is order already
+            {
+                txtOrderId.Text = table.OrderId.ToString();
+                List<Order> temp = diningArea.Orders.Where(o => o.OrderId > 0 && o.OrderId == table.OrderId).ToList();
+                if (temp.Count > 0)
+                {
+                    Order order = temp[0];
+                    txtNoOfPeople.Text = order.NumberofPeople.ToString();
+                    txtTableIds.Text = string.Join(",", order.TableIds);
+                    comboBoxOrderStatus.DataSource = System.Enum.GetNames(typeof(OrderStatus));
+                    comboBoxOrderStatus.SelectedIndex = (int)order.OrderStatus;
+                    dgvItemMenu1.DataSource = null;
+                    dgvItemMenu1.DataSource = itemManager.GetAll();
+                    dgvSelectedItems.DataSource = null;
+                    dgvSelectedItems.DataSource = order.Items;
+                    //MessageBox.Show("number of items {0}", itemManager.GetAll().ToList().Count.ToString());
+                }
+            }
+            //txtNoOfPeople=
+            //comboBoxOrderStatus.SelectedIndex = (int)Order.OrderStatus;
+
             //comboBoxWaiterId.DataSource = diningArea.Waiters.Select(waiter=>waiter.Name).ToList();
-            comboBoxWaiterId.DataSource = diningArea.Tables.Select(waiter => waiter.TableStatus).ToList();
+            //comboBoxOrderStatus.DataSource = diningArea.Tables.Select(waiter => waiter.TableStatus).ToList();
             //Todo: waiter name order by workload, i.e. sum of customers 
 
         }
@@ -152,7 +216,7 @@ namespace IntelligentRestaurantManager.UI
                 waitlistForm.ShowInTaskbar = false;
                 waitlistForm.StartPosition = FormStartPosition.Manual;
                 waitlistForm.Location = new Point(this.Location.X - waitlistForm.Size.Width, this.Location.Y);
-                waitlistForm.Height = this.Height; 
+                waitlistForm.Height = this.Height;
                 waitlistForm.Show();
             }
             else
@@ -173,11 +237,28 @@ namespace IntelligentRestaurantManager.UI
             }
         }
 
-        private void btnCreateOrder_Click(object sender, EventArgs e)
+        //private void btnCreateOrder_Click(object sender, EventArgs e)
+        //{
+        //    MessageBox.Show(string.Format("There are {0} customers waiting.", diningArea.Customers.Count));
+        //    //(diningArea.CurrentStaff as Waiter).CreateOrder(diningArea.Orders,(Table)labelTabelId.Tag,
+        //    MessageBox.Show(diningArea.Tables.Select(t => t.TableStatus).ToString());
+        //}
+
+        private void btnSaveTable_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(string.Format("There are {0} customers waiting.", diningArea.Customers.Count));
-            //(diningArea.CurrentStaff as Waiter).CreateOrder(diningArea.Orders,(Table)labelTabelId.Tag,
-            MessageBox.Show(diningArea.Tables.Select(t => t.TableStatus).ToString());
+            Table currentTable = diningArea.Tables.Where(t => t.TableId == int.Parse(txtTableId.Text)).ToList()[0];
+            currentTable.TableId = int.Parse(txtTableId.Text);
+            currentTable.Capacity = int.Parse(txtCapacity.Text);
+            currentTable.TableStatus = (TableStatus)comboBoxTableStatus.SelectedIndex;
+            currentTable.WaiterName = comboBoxWaiterName.Text;
+            currentTable.CustomerId = int.Parse(txtCustomerId.Text);
+            currentTable.OrderId = int.Parse(txtOrderId.Text);
+            currentTable.ReservationInfo = txtResInfo.Text;
+
+            (diningArea.CurrentStaff as Waiter).UpdateTable(diningArea.Tables, currentTable);
+            MessageBox.Show("OK");
+            this.flowLayoutPanel1.Controls.Clear();
+            InitTablePosition_Simple();
         }
 
     }

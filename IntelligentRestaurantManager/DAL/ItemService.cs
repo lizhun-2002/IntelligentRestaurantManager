@@ -13,13 +13,14 @@ namespace IntelligentRestaurantManager.DAL
     {
         public int AddNew(Item item)
         {
-            return SQLHelper.ExecuteNonQuery("insert into T_ItemInfo([ItemId],[Name],[Price],[AverageTimeCost],[Description] ,[ItemStatus]) values(@ItemId,@Name,@Price,@AverageTimeCost,@Description,@ItemStatus)",
+            return SQLHelper.ExecuteNonQuery("insert into T_ItemInfo([ItemId],[Name],[Price],[AverageTimeCost],[Description] ,[ItemStatus],[ItemAmount) values(@ItemId,@Name,@Price,@AverageTimeCost,@Description,@ItemStatus,@ItemAmount)",
                 new SqlParameter("ItemId", item.ItemId),
                 new SqlParameter("Name", item.Name),
                 new SqlParameter("Price", item.Price),
                 new SqlParameter("AverageTimeCost", item.AverageTimeCost),
                 new SqlParameter("Description", item.Description),
-                new SqlParameter("ItemStatus", item.ItemStatus)
+                new SqlParameter("ItemStatus", item.ItemStatus),
+                new SqlParameter("ItemAmount", item.ItemAmount)
                 );
         }
 
@@ -40,13 +41,14 @@ namespace IntelligentRestaurantManager.DAL
 
         public int Update(Item item)
         {
-            return SQLHelper.ExecuteNonQuery("update T_ItemInfo set [Name]=@Name,[Price]=@Price,[AverageTimeCost]=@AverageTimeCost,[Description]=@Description,[ItemStatus]=@ItemStatus where [ItemId]=@ItemId",
+            return SQLHelper.ExecuteNonQuery("update T_ItemInfo set [Name]=@Name,[Price]=@Price,[AverageTimeCost]=@AverageTimeCost,[Description]=@Description,[ItemStatus]=@ItemStatus,[ItemAmount]=@ItemAmount where [ItemId]=@ItemId",
                 new SqlParameter("ItemId", item.ItemId),
                 new SqlParameter("Name", item.Name),
                 new SqlParameter("Price", item.Price),
                 new SqlParameter("AverageTimeCost", item.AverageTimeCost),
                 new SqlParameter("Description", item.Description),
-                new SqlParameter("ItemStatus", item.ItemStatus)
+                new SqlParameter("ItemStatus", item.ItemStatus),
+                new SqlParameter("ItemAmount", item.ItemAmount)
                 );
         }
 
@@ -64,6 +66,7 @@ namespace IntelligentRestaurantManager.DAL
                 item.AverageTimeCost = (int)row["AverageTimeCost"];
                 item.Description = (string)row["Description"];
                 item.ItemStatus = (ItemStatus)row["ItemStatus"];
+                item.ItemAmount = (int)row["ItemAmount"];
                 list.Add(item);
             }
             return list;
@@ -83,6 +86,7 @@ namespace IntelligentRestaurantManager.DAL
                 item.AverageTimeCost = (int)row["AverageTimeCost"];
                 item.Description = (string)row["Description"];
                 item.ItemStatus = (ItemStatus)row["ItemStatus"];
+                item.ItemAmount = (int)row["ItemAmount"];
                 list.Add(item);
             }
             return list;
@@ -101,7 +105,9 @@ namespace IntelligentRestaurantManager.DAL
                 item.Price = (decimal)row["Price"];
                 item.AverageTimeCost = (int)row["AverageTimeCost"];
                 item.Description = (string)row["Description"];
-                //item.ItemStatus = (ItemStatus)row["ItemStatus"];
+                item.ItemStatus = (ItemStatus)row["ItemStatus"];
+                item.ItemAmount = (int)row["ItemAmount"];
+
                 return item;
             }
             else if (dt.Rows.Count > 1)
