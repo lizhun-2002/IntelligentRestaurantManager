@@ -145,6 +145,20 @@ namespace IntelligentRestaurantManager.DAL
             return list;
         }
 
+        public IEnumerable<Item> GetByItemIdArray(int[] itemIdArray, int[] itemStatusArray, int[] itemAmountArray)
+        {
+            List<Item> list = new List<Item>();
+            for (int i = 0; i < itemIdArray.Length; i++)
+            {
+                Item item = new Item();
+                item = GetByItemId(itemIdArray[i]);
+                item.ItemStatus = (ItemStatus)itemStatusArray[i];
+                item.ItemAmount = itemAmountArray[i];
+                list.Add(item);
+            }
+            return list;
+        }
+
         public int GetCount()
         {
             return (int)SQLHelper.ExecuteScalar("select COUNT(*) from T_ItemInfo");

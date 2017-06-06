@@ -15,13 +15,15 @@ namespace IntelligentRestaurantManager.DAL
         {
             int [] ItemIds = new int[order.Items.Count];
             int[] ItemStatusAll = new int[order.Items.Count];
+            int[] ItemAmount = new int[order.Items.Count];
             //System.Text.StringBuilder sb = new System.Text.StringBuilder();
             for (int i=0; i < order.Items.Count; i++)
             {
                 ItemIds[i] = order.Items[i].ItemId;
                 ItemStatusAll[i] = (int)order.Items[i].ItemStatus;
+                ItemAmount[i] = order.Items[i].ItemAmount;
             }
-            return SQLHelper.ExecuteNonQuery("insert into T_OrderFlow([OrderId],[StartTime],[NumberofPeople],[TableIds],[OrderStatus],[ItemIds],[ItemStatusAll],[FinishTime]) values(@OrderId,@StartTime,@NumberofPeople,@TableIds,@OrderStatus,@ItemIds,@ItemStatusAll,@FinishTime)",
+            return SQLHelper.ExecuteNonQuery("insert into T_OrderFlow([OrderId],[StartTime],[NumberofPeople],[TableIds],[OrderStatus],[ItemIds],[ItemStatusAll],[ItemAmounts],[FinishTime]) values(@OrderId,@StartTime,@NumberofPeople,@TableIds,@OrderStatus,@ItemIds,@ItemStatusAll,@ItemAmounts,@FinishTime)",
                 new SqlParameter("OrderId", order.OrderId),
                 new SqlParameter("StartTime", order.StartTime),
                 new SqlParameter("NumberofPeople", order.NumberofPeople),
@@ -29,6 +31,7 @@ namespace IntelligentRestaurantManager.DAL
                 new SqlParameter("OrderStatus", order.OrderStatus),
                 new SqlParameter("ItemIds", string.Join(",", ItemIds)),
                 new SqlParameter("ItemStatusAll", string.Join(",", ItemStatusAll)),
+                new SqlParameter("ItemAmounts", string.Join(",", ItemAmount)),
                 new SqlParameter("FinishTime", order.FinishTime)
                 );
         }
@@ -70,7 +73,9 @@ namespace IntelligentRestaurantManager.DAL
                 int[] intArray2 = Array.ConvertAll<string, int>(strArray2, s => int.Parse(s));
                 string[] strArray3 = ((string)row["ItemStatusAll"]).Split(new char[] { ',' });
                 int[] intArray3 = Array.ConvertAll<string, int>(strArray3, s => int.Parse(s));
-                order.Items = (List<Item>)new ItemService().GetByItemIdArray(intArray2, intArray3);
+                string[] strArray4 = ((string)row["ItemAmounts"]).Split(new char[] { ',' });
+                int[] intArray4 = Array.ConvertAll<string, int>(strArray4, s => int.Parse(s));
+                order.Items = (List<Item>)new ItemService().GetByItemIdArray(intArray2, intArray3, intArray4);
 
                 order.FinishTime = (DateTime)row["FinishTime"];
                 list.Add(order);
@@ -99,7 +104,9 @@ namespace IntelligentRestaurantManager.DAL
                 int[] intArray2 = Array.ConvertAll<string, int>(strArray2, s => int.Parse(s));
                 string[] strArray3 = ((string)row["ItemStatusAll"]).Split(new char[] { ',' });
                 int[] intArray3 = Array.ConvertAll<string, int>(strArray3, s => int.Parse(s));
-                order.Items = (List<Item>)new ItemService().GetByItemIdArray(intArray2, intArray3);
+                string[] strArray4 = ((string)row["ItemAmounts"]).Split(new char[] { ',' });
+                int[] intArray4 = Array.ConvertAll<string, int>(strArray4, s => int.Parse(s));
+                order.Items = (List<Item>)new ItemService().GetByItemIdArray(intArray2, intArray3, intArray4);
 
                 order.FinishTime = (DateTime)row["FinishTime"];
                 list.Add(order);
@@ -128,7 +135,9 @@ namespace IntelligentRestaurantManager.DAL
                 int[] intArray2 = Array.ConvertAll<string, int>(strArray2, s => int.Parse(s));
                 string[] strArray3 = ((string)row["ItemStatusAll"]).Split(new char[] { ',' });
                 int[] intArray3 = Array.ConvertAll<string, int>(strArray3, s => int.Parse(s));
-                order.Items = (List<Item>)new ItemService().GetByItemIdArray(intArray2, intArray3);
+                string[] strArray4 = ((string)row["ItemAmounts"]).Split(new char[] { ',' });
+                int[] intArray4 = Array.ConvertAll<string, int>(strArray4, s => int.Parse(s));
+                order.Items = (List<Item>)new ItemService().GetByItemIdArray(intArray2, intArray3, intArray4);
 
                 order.FinishTime = (DateTime)row["FinishTime"];
                 list.Add(order);
@@ -157,7 +166,9 @@ namespace IntelligentRestaurantManager.DAL
                 int[] intArray2 = Array.ConvertAll<string, int>(strArray2, s => int.Parse(s));
                 string[] strArray3 = ((string)row["ItemStatusAll"]).Split(new char[] { ',' });
                 int[] intArray3 = Array.ConvertAll<string, int>(strArray3, s => int.Parse(s));
-                order.Items = (List<Item>)new ItemService().GetByItemIdArray(intArray2, intArray3);
+                string[] strArray4 = ((string)row["ItemAmounts"]).Split(new char[] { ',' });
+                int[] intArray4 = Array.ConvertAll<string, int>(strArray4, s => int.Parse(s));
+                order.Items = (List<Item>)new ItemService().GetByItemIdArray(intArray2, intArray3, intArray4);
 
                 order.FinishTime = (DateTime)row["FinishTime"];
                 return order;

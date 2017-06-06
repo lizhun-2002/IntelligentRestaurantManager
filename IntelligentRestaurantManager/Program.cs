@@ -45,7 +45,7 @@ namespace IntelligentRestaurantManager
                 }
                 else if (currentStaff.Role == StaffRole.Cook)
                 {
-                    MessageBox.Show(string.Format("Welcome {0}! Your role is {1}", currentStaff.Name, currentStaff.Role));
+                    //MessageBox.Show(string.Format("Welcome {0}! Your role is {1}", currentStaff.Name, currentStaff.Role));
                     Application.Run(new OrderListForm());
                 }
                 else

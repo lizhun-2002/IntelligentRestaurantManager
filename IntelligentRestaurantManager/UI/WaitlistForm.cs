@@ -21,6 +21,12 @@ namespace IntelligentRestaurantManager.UI
         private CustomerManager customerManager;
         private TableManager tableManager;
 
+        public ListBox WaitingList
+        {
+            get { return lbList; }
+            set { lbList = value; }
+        }
+
         public WaitlistForm(DiningArea diningArea)
         {
             InitializeComponent();

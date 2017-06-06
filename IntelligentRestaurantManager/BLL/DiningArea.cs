@@ -42,7 +42,7 @@ namespace IntelligentRestaurantManager.BLL
             foreach (Table table in Tables)
             {
                 //reset countDown time
-                table.CountDown = DateTime.MinValue;
+                table.CountDown = System.Data.SqlTypes.SqlDateTime.MinValue.Value;
                 //activate table
                 if (table.TableStatus != TableStatus.Breakdown)
                 {
@@ -66,6 +66,7 @@ namespace IntelligentRestaurantManager.BLL
             }
 
             //clear waiting list
+            Customers.Clear();
             new CustomerManager().DeleteAll();
 
         }

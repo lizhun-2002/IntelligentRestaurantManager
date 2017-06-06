@@ -37,7 +37,7 @@
             // 
             this.lbNumWaiting.AutoSize = true;
             this.lbNumWaiting.Font = new System.Drawing.Font("Calibri", 20.25F);
-            this.lbNumWaiting.Location = new System.Drawing.Point(17, 68);
+            this.lbNumWaiting.Location = new System.Drawing.Point(15, 68);
             this.lbNumWaiting.Name = "lbNumWaiting";
             this.lbNumWaiting.Size = new System.Drawing.Size(81, 33);
             this.lbNumWaiting.TabIndex = 0;
@@ -47,12 +47,13 @@
             // 
             this.lbWaitingPerson.BackColor = System.Drawing.SystemColors.MenuBar;
             this.lbWaitingPerson.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbWaitingPerson.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lbWaitingPerson.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbWaitingPerson.FormattingEnabled = true;
             this.lbWaitingPerson.ItemHeight = 23;
-            this.lbWaitingPerson.Location = new System.Drawing.Point(23, 125);
+            this.lbWaitingPerson.Location = new System.Drawing.Point(0, 144);
             this.lbWaitingPerson.Name = "lbWaitingPerson";
-            this.lbWaitingPerson.Size = new System.Drawing.Size(428, 391);
+            this.lbWaitingPerson.Size = new System.Drawing.Size(409, 391);
             this.lbWaitingPerson.TabIndex = 1;
             // 
             // lbCurrentTime
@@ -60,7 +61,7 @@
             this.lbCurrentTime.AutoSize = true;
             this.lbCurrentTime.Font = new System.Drawing.Font("Calibri", 20.25F);
             this.lbCurrentTime.ForeColor = System.Drawing.Color.Blue;
-            this.lbCurrentTime.Location = new System.Drawing.Point(17, 21);
+            this.lbCurrentTime.Location = new System.Drawing.Point(15, 21);
             this.lbCurrentTime.Name = "lbCurrentTime";
             this.lbCurrentTime.Size = new System.Drawing.Size(81, 33);
             this.lbCurrentTime.TabIndex = 2;
@@ -68,9 +69,9 @@
             // 
             // WaitinglistScreenForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(477, 535);
+            this.ClientSize = new System.Drawing.Size(409, 535);
             this.Controls.Add(this.lbCurrentTime);
             this.Controls.Add(this.lbWaitingPerson);
             this.Controls.Add(this.lbNumWaiting);

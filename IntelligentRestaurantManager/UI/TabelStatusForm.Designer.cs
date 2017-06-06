@@ -40,6 +40,8 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.myProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changePasswordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.systemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.closeDiningAreaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.waitingListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -89,6 +91,7 @@
             this.labelTableIds = new System.Windows.Forms.Label();
             this.txtNoOfPeople = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.reservationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -106,7 +109,7 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.setTableStatusToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(170, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(170, 48);
             // 
             // setTableStatusToolStripMenuItem
             // 
@@ -125,9 +128,11 @@
             this.activeToolStripMenuItem.Name = "activeToolStripMenuItem";
             this.activeToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.activeToolStripMenuItem.Text = "&Active";
+            this.activeToolStripMenuItem.Click += new System.EventHandler(this.activeToolStripMenuItem_Click);
             // 
             // orderingToolStripMenuItem
             // 
+            this.orderingToolStripMenuItem.Enabled = false;
             this.orderingToolStripMenuItem.Name = "orderingToolStripMenuItem";
             this.orderingToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.orderingToolStripMenuItem.Text = "&Ordering";
@@ -135,8 +140,9 @@
             // cleaningToolStripMenuItem
             // 
             this.cleaningToolStripMenuItem.Name = "cleaningToolStripMenuItem";
-            this.cleaningToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.cleaningToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cleaningToolStripMenuItem.Text = "&Cleaning";
+            this.cleaningToolStripMenuItem.Click += new System.EventHandler(this.cleaningToolStripMenuItem_Click);
             // 
             // reservedToolStripMenuItem
             // 
@@ -154,11 +160,12 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.myProfileToolStripMenuItem,
+            this.systemToolStripMenuItem,
             this.viewToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(964, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(903, 25);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -177,10 +184,26 @@
             this.changePasswordToolStripMenuItem.Text = "&Change password";
             this.changePasswordToolStripMenuItem.Click += new System.EventHandler(this.changePasswordToolStripMenuItem_Click);
             // 
+            // systemToolStripMenuItem
+            // 
+            this.systemToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.closeDiningAreaToolStripMenuItem});
+            this.systemToolStripMenuItem.Name = "systemToolStripMenuItem";
+            this.systemToolStripMenuItem.Size = new System.Drawing.Size(61, 21);
+            this.systemToolStripMenuItem.Text = "&System";
+            // 
+            // closeDiningAreaToolStripMenuItem
+            // 
+            this.closeDiningAreaToolStripMenuItem.Name = "closeDiningAreaToolStripMenuItem";
+            this.closeDiningAreaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.closeDiningAreaToolStripMenuItem.Text = "&Close Dining Area";
+            this.closeDiningAreaToolStripMenuItem.Click += new System.EventHandler(this.closeDiningAreaToolStripMenuItem_Click);
+            // 
             // viewToolStripMenuItem
             // 
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.waitingListToolStripMenuItem});
+            this.waitingListToolStripMenuItem,
+            this.reservationToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(47, 21);
             this.viewToolStripMenuItem.Text = "&View";
@@ -188,7 +211,7 @@
             // waitingListToolStripMenuItem
             // 
             this.waitingListToolStripMenuItem.Name = "waitingListToolStripMenuItem";
-            this.waitingListToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.waitingListToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.waitingListToolStripMenuItem.Text = "&Waiting List";
             this.waitingListToolStripMenuItem.Click += new System.EventHandler(this.waitingListToolStripMenuItem_Click);
             // 
@@ -227,9 +250,9 @@
             this.groupBox1.Controls.Add(this.btnLegend1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBox1.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(0, 623);
+            this.groupBox1.Location = new System.Drawing.Point(0, 722);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(964, 69);
+            this.groupBox1.Size = new System.Drawing.Size(903, 69);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Legend";
@@ -348,7 +371,7 @@
             this.groupBox2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(531, 228);
+            this.groupBox2.Size = new System.Drawing.Size(550, 228);
             this.groupBox2.TabIndex = 40;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Input Table Information";
@@ -473,9 +496,9 @@
             this.panel1.Controls.Add(this.groupBox3);
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(433, 25);
+            this.panel1.Location = new System.Drawing.Point(353, 25);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(531, 598);
+            this.panel1.Size = new System.Drawing.Size(550, 697);
             this.panel1.TabIndex = 42;
             // 
             // groupBox3
@@ -496,7 +519,7 @@
             this.groupBox3.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(0, 228);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(531, 370);
+            this.groupBox3.Size = new System.Drawing.Size(550, 469);
             this.groupBox3.TabIndex = 41;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Input Order Information";
@@ -504,21 +527,24 @@
             // dgvSelectedItems
             // 
             this.dgvSelectedItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSelectedItems.Location = new System.Drawing.Point(27, 148);
+            this.dgvSelectedItems.Location = new System.Drawing.Point(27, 146);
             this.dgvSelectedItems.Name = "dgvSelectedItems";
             this.dgvSelectedItems.RowTemplate.Height = 23;
-            this.dgvSelectedItems.Size = new System.Drawing.Size(240, 150);
+            this.dgvSelectedItems.Size = new System.Drawing.Size(235, 258);
             this.dgvSelectedItems.TabIndex = 53;
+            this.dgvSelectedItems.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSelectedItems_CellContentDoubleClick);
+            this.dgvSelectedItems.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSelectedItems_CellDoubleClick);
             // 
             // btnSaveOrder
             // 
             this.btnSaveOrder.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaveOrder.Location = new System.Drawing.Point(338, 318);
+            this.btnSaveOrder.Location = new System.Drawing.Point(338, 420);
             this.btnSaveOrder.Name = "btnSaveOrder";
             this.btnSaveOrder.Size = new System.Drawing.Size(144, 30);
             this.btnSaveOrder.TabIndex = 52;
             this.btnSaveOrder.Text = "Save";
             this.btnSaveOrder.UseVisualStyleBackColor = true;
+            this.btnSaveOrder.Click += new System.EventHandler(this.btnSaveOrder_Click);
             // 
             // txtOrderId
             // 
@@ -559,20 +585,20 @@
             this.tabControlMenu.Controls.Add(this.tabPage1);
             this.tabControlMenu.Controls.Add(this.tabPage2);
             this.tabControlMenu.Controls.Add(this.tabPage3);
-            this.tabControlMenu.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControlMenu.Location = new System.Drawing.Point(290, 148);
+            this.tabControlMenu.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControlMenu.Location = new System.Drawing.Point(279, 115);
             this.tabControlMenu.Name = "tabControlMenu";
             this.tabControlMenu.SelectedIndex = 0;
-            this.tabControlMenu.Size = new System.Drawing.Size(228, 150);
+            this.tabControlMenu.Size = new System.Drawing.Size(249, 296);
             this.tabControlMenu.TabIndex = 47;
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.dgvItemMenu1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 23);
+            this.tabPage1.Location = new System.Drawing.Point(4, 28);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(220, 123);
+            this.tabPage1.Size = new System.Drawing.Size(241, 264);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Main Dish";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -584,24 +610,26 @@
             this.dgvItemMenu1.Location = new System.Drawing.Point(3, 3);
             this.dgvItemMenu1.Name = "dgvItemMenu1";
             this.dgvItemMenu1.RowTemplate.Height = 23;
-            this.dgvItemMenu1.Size = new System.Drawing.Size(214, 117);
+            this.dgvItemMenu1.Size = new System.Drawing.Size(235, 258);
             this.dgvItemMenu1.TabIndex = 0;
+            this.dgvItemMenu1.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvItemMenu1_CellContentDoubleClick);
+            this.dgvItemMenu1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvItemMenu1_CellDoubleClick);
             // 
             // tabPage2
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 23);
+            this.tabPage2.Location = new System.Drawing.Point(4, 28);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(220, 123);
+            this.tabPage2.Size = new System.Drawing.Size(241, 264);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Beverage";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // tabPage3
             // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 23);
+            this.tabPage3.Location = new System.Drawing.Point(4, 28);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(220, 123);
+            this.tabPage3.Size = new System.Drawing.Size(241, 264);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Dessert";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -657,14 +685,21 @@
             this.flowLayoutPanel1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 25);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(433, 598);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(353, 697);
             this.flowLayoutPanel1.TabIndex = 43;
+            // 
+            // reservationToolStripMenuItem
+            // 
+            this.reservationToolStripMenuItem.Name = "reservationToolStripMenuItem";
+            this.reservationToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.reservationToolStripMenuItem.Text = "&Reservation";
+            this.reservationToolStripMenuItem.Click += new System.EventHandler(this.reservationToolStripMenuItem_Click);
             // 
             // TabelStatusForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(964, 692);
+            this.ClientSize = new System.Drawing.Size(903, 791);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
@@ -755,6 +790,9 @@
         private System.Windows.Forms.DataGridView dgvSelectedItems;
         private System.Windows.Forms.DataGridView dgvItemMenu1;
         private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.ToolStripMenuItem systemToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem closeDiningAreaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reservationToolStripMenuItem;
     }
 }
 

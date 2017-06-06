@@ -49,15 +49,31 @@ namespace IntelligentRestaurantManager.UI
             //groupbox:table information
             txtTableId.Enabled = false;
             txtCapacity.Enabled = false;
+            comboBoxTableStatus.DataSource = System.Enum.GetNames(typeof(TableStatus));
+            comboBoxWaiterName.DataSource = diningArea.Waiters.Select(waiter => waiter.Name).ToList();
             //groupbox:order information
             txtOrderId.Enabled = false;
+
             dgvItemMenu1.DataSource = itemManager.GetAll();
             dgvItemMenu1.ReadOnly = true;
-            dgvItemMenu1.Columns["ItemId"].Visible = false;
+            dgvItemMenu1.RowHeadersVisible = false;
+            dgvItemMenu1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvItemMenu1.Columns["AverageTimeCost"].Visible = false;
             dgvItemMenu1.Columns["ItemStatus"].Visible = false;
-            dgvItemMenu1.Columns["ItemStatus"].Visible = false;
             dgvItemMenu1.Columns["ItemAmount"].Visible = false;
+            dgvItemMenu1.Columns["Description"].Visible = false;
+
+            dgvSelectedItems.DataSource = new List<Item>();
+            //dgvSelectedItems.ReadOnly = true;
+            dgvSelectedItems.RowHeadersVisible = false;
+            dgvSelectedItems.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvSelectedItems.Columns["AverageTimeCost"].Visible = false;
+            dgvSelectedItems.Columns["ItemStatus"].Visible = false;
+            dgvSelectedItems.Columns["Description"].Visible = false;
+            dgvSelectedItems.Columns["ItemId"].ReadOnly = true;
+            dgvSelectedItems.Columns["Name"].ReadOnly = true;
+            dgvSelectedItems.Columns["Price"].ReadOnly = true;
+            dgvSelectedItems.AllowUserToAddRows = false;
         }
 
         void waitlistForm_OnAllocate(object sender, WaitlistForm.AllocateEventArgs e)
@@ -113,9 +129,7 @@ namespace IntelligentRestaurantManager.UI
             Table table = (Table)(sender as Button).Tag;
             txtTableId.Text = table.TableId.ToString();
             txtCapacity.Text = table.Capacity.ToString();
-            comboBoxTableStatus.DataSource = System.Enum.GetNames(typeof(TableStatus));
             comboBoxTableStatus.SelectedIndex = (int)table.TableStatus;
-            comboBoxWaiterName.DataSource = diningArea.Waiters.Select(waiter => waiter.Name).ToList();
             comboBoxWaiterName.SelectedIndex = diningArea.Waiters.Select(waiter => waiter.Name).ToList().IndexOf(table.WaiterName);
             txtCustomerId.Text = table.CustomerId.ToString();
             txtResInfo.Text = table.ReservationInfo;
@@ -127,19 +141,18 @@ namespace IntelligentRestaurantManager.UI
                 txtNoOfPeople.Text = "";
                 txtTableIds.Text = "";
                 comboBoxOrderStatus.DataSource = null;
-
+                dgvSelectedItems.DataSource = new BindingList<Item>();
             }
             else if (table.OrderId < -1)//there is customer, but not order yet
             {
                 txtOrderId.Text = "-1";
                 txtNoOfPeople.Text = (-table.OrderId).ToString();
-                int[] tableIds = diningArea.Tables.Where(t => t.CustomerId > 0 && t.CustomerId == table.CustomerId).Select(t => t.CustomerId).ToArray();
+                int[] tableIds = diningArea.Tables.Where(t => t.CustomerId > 0 && t.CustomerId == table.CustomerId).Select(t => t.TableId).ToArray();
                 txtTableIds.Text = string.Join(",", tableIds);
                 comboBoxOrderStatus.DataSource = System.Enum.GetNames(typeof(OrderStatus)); ;
-                dgvItemMenu1.DataSource = null;
+                dgvItemMenu1.DataSource = new List<Item>();
                 dgvItemMenu1.DataSource = itemManager.GetAll();
-                dgvSelectedItems.DataSource = null;
-                dgvSelectedItems.DataSource = itemManager.GetAll();//new List<Item>() { new Item()};
+                dgvSelectedItems.DataSource = new BindingList<Item>();
             }
             else//there is order already
             {
@@ -152,20 +165,13 @@ namespace IntelligentRestaurantManager.UI
                     txtTableIds.Text = string.Join(",", order.TableIds);
                     comboBoxOrderStatus.DataSource = System.Enum.GetNames(typeof(OrderStatus));
                     comboBoxOrderStatus.SelectedIndex = (int)order.OrderStatus;
-                    dgvItemMenu1.DataSource = null;
+                    dgvItemMenu1.DataSource = new List<Item>();
                     dgvItemMenu1.DataSource = itemManager.GetAll();
-                    dgvSelectedItems.DataSource = null;
-                    dgvSelectedItems.DataSource = order.Items;
+                    dgvSelectedItems.DataSource = new BindingList<Item>();
+                    dgvSelectedItems.DataSource = new BindingList<Item>(order.Items);
                     //MessageBox.Show("number of items {0}", itemManager.GetAll().ToList().Count.ToString());
                 }
             }
-            //txtNoOfPeople=
-            //comboBoxOrderStatus.SelectedIndex = (int)Order.OrderStatus;
-
-            //comboBoxWaiterId.DataSource = diningArea.Waiters.Select(waiter=>waiter.Name).ToList();
-            //comboBoxOrderStatus.DataSource = diningArea.Tables.Select(waiter => waiter.TableStatus).ToList();
-            //Todo: waiter name order by workload, i.e. sum of customers 
-
         }
 
         void btn_MouseDown(object sender, MouseEventArgs e)
@@ -201,13 +207,6 @@ namespace IntelligentRestaurantManager.UI
             return result;
         }
 
-        private void allocateTableWaiterToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Table table = contextMenuStrip1.Tag as Table;
-            MessageBox.Show(string.Format("Table ID is {0}! It's capacity {1}", table.TableId, table.Capacity));
-
-        }
-
         private void waitingListToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (waitlistForm == null || waitlistForm.IsDisposed)
@@ -227,6 +226,15 @@ namespace IntelligentRestaurantManager.UI
             }
         }
 
+        private void reservationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReservationsForm reservationsForm = new ReservationsForm();
+            reservationsForm.StartPosition = FormStartPosition.CenterScreen;
+            if (reservationsForm.ShowDialog() == DialogResult.OK)
+            {
+            }
+        }
+
         private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ProfileEditForm profileEditForm = new ProfileEditForm(diningArea.CurrentStaff);
@@ -237,29 +245,191 @@ namespace IntelligentRestaurantManager.UI
             }
         }
 
-        //private void btnCreateOrder_Click(object sender, EventArgs e)
-        //{
-        //    MessageBox.Show(string.Format("There are {0} customers waiting.", diningArea.Customers.Count));
-        //    //(diningArea.CurrentStaff as Waiter).CreateOrder(diningArea.Orders,(Table)labelTabelId.Tag,
-        //    MessageBox.Show(diningArea.Tables.Select(t => t.TableStatus).ToString());
-        //}
-
-        private void btnSaveTable_Click(object sender, EventArgs e)
+        private void closeDiningAreaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Table currentTable = diningArea.Tables.Where(t => t.TableId == int.Parse(txtTableId.Text)).ToList()[0];
-            currentTable.TableId = int.Parse(txtTableId.Text);
-            currentTable.Capacity = int.Parse(txtCapacity.Text);
-            currentTable.TableStatus = (TableStatus)comboBoxTableStatus.SelectedIndex;
-            currentTable.WaiterName = comboBoxWaiterName.Text;
-            currentTable.CustomerId = int.Parse(txtCustomerId.Text);
-            currentTable.OrderId = int.Parse(txtOrderId.Text);
-            currentTable.ReservationInfo = txtResInfo.Text;
-
-            (diningArea.CurrentStaff as Waiter).UpdateTable(diningArea.Tables, currentTable);
-            MessageBox.Show("OK");
+            if (MessageBox.Show("Are you sure to close dining area?", "Warning!", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                diningArea.CloseDiningArea();
+                waitlistForm.WaitingList.Items.Clear();
+            }
             this.flowLayoutPanel1.Controls.Clear();
             InitTablePosition_Simple();
         }
+
+        private void btnSaveTable_Click(object sender, EventArgs e)
+        {
+            if (txtTableId.Text == "" || txtCustomerId.Text == "" || comboBoxWaiterName.Text == "")
+            {
+                MessageBox.Show("Please select a table and input all the information.");
+            }
+            else if (MessageBox.Show("Are you sure to save table information?", "Warning!", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                Table currentTable = diningArea.Tables.Where(t => t.TableId == int.Parse(txtTableId.Text)).ToList()[0];
+                currentTable.TableId = int.Parse(txtTableId.Text);
+                currentTable.Capacity = int.Parse(txtCapacity.Text);
+                currentTable.TableStatus = (TableStatus)comboBoxTableStatus.SelectedIndex;
+                currentTable.WaiterName = comboBoxWaiterName.Text;
+                currentTable.CustomerId = int.Parse(txtCustomerId.Text);
+                currentTable.OrderId = int.Parse(txtOrderId.Text);
+                currentTable.ReservationInfo = txtResInfo.Text;
+
+                int flag = (diningArea.CurrentStaff as Waiter).UpdateTable(diningArea.Tables, currentTable);
+                if (flag == 1) MessageBox.Show("Success!");
+                if (flag == 0) MessageBox.Show("Failed!");
+
+                //MessageBox.Show("OK");
+                this.flowLayoutPanel1.Controls.Clear();
+                InitTablePosition_Simple();
+            }
+        }
+
+        private void btnSaveOrder_Click(object sender, EventArgs e)
+        {
+            List<Item> selectedItems = new List<Item>(dgvSelectedItems.DataSource as BindingList<Item>);
+            if (txtTableId.Text == "" || txtNoOfPeople.Text == "" || txtTableIds.Text == "")
+            {
+                MessageBox.Show("Please select a table and input all the information.");
+            }
+            else if (selectedItems == null || selectedItems.Count == 0)
+            {
+                MessageBox.Show("Order should contain at least one item.");
+            }
+            else
+            {
+                Waiter waiter = diningArea.CurrentStaff as Waiter;
+                if (int.Parse(txtOrderId.Text) == -1)
+                {
+                    if (MessageBox.Show("Are you sure to create new order?", "Warning!", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                    {
+                        int flag;
+                        flag = waiter.CreateOrder(diningArea.Orders, int.Parse(txtCustomerId.Text), selectedItems, int.Parse(txtNoOfPeople.Text), diningArea.Tables);
+                        //if (flag == 1) MessageBox.Show("Success!");
+                        if (flag == 0) MessageBox.Show("Failed!");
+                    }
+                }
+                else
+                {
+                    if (MessageBox.Show("Are you sure to save order?", "Warning!", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                    {
+                        int flag;
+                        flag = waiter.UpdateOrder(diningArea.Orders, int.Parse(txtOrderId.Text), int.Parse(txtCustomerId.Text), selectedItems, int.Parse(txtNoOfPeople.Text), (OrderStatus)comboBoxOrderStatus.SelectedIndex);
+                        //if (flag == 1) MessageBox.Show("Success!");
+                        if (flag == 0) MessageBox.Show("Failed!");
+                    }
+                }
+            }
+        }
+
+        private void dgvItemMenu1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+        }
+
+        private void dgvSelectedItems_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgvSelectedItems_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            BindingList<Item> selectedItems = dgvSelectedItems.DataSource as BindingList<Item>;
+            if (selectedItems == null) selectedItems = new BindingList<Item>();
+            if (e.RowIndex > -1)
+            {
+                selectedItems.Remove(selectedItems[e.RowIndex]);
+                dgvSelectedItems.DataSource = new BindingList<Item>(selectedItems);
+            }
+
+        }
+
+        private void dgvItemMenu1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            List<Item> menuItems = dgvItemMenu1.DataSource as List<Item>;
+            BindingList<Item> selectedItems = dgvSelectedItems.DataSource as BindingList<Item>;
+            if (selectedItems == null) selectedItems = new BindingList<Item>();
+            if (e.RowIndex > -1 && !selectedItems.Select(t => t.ItemId).ToList().Contains(menuItems[e.RowIndex].ItemId))
+            {
+                selectedItems.Add(menuItems[e.RowIndex]);
+                dgvSelectedItems.DataSource = new BindingList<Item>(selectedItems);
+            }
+
+        }
+
+        private void activeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Table table = contextMenuStrip1.Tag as Table;
+            Waiter waiter = diningArea.CurrentStaff as Waiter;
+            Order order = new OrderManager().GetByOrderId(table.OrderId);
+            bool flag = waiter.SetTableStatus(table, TableStatus.Active);
+            if (order.OrderStatus == OrderStatus.Start)
+            {
+                MessageBox.Show("Please finish or cancel order first!");
+            }
+            else if (flag == true)
+            {
+                //clear data
+                table.CountDown = System.Data.SqlTypes.SqlDateTime.MinValue.Value;
+                table.ReservationInfo = "";
+                table.CustomerId = -1;
+                table.WaiterName = "";
+                table.OrderId = -1;
+                new TableManager().Update(table); 
+
+                //clean UI
+                comboBoxTableStatus.SelectedIndex = (int)table.TableStatus;
+                comboBoxWaiterName.Text = table.WaiterName;
+                txtCustomerId.Text = table.CustomerId.ToString();
+                txtResInfo.Text = table.ReservationInfo;
+
+                txtOrderId.Text = "-1";
+                txtNoOfPeople.Text = "";
+                txtTableIds.Text = "";
+                comboBoxOrderStatus.DataSource = null;
+                dgvSelectedItems.DataSource = new BindingList<Item>();
+
+                this.flowLayoutPanel1.Controls.Clear();
+                InitTablePosition_Simple();
+            }
+            if (flag == false) MessageBox.Show("Failed!");
+        }
+
+        private void cleaningToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Table table = contextMenuStrip1.Tag as Table;
+            Waiter waiter = diningArea.CurrentStaff as Waiter;
+            Order order = new OrderManager().GetByOrderId(table.OrderId);
+            bool flag = waiter.SetTableStatus(table, TableStatus.Cleaning);
+            if (order.OrderStatus == OrderStatus.Start)
+            {
+                MessageBox.Show("Please finish or cancel order first!");
+            }
+            else if (flag == true)
+            {
+                //clear data
+                table.CountDown = DateTime.Now.AddMinutes(5);
+                table.ReservationInfo = "";
+                table.CustomerId = -1;
+                table.WaiterName = "";
+                table.OrderId = -1;
+                new TableManager().Update(table);
+
+                //clean UI
+                comboBoxTableStatus.SelectedIndex = (int)table.TableStatus;
+                comboBoxWaiterName.Text = table.WaiterName;
+                txtCustomerId.Text = table.CustomerId.ToString();
+                txtResInfo.Text = table.ReservationInfo;
+
+                txtOrderId.Text = "-1";
+                txtNoOfPeople.Text = "";
+                txtTableIds.Text = "";
+                comboBoxOrderStatus.DataSource = null;
+                dgvSelectedItems.DataSource = new BindingList<Item>();
+
+                this.flowLayoutPanel1.Controls.Clear();
+                InitTablePosition_Simple();
+            }
+            if (flag == false) MessageBox.Show("Failed!");
+        }
+
 
     }
 }

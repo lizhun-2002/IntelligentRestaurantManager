@@ -63,7 +63,7 @@ namespace IntelligentRestaurantManager.BLL
                 table.CustomerId = waitingNumber;
                 table.WaiterName = waiterName;
 
-                for (int i = 0; i < tables.Count;i++ )
+                for (int i = 0; i < tables.Count; i++)
                 {
                     if (tables[i].TableId == table.TableId)
                     {
@@ -128,16 +128,56 @@ namespace IntelligentRestaurantManager.BLL
             return result;
         }
 
-        public int CreateOrder(List<Order> orders, Table table, List<Item> items, int numberofPeople)
+        public int CreateOrder(List<Order> orders, int customerId, List<Item> items, int numberofPeople, List<Table> tables)
         {
-            if (table.CustomerId <= 0) 
-            { 
-                return 0; 
+            if (customerId <= 0)
+            {
+                return 0;
             }
-            List<Table> tables = (List<Table>)new TableManager().GetByTableCustomerId(table.CustomerId);
+            List<Table> linkedTables = (List<Table>)new TableManager().GetByTableCustomerId(customerId);
             Order order = new Order();
-            order.OrderId = new OrderManager().GetMaxOrderId() + 1;
+            if (new OrderManager().GetCount() < 1)
+            {
+                order.OrderId = 1;
+            }
+            else
+            {
+                order.OrderId = new OrderManager().GetMaxOrderId() + 1;
+            }
             order.StartTime = DateTime.Now;
+            order.NumberofPeople = numberofPeople;
+            int[] tableIdArray = new int[linkedTables.Count];
+            for (int i = 0; i < linkedTables.Count; i++)
+            {
+                tableIdArray[i] = linkedTables[i].TableId;
+            }
+            order.TableIds = tableIdArray;
+            order.OrderStatus = OrderStatus.Start;
+            order.Items = items;
+            int result = new OrderManager().AddNew(order);
+            if (result == 1)
+            {
+                orders.Add(order);
+                for (int i = 0; i < tables.Count; i++)
+                {
+                    foreach (Table t in linkedTables)
+                    {
+                        if(t.TableId==tables[i].TableId) tables[i].OrderId = order.OrderId;
+                        new TableManager().Update(tables[i]);
+                    }
+                }
+            }
+            return result;
+        }
+
+        public int UpdateOrder(List<Order> orders, int orderId, int customerId, List<Item> items, int numberofPeople, OrderStatus orderStatus)
+        {
+            if (customerId <= 0)
+            {
+                return 0;
+            }
+            List<Table> tables = (List<Table>)new TableManager().GetByTableCustomerId(customerId);
+            Order order = new OrderManager().GetByOrderId(orderId);
             order.NumberofPeople = numberofPeople;
             int[] tableIdArray = new int[tables.Count];
             for (int i = 0; i < tables.Count; i++)
@@ -145,14 +185,10 @@ namespace IntelligentRestaurantManager.BLL
                 tableIdArray[i] = tables[i].TableId;
             }
             order.TableIds = tableIdArray;
-            order.OrderStatus = OrderStatus.Start;
+            order.OrderStatus = orderStatus;
             order.Items = items;
-            order.FinishTime = DateTime.MinValue;
-            int result = new OrderManager().AddNew(order);
-            if (result == 1)
-            {
-                orders.Add(order);
-            }
+            if (orderStatus == OrderStatus.Finish) order.FinishTime = DateTime.Now;
+            int result = UpdateOrder(orders, order);
             return result;
         }
 
