@@ -140,7 +140,7 @@ namespace IntelligentRestaurantManager.DAL
             {
                 Item item = new Item();
                 item = GetByItemId(itemIdArray[i]);
-                //item.ItemStatus = (ItemStatus)itemStatusArray[i];
+                item.ItemStatus = (ItemStatus)itemStatusArray[i];
                 list.Add(item);
             }
             return list;
