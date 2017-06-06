@@ -107,6 +107,7 @@ namespace IntelligentRestaurantManager.DAL
                 item.Description = (string)row["Description"];
                 item.ItemStatus = (ItemStatus)row["ItemStatus"];
                 item.ItemAmount = (int)row["ItemAmount"];
+
                 return item;
             }
             else if (dt.Rows.Count > 1)
@@ -139,7 +140,7 @@ namespace IntelligentRestaurantManager.DAL
             {
                 Item item = new Item();
                 item = GetByItemId(itemIdArray[i]);
-                item.ItemStatus = (ItemStatus)itemStatusArray[i];
+                //item.ItemStatus = (ItemStatus)itemStatusArray[i];
                 list.Add(item);
             }
             return list;

@@ -37,7 +37,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.timeUd = new System.Windows.Forms.NumericUpDown();
             this.tableComboBox = new System.Windows.Forms.ComboBox();
             this.partyNumberUd = new System.Windows.Forms.NumericUpDown();
@@ -126,24 +125,12 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(269, 386);
+            this.label4.Location = new System.Drawing.Point(23, 380);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(51, 18);
             this.label4.TabIndex = 12;
             this.label4.Text = "Table";
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(26, 382);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(205, 22);
-            this.checkBox1.TabIndex = 13;
-            this.checkBox1.Text = "Table Auto Allocation";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // timeUd
             // 
@@ -166,7 +153,7 @@
             // tableComboBox
             // 
             this.tableComboBox.FormattingEnabled = true;
-            this.tableComboBox.Location = new System.Drawing.Point(330, 380);
+            this.tableComboBox.Location = new System.Drawing.Point(82, 377);
             this.tableComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.tableComboBox.Name = "tableComboBox";
             this.tableComboBox.Size = new System.Drawing.Size(95, 26);
@@ -198,7 +185,6 @@
             this.Controls.Add(this.partyNumberUd);
             this.Controls.Add(this.tableComboBox);
             this.Controls.Add(this.timeUd);
-            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -230,7 +216,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.NumericUpDown timeUd;
         private System.Windows.Forms.ComboBox tableComboBox;
         private System.Windows.Forms.NumericUpDown partyNumberUd;

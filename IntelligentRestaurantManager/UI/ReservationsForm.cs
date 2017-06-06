@@ -99,7 +99,6 @@ namespace IntelligentRestaurantManager
                     MessageBox.Show("Reservation Successful");
 
                     // Reset all values
-                    checkBox1.Checked = false;
                     textBox1.Text = "";
                     partyNumberUd.Value = 1;
                     timeUd.Value = 12;
@@ -137,31 +136,6 @@ namespace IntelligentRestaurantManager
             }
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            // TODO : Get list of tables from DB and reservation info
-            // Algorithm : from reservation info, get list of reserved tables
-            //             then from table info, get a table of appropriate size
-            //             if all tables are reserved, return an error message
-            // Check if the checkbox is checked
-            List<Model.Reservation> reslist = new List<Model.Reservation>();
-            List<int> alreadyTakenTables = new List<int>();
-
-            if (checkBox1.Checked == true)
-            {
-                refreshTableList();
-                foreach (Model.Reservation r in myReservation) {
-                    if (r.day == monthCalendar1.SelectionStart.Day && r.month == monthCalendar1.SelectionStart.Month) {
-                        reslist.Add(r);
-                    }
-                }
-                foreach (Model.Reservation r in reslist)
-                {
-                    alreadyTakenTables.Add(r.getId());
-                }
-                MessageBox.Show("Table allocated to PLACEHOLDER");
-            }
-        }
 
         private void ReservationsForm_Load(object sender, EventArgs e)
         {

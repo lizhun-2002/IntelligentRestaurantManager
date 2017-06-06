@@ -72,7 +72,7 @@ namespace IntelligentRestaurantManager.DAL
                 int[] intArray3 = Array.ConvertAll<string, int>(strArray3, s => int.Parse(s));
                 order.Items = (List<Item>)new ItemService().GetByItemIdArray(intArray2, intArray3);
 
-                order.FinishTime = (DateTime)row["FinishTime"];
+                //order.FinishTime = (DateTime)row["FinishTime"];
                 list.Add(order);
             }
             return list;
@@ -159,7 +159,7 @@ namespace IntelligentRestaurantManager.DAL
                 int[] intArray3 = Array.ConvertAll<string, int>(strArray3, s => int.Parse(s));
                 order.Items = (List<Item>)new ItemService().GetByItemIdArray(intArray2, intArray3);
 
-                order.FinishTime = (DateTime)row["FinishTime"];
+                //order.FinishTime = (DateTime)row["FinishTime"];
                 return order;
             }
             else if (dt.Rows.Count > 1)

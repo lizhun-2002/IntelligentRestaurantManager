@@ -8,7 +8,7 @@ namespace IntelligentRestaurantManager.Model
 {
     public enum OrderStatus
     {
-        Start, Cancel, Finish
+        Start, Cancel, Processing, Finish
     }
 
     public class Order
