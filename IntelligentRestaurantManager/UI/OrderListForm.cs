@@ -14,78 +14,36 @@ namespace IntelligentRestaurantManager
     {
         //MenuItem[] waitingMenuItem = new MenuItem[100];
         int listbox1FlashTimerCount = 0;
-        int waitingLabelCount = 0;
-        List<MenuItem> waitingMenuItemList = new List<MenuItem>();
-        private class MenuItem
-        {
-            string type;
-            int id;
-            public MenuItem(string name, int i)
-            {
-                type = name;
-                id = i;
-            }
-            public string getFoodType()
-            {
-                return type;
-            }
-            public int getID()
-            {
-                return id;
-            }
+        List<Model.Order> newOrders = new List<Model.Order>();
+        List<Model.Order> procOrders = new List<Model.Order>();
+        List<Model.Order> finishedOrders = new List<Model.Order>();
+        IEnumerable<Model.Order> checker;
+        BLL.OrderManager myOrderManager = new BLL.OrderManager();
 
+        public void refreshLists()
+        {
+            listBox1.Items.Clear();
+            listBox2.Items.Clear();
+            listBox3.Items.Clear();
+            foreach (Model.Order o in newOrders) {
+                listBox1.Items.Add(o.OrderId + " " + o.Items[0].Name);
+            }
+            foreach (Model.Order o in procOrders)
+            {
+                listBox2.Items.Add(o.OrderId + " " + o.Items[0].Name);
+            }
+            foreach (Model.Order o in finishedOrders)
+            {
+                listBox3.Items.Add(o.OrderId + " " + o.Items[0].Name);
+            }
+            if (listBox3.Items.Count > 5)
+            {
+                listBox3.Items.RemoveAt(0);
+            }
         }
-        /*
-        public partial class MyLabel : Label
-        {
-            int id;
-            public MyLabel(string str, int i)
-            {
-                id = i;
-                this.Text = str;
-            }
-            public void setText(string str)
-            {
-                this.Text = str;
-            }
-        } */
-
         public OrderListForm()
         {
             InitializeComponent();
-            
-            //test code delete for final
-            this.addNewItem("Pasta", 1001);
-            this.addNewItem("Pizza", 1002);
-            this.addNewItem("Burger", 2131);
-            this.addNewItem("Burger", 2112);
-            this.addNewItem("Rice", 1121);
-            this.addNewItem("Rice", 1721);
-            this.addNewItem("Rice", 1127);
-            this.removeItem("Burger", 2131);
-        }
-
-        public void addNewItem(string str, int id)
-        {
-            // TODO : put network code for receiving new items
-            // use ID as way to cancel orders
-            MenuItem temp = new MenuItem(str, id);
-            waitingMenuItemList.Add(temp);
-            listBox1.Items.Add(temp.getFoodType() + " " + temp.getID());
-            listbox1FlashTimer.Enabled = true;
-        }
-
-        public void removeItem(string str, int id)
-        {
-            if (listBox1.Items.Contains(str + " " + id.ToString()))
-            {
-                listBox1.Items.Remove(str + " " + id.ToString());
-                // TODO : Signal successful removal
-            }
-            else
-            {
-                // TODO : Signal failure to remove
-            }
         }
         
         private void OrderListForm_Load(object sender, EventArgs e)
@@ -100,10 +58,18 @@ namespace IntelligentRestaurantManager
 
         private void listBox1_DoubleClick(object sender, EventArgs e)
         {
-            if (listBox1.SelectedItem != null) { 
+            /*if (listBox1.SelectedItem != null) { 
                 listBox2.Items.Add(listBox1.SelectedItem);
                 listBox1.Items.RemoveAt(listBox1.SelectedIndex);
-            }
+            }*/
+            string s = listBox1.SelectedItem.ToString();
+            string[] strarray = s.Split(' ');
+            Model.Order temp = myOrderManager.GetByOrderId(int.Parse(strarray[0]));
+            temp.OrderStatus = Model.OrderStatus.Processing;
+            myOrderManager.DeleteByOrderId(int.Parse(strarray[0]));
+            myOrderManager.AddNew(temp);
+
+            refreshLists();
         }
 
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -113,13 +79,19 @@ namespace IntelligentRestaurantManager
 
         private void listBox2_DoubleClick(object sender, EventArgs e)
         {
-            listBox3.Items.Add(listBox2.SelectedItem);
-            listBox2.Items.RemoveAt(listBox2.SelectedIndex);
+            /*listBox3.Items.Add(listBox2.SelectedItem);
+            listBox2.Items.RemoveAt(listBox2.SelectedIndex);*/
             if(listBox3.Items.Count > 5)
             {
                 listBox3.Items.RemoveAt(0);
             }
-            // TODO: put some kind of signalling mechanism here so waiters know the order is completed
+            string s = listBox2.SelectedItem.ToString();
+            string[] strarray = s.Split(' ');
+            Model.Order temp = myOrderManager.GetByOrderId(int.Parse(strarray[0]));
+            temp.OrderStatus = Model.OrderStatus.Finish;
+            myOrderManager.DeleteByOrderId(int.Parse(strarray[0]));
+            myOrderManager.AddNew(temp);
+            refreshLists();
         }
 
         private void listbox1FlashTimer_Tick(object sender, EventArgs e)
@@ -138,6 +110,36 @@ namespace IntelligentRestaurantManager
                 listbox1FlashTimerCount = 0;
                 listbox1FlashTimer.Enabled = false;
             }
+        }
+
+        private void orderCheckTimer_Tick(object sender, EventArgs e)
+        {
+            IEnumerable<Model.Order> temp;
+            temp = myOrderManager.GetAll();
+                        
+            newOrders.Clear();
+            procOrders.Clear();
+            finishedOrders.Clear();
+    
+            foreach (Model.Order o in temp){
+                if(o.OrderStatus == Model.OrderStatus.Start)
+                {
+                    newOrders.Add(o);
+                }
+                else if(o.OrderStatus == Model.OrderStatus.Processing){
+                    procOrders.Add(o);
+                }
+                else if (o.OrderStatus == Model.OrderStatus.Finish)
+                {
+                    finishedOrders.Add(o);
+                }
+            }
+            if (newOrders != checker)
+            {
+                listbox1FlashTimer.Enabled = true;
+            }
+            checker = newOrders;
+            refreshLists();
         }
     }
 }

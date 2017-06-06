@@ -101,7 +101,7 @@ namespace IntelligentRestaurantManager.DAL
                 item.Price = (decimal)row["Price"];
                 item.AverageTimeCost = (int)row["AverageTimeCost"];
                 item.Description = (string)row["Description"];
-                item.ItemStatus = (ItemStatus)row["ItemStatus"];
+                //item.ItemStatus = (ItemStatus)row["ItemStatus"];
                 return item;
             }
             else if (dt.Rows.Count > 1)
@@ -134,7 +134,7 @@ namespace IntelligentRestaurantManager.DAL
             {
                 Item item = new Item();
                 item = GetByItemId(itemIdArray[i]);
-                item.ItemStatus = (ItemStatus)itemStatusArray[i];
+                //item.ItemStatus = (ItemStatus)itemStatusArray[i];
                 list.Add(item);
             }
             return list;
