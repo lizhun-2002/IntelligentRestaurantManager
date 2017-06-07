@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TabelStatusForm));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.setTableStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.activeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,6 +45,7 @@
             this.closeDiningAreaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.waitingListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reservationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutIRMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyRightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -91,7 +93,7 @@
             this.labelTableIds = new System.Windows.Forms.Label();
             this.txtNoOfPeople = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.reservationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -109,7 +111,7 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.setTableStatusToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(170, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(170, 26);
             // 
             // setTableStatusToolStripMenuItem
             // 
@@ -140,7 +142,7 @@
             // cleaningToolStripMenuItem
             // 
             this.cleaningToolStripMenuItem.Name = "cleaningToolStripMenuItem";
-            this.cleaningToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cleaningToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.cleaningToolStripMenuItem.Text = "&Cleaning";
             this.cleaningToolStripMenuItem.Click += new System.EventHandler(this.cleaningToolStripMenuItem_Click);
             // 
@@ -149,12 +151,14 @@
             this.reservedToolStripMenuItem.Name = "reservedToolStripMenuItem";
             this.reservedToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.reservedToolStripMenuItem.Text = "&Reserved";
+            this.reservedToolStripMenuItem.Click += new System.EventHandler(this.reservedToolStripMenuItem_Click);
             // 
             // breakdownToolStripMenuItem
             // 
             this.breakdownToolStripMenuItem.Name = "breakdownToolStripMenuItem";
             this.breakdownToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.breakdownToolStripMenuItem.Text = "&Breakdown";
+            this.breakdownToolStripMenuItem.Click += new System.EventHandler(this.breakdownToolStripMenuItem_Click);
             // 
             // menuStrip1
             // 
@@ -211,9 +215,16 @@
             // waitingListToolStripMenuItem
             // 
             this.waitingListToolStripMenuItem.Name = "waitingListToolStripMenuItem";
-            this.waitingListToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.waitingListToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.waitingListToolStripMenuItem.Text = "&Waiting List";
             this.waitingListToolStripMenuItem.Click += new System.EventHandler(this.waitingListToolStripMenuItem_Click);
+            // 
+            // reservationToolStripMenuItem
+            // 
+            this.reservationToolStripMenuItem.Name = "reservationToolStripMenuItem";
+            this.reservationToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.reservationToolStripMenuItem.Text = "&Reservation";
+            this.reservationToolStripMenuItem.Click += new System.EventHandler(this.reservationToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -503,6 +514,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.btnRefresh);
             this.groupBox3.Controls.Add(this.dgvSelectedItems);
             this.groupBox3.Controls.Add(this.btnSaveOrder);
             this.groupBox3.Controls.Add(this.txtOrderId);
@@ -688,12 +700,16 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(353, 697);
             this.flowLayoutPanel1.TabIndex = 43;
             // 
-            // reservationToolStripMenuItem
+            // btnRefresh
             // 
-            this.reservationToolStripMenuItem.Name = "reservationToolStripMenuItem";
-            this.reservationToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.reservationToolStripMenuItem.Text = "&Reservation";
-            this.reservationToolStripMenuItem.Click += new System.EventHandler(this.reservationToolStripMenuItem_Click);
+            this.btnRefresh.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefresh.Location = new System.Drawing.Point(80, 420);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(144, 30);
+            this.btnRefresh.TabIndex = 54;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // TabelStatusForm
             // 
@@ -704,6 +720,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "TabelStatusForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -793,6 +810,7 @@
         private System.Windows.Forms.ToolStripMenuItem systemToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeDiningAreaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reservationToolStripMenuItem;
+        private System.Windows.Forms.Button btnRefresh;
     }
 }
 

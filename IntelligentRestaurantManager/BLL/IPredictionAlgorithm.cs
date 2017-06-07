@@ -8,8 +8,9 @@ using IntelligentRestaurantManager.DAL;
 
 namespace IntelligentRestaurantManager.BLL
 {
-    interface IPredictionAlgorithm
+    public interface IPredictionAlgorithm
     {
         void PredictWaitingTime(List<Table> ptables, List<Customer> pcustomers);
+        void PredictWaitingTimeReg(List<Table> tables, List<Customer> customers, List<Order> orders, List<Order> finishedOrders, List<Item> allItem);
     }
 }

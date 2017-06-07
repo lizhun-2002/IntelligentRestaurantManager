@@ -19,6 +19,7 @@ namespace IntelligentRestaurantManager.UI
         private StaffManager staffManager;
         private TableManager tableManager;
         private ItemManager itemManager;
+        private OrderManager orderManager;
         //WaitlistForm is a part of waiter main form, so...it's here
         WaitlistForm waitlistForm;
 
@@ -29,6 +30,10 @@ namespace IntelligentRestaurantManager.UI
             staffManager = new StaffManager();
             tableManager = new TableManager();
             itemManager = new ItemManager();
+            orderManager = new OrderManager();
+
+            diningArea.AWaitingTimePredictor.PredictWaitingTimeReg(diningArea.Tables, diningArea.Customers, diningArea.Orders, (List<Order>)orderManager.GetByOrderStatus(OrderStatus.Finish), (List<Item>)itemManager.GetAll());
+
             this.Text = this.Text + string.Format("  ({0}: {1})", diningArea.CurrentStaff.Role, diningArea.CurrentStaff.Name);
             InitTablePosition_Simple();
 
@@ -98,6 +103,18 @@ namespace IntelligentRestaurantManager.UI
                 btn.Width = 80;
                 btn.Height = 80;
                 btn.Text = i.ToString("000") + "_" + diningArea.Tables[i - 1].Capacity.ToString();
+                if (diningArea.Tables[i - 1].CountDown > System.Data.SqlTypes.SqlDateTime.MinValue.Value && diningArea.Tables[i - 1].CountDown < System.Data.SqlTypes.SqlDateTime.MaxValue.Value)
+                {
+                    TimeSpan ts = diningArea.Tables[i - 1].CountDown - DateTime.Now;
+                    if (diningArea.Tables[i - 1].CountDown < DateTime.Now)
+                    {
+                        btn.Text = btn.Text + "\n\n" + ("00:00:00");
+                    }
+                    else
+                    {
+                        btn.Text = btn.Text + "\n\n" + ts.ToString(@"hh\:mm\:ss");
+                    }
+                }
                 btn.BackColor = SetTableBackColor(diningArea.Tables[i - 1].TableStatus);
                 btn.ForeColor = Color.Black;
                 btn.TextAlign = ContentAlignment.TopCenter;
@@ -354,17 +371,21 @@ namespace IntelligentRestaurantManager.UI
 
         }
 
+
+        #region RightClickTableMenu actions
+
         private void activeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Table table = contextMenuStrip1.Tag as Table;
             Waiter waiter = diningArea.CurrentStaff as Waiter;
             Order order = new OrderManager().GetByOrderId(table.OrderId);
-            bool flag = waiter.SetTableStatus(table, TableStatus.Active);
-            if (order.OrderStatus == OrderStatus.Start)
+            if (order != null && order.OrderStatus == OrderStatus.Start)
             {
                 MessageBox.Show("Please finish or cancel order first!");
+                return;
             }
-            else if (flag == true)
+            bool flag = waiter.SetTableStatus(table, TableStatus.Active);
+            if (flag == true)
             {
                 //clear data
                 table.CountDown = System.Data.SqlTypes.SqlDateTime.MinValue.Value;
@@ -372,7 +393,7 @@ namespace IntelligentRestaurantManager.UI
                 table.CustomerId = -1;
                 table.WaiterName = "";
                 table.OrderId = -1;
-                new TableManager().Update(table); 
+                new TableManager().Update(table);
 
                 //clean UI
                 comboBoxTableStatus.SelectedIndex = (int)table.TableStatus;
@@ -389,7 +410,7 @@ namespace IntelligentRestaurantManager.UI
                 this.flowLayoutPanel1.Controls.Clear();
                 InitTablePosition_Simple();
             }
-            if (flag == false) MessageBox.Show("Failed!");
+            else MessageBox.Show("Failed!");
         }
 
         private void cleaningToolStripMenuItem_Click(object sender, EventArgs e)
@@ -397,12 +418,13 @@ namespace IntelligentRestaurantManager.UI
             Table table = contextMenuStrip1.Tag as Table;
             Waiter waiter = diningArea.CurrentStaff as Waiter;
             Order order = new OrderManager().GetByOrderId(table.OrderId);
-            bool flag = waiter.SetTableStatus(table, TableStatus.Cleaning);
-            if (order.OrderStatus == OrderStatus.Start)
+            if (order != null && order.OrderStatus == OrderStatus.Start)
             {
                 MessageBox.Show("Please finish or cancel order first!");
+                return;
             }
-            else if (flag == true)
+            bool flag = waiter.SetTableStatus(table, TableStatus.Cleaning);
+            if (flag == true)
             {
                 //clear data
                 table.CountDown = DateTime.Now.AddMinutes(5);
@@ -427,7 +449,93 @@ namespace IntelligentRestaurantManager.UI
                 this.flowLayoutPanel1.Controls.Clear();
                 InitTablePosition_Simple();
             }
-            if (flag == false) MessageBox.Show("Failed!");
+            else MessageBox.Show("Failed!");
+        }
+
+        private void reservedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Table table = contextMenuStrip1.Tag as Table;
+            Waiter waiter = diningArea.CurrentStaff as Waiter;
+            Order order = new OrderManager().GetByOrderId(table.OrderId);
+            if (order != null && order.OrderStatus == OrderStatus.Start)
+            {
+                MessageBox.Show("Please finish or cancel order first!");
+                return;
+            }
+            bool flag = waiter.SetTableStatus(table, TableStatus.Reserved);
+            if (flag == true)
+            {
+                //clear data
+                //table.CountDown = DateTime.Now.AddMinutes(5);
+                table.ReservationInfo = "";
+                table.CustomerId = -1;
+                table.WaiterName = "";
+                table.OrderId = -1;
+                new TableManager().Update(table);
+
+                //clean UI
+                comboBoxTableStatus.SelectedIndex = (int)table.TableStatus;
+                comboBoxWaiterName.Text = table.WaiterName;
+                txtCustomerId.Text = table.CustomerId.ToString();
+                txtResInfo.Text = table.ReservationInfo;
+
+                txtOrderId.Text = "-1";
+                txtNoOfPeople.Text = "";
+                txtTableIds.Text = "";
+                comboBoxOrderStatus.DataSource = null;
+                dgvSelectedItems.DataSource = new BindingList<Item>();
+
+                this.flowLayoutPanel1.Controls.Clear();
+                InitTablePosition_Simple();
+            }
+            else MessageBox.Show("Failed!");
+        }
+
+        private void breakdownToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Table table = contextMenuStrip1.Tag as Table;
+            Waiter waiter = diningArea.CurrentStaff as Waiter;
+            Order order = new OrderManager().GetByOrderId(table.OrderId);
+            if (order != null && order.OrderStatus == OrderStatus.Start)
+            {
+                MessageBox.Show("Please finish or cancel order first!");
+                return;
+            }
+            bool flag = waiter.SetTableStatus(table, TableStatus.Breakdown);
+            if (flag == true)
+            {
+                //clear data
+                table.CountDown = System.Data.SqlTypes.SqlDateTime.MaxValue.Value;
+                table.ReservationInfo = "";
+                table.CustomerId = -1;
+                table.WaiterName = "";
+                table.OrderId = -1;
+                new TableManager().Update(table);
+
+                //clean UI
+                comboBoxTableStatus.SelectedIndex = (int)table.TableStatus;
+                comboBoxWaiterName.Text = table.WaiterName;
+                txtCustomerId.Text = table.CustomerId.ToString();
+                txtResInfo.Text = table.ReservationInfo;
+
+                txtOrderId.Text = "-1";
+                txtNoOfPeople.Text = "";
+                txtTableIds.Text = "";
+                comboBoxOrderStatus.DataSource = null;
+                dgvSelectedItems.DataSource = new BindingList<Item>();
+
+                this.flowLayoutPanel1.Controls.Clear();
+                InitTablePosition_Simple();
+            }
+            else MessageBox.Show("Failed!");
+        }
+        #endregion
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            diningArea.AWaitingTimePredictor.PredictWaitingTimeReg(diningArea.Tables, diningArea.Customers, diningArea.Orders, (List<Order>)orderManager.GetByOrderStatus(OrderStatus.Finish), (List<Item>)itemManager.GetAll());
+            this.flowLayoutPanel1.Controls.Clear();
+            InitTablePosition_Simple();
         }
 
 

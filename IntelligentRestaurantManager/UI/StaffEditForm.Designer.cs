@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StaffEditForm));
             this.comboBoxRole = new System.Windows.Forms.ComboBox();
             this.labelRole = new System.Windows.Forms.Label();
             this.labelName = new System.Windows.Forms.Label();
@@ -125,6 +126,7 @@
             this.Controls.Add(this.labelName);
             this.Controls.Add(this.comboBoxRole);
             this.Controls.Add(this.labelRole);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "StaffEditForm";
             this.Text = "Input Staff Information";
             this.ResumeLayout(false);

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WaitinglistScreenForm));
             this.lbNumWaiting = new System.Windows.Forms.Label();
             this.lbWaitingPerson = new System.Windows.Forms.ListBox();
             this.lbCurrentTime = new System.Windows.Forms.Label();
@@ -75,6 +76,7 @@
             this.Controls.Add(this.lbCurrentTime);
             this.Controls.Add(this.lbWaitingPerson);
             this.Controls.Add(this.lbNumWaiting);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "WaitinglistScreenForm";
             this.Text = "WaitinglistScreenForm";
             this.Load += new System.EventHandler(this.WaitinglistScreenForm_Load);

@@ -8,7 +8,7 @@ using IntelligentRestaurantManager.DAL;
 
 namespace IntelligentRestaurantManager.BLL
 {
-    interface IPlacementAlgorithm
+    public interface IPlacementAlgorithm
     {
         void flood_fill(List<Table> ptables, Table tb, HashSet<int> visited, List<int> partition);
         int n_flood_fill(List<Table> ptables, Table curr_table, HashSet<int> prev_visited, HashSet<int> new_visited);

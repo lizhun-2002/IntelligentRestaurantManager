@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TableEditForm));
             this.labelCapacity = new System.Windows.Forms.Label();
             this.labelTabelId = new System.Windows.Forms.Label();
             this.labelLink1 = new System.Windows.Forms.Label();
@@ -193,6 +194,7 @@
             this.Controls.Add(this.labelLink1);
             this.Controls.Add(this.labelCapacity);
             this.Controls.Add(this.labelTabelId);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "TableEditForm";
             this.Text = "Input Table Information";
             ((System.ComponentModel.ISupportInitialize)(this.nudTableId)).EndInit();

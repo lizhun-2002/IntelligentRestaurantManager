@@ -15,8 +15,8 @@ namespace IntelligentRestaurantManager.BLL
         public List<Order> Orders { get; set; }
         public List<Customer> Customers { get; set; }
         public List<Staff> Waiters { get; set; }
-        IPlacementAlgorithm APlacementOptimizer { get; set; }
-        IPredictionAlgorithm AWaitingTimePredictor { get; set; }
+        public IPlacementAlgorithm APlacementOptimizer { get; set; }
+        public IPredictionAlgorithm AWaitingTimePredictor { get; set; }
 
         public DiningArea(Staff staff)
         {

@@ -86,7 +86,7 @@ namespace IntelligentRestaurantManager.DAL
         public IEnumerable<Order> GetByOrderDate(DateTime date)
         {
             DataTable dt = new DataTable();
-            dt = SQLHelper.ExecuteDataTable("select * from T_OrderFlow where [StartTime]=@StartTime", new SqlParameter("StartTime", date));
+            dt = SQLHelper.ExecuteDataTable("select * from T_OrderFlow where datediff(day,[StartTime],@StartTime)=0", new SqlParameter("StartTime", date));
             List<Order> list = new List<Order>();
             foreach (DataRow row in dt.Rows)
             {

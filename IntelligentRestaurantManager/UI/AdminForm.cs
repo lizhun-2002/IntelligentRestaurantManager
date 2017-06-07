@@ -18,6 +18,7 @@ namespace IntelligentRestaurantManager.UI
         private StaffManager staffManager;
         private TableManager tableManager;
         private ItemManager itemManager;
+        private OrderManager orderManager;
 
         public AdminForm(DiningArea diningArea)
         {
@@ -27,6 +28,7 @@ namespace IntelligentRestaurantManager.UI
             staffManager = new StaffManager();
             tableManager = new TableManager();
             itemManager = new ItemManager();
+            orderManager = new OrderManager();
             this.Text = this.Text + string.Format("  ({0}: {1})", diningArea.CurrentStaff.Role, diningArea.CurrentStaff.Name);
         }
 
@@ -46,7 +48,11 @@ namespace IntelligentRestaurantManager.UI
             dgvItem.ReadOnly = true;
             dgvItem.Columns["ItemStatus"].Visible = false;
             dgvItem.Columns["ItemAmount"].Visible = false;
-        }
+            monthCalendar1.Visible = false;
+            dgvStatistics.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvStatistics.ReadOnly = true;
+            dgvStatistics.AllowUserToAddRows = false;
+       }
 
         #region Staff tab
         private void btnAddStaff_Click(object sender, EventArgs e)
@@ -81,7 +87,7 @@ namespace IntelligentRestaurantManager.UI
             //if update success
             if (staff != null)
             {
-                StaffEditForm staffEditForm = new StaffEditForm(staff,diningArea);
+                StaffEditForm staffEditForm = new StaffEditForm(staff, diningArea);
                 if (staffEditForm.ShowDialog() == DialogResult.OK)
                 {
                     dgvStaff.DataSource = staffManager.GetAll();
@@ -176,5 +182,65 @@ namespace IntelligentRestaurantManager.UI
             }
         }
         #endregion
+
+        #region Item statistics
+        private class OrderStatistics
+        {
+            public int OrderId{get; set;}
+            public int NumberOfPeople { get; set; }
+            public decimal TotalAmount { get; set; }
+            public DateTime StartTime { get; set; }
+            public DateTime FinishTime { get; set; }
+        }
+
+        private void btnQuery_Click(object sender, EventArgs e)
+        {
+            DateTime date;
+            try
+            {
+                date = DateTime.Parse(txtDate.Text);
+            }
+            catch (Exception)
+            {
+                return;
+            }
+            List<Order> orders = (List<Order>)orderManager.GetByOrderDate(date);
+            List<OrderStatistics> orderStatistics = new List<OrderStatistics>();
+            foreach (Order order in orders)
+            {
+                OrderStatistics oS = new OrderStatistics();
+                oS.OrderId = order.OrderId;
+                oS.NumberOfPeople = order.NumberofPeople;
+                oS.TotalAmount = order.Items.Select(it => it.Price * it.ItemAmount).Sum();
+                oS.StartTime = order.StartTime;
+                oS.FinishTime = order.FinishTime;
+                orderStatistics.Add(oS);
+            }
+            dgvStatistics.DataSource = new BindingList<OrderStatistics>(orderStatistics);
+            txtTurnover.Text = orderStatistics.Select(os => os.TotalAmount).Sum().ToString();
+            txtCustomerVolume.Text = orderStatistics.Select(os => os.NumberOfPeople).Sum().ToString();
+        }
+
+        private void txtDate_Enter(object sender, EventArgs e)
+        {
+            if (monthCalendar1.Visible == true)
+            {
+                monthCalendar1.Visible = false;
+            }
+            else
+            {
+                monthCalendar1.Visible = true;
+            }
+        }
+
+        private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            monthCalendar1.Visible = false;
+            txtDate.Text = monthCalendar1.SelectionStart.ToString("yyyy-MM-dd");
+        }
+
+        #endregion
+
+
     }
 }

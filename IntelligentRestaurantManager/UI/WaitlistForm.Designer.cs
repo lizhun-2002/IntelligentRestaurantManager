@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WaitlistForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnRemove = new System.Windows.Forms.Button();
@@ -287,6 +288,7 @@
             this.ClientSize = new System.Drawing.Size(491, 538);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "WaitlistForm";
             this.Text = "Waiting List";
             this.panel1.ResumeLayout(false);

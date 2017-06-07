@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProfileEditForm));
             this.txtNewPass = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
             this.labelPass = new System.Windows.Forms.Label();
@@ -145,6 +146,7 @@
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.labelPass);
             this.Controls.Add(this.labelName);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ProfileEditForm";
             this.Text = "My Profile";
             this.ResumeLayout(false);

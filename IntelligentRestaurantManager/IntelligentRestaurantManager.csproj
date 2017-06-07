@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>图片1.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -58,7 +61,21 @@
     <Compile Include="BLL\TableManager.cs" />
     <Compile Include="BLL\Waiter.cs" />
     <Compile Include="BLL\WaitingTimePredictor.cs" />
+    <Compile Include="Common\alglibinternal.cs" />
+    <Compile Include="Common\alglibmisc.cs" />
+    <Compile Include="Common\alglib_info.cs" />
+    <Compile Include="Common\ap.cs" />
+    <Compile Include="Common\dataanalysis.cs" />
     <Compile Include="Common\DataValidity.cs" />
+    <Compile Include="Common\diffequations.cs" />
+    <Compile Include="Common\fasttransforms.cs" />
+    <Compile Include="Common\integration.cs" />
+    <Compile Include="Common\interpolation.cs" />
+    <Compile Include="Common\linalg.cs" />
+    <Compile Include="Common\optimization.cs" />
+    <Compile Include="Common\solvers.cs" />
+    <Compile Include="Common\specialfunctions.cs" />
+    <Compile Include="Common\statistics.cs" />
     <Compile Include="DAL\CustomerService.cs" />
     <Compile Include="DAL\ItemService.cs" />
     <Compile Include="DAL\OrderService.cs">
@@ -80,12 +97,6 @@
     </Compile>
     <Compile Include="UI\ItemEditForm.Designer.cs">
       <DependentUpon>ItemEditForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\OrderEditForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\OrderEditForm.Designer.cs">
-      <DependentUpon>OrderEditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\OrderListForm.cs">
       <SubType>Form</SubType>
@@ -130,12 +141,6 @@
     <Compile Include="UI\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\TableEditForm%28old version%29.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\TableEditForm%28old version%29.Designer.cs">
-      <DependentUpon>TableEditForm%28old version%29.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\TableEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -159,9 +164,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ItemEditForm.resx">
       <DependentUpon>ItemEditForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\OrderEditForm.resx">
-      <DependentUpon>OrderEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\OrderListForm.resx">
       <DependentUpon>OrderListForm.cs</DependentUpon>
@@ -190,9 +192,6 @@
     <EmbeddedResource Include="UI\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\TableEditForm%28old version%29.resx">
-      <DependentUpon>TableEditForm%28old version%29.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UI\TableEditForm.resx">
       <DependentUpon>TableEditForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -217,7 +216,10 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="bitbug_favicon.ico" />
+    <Content Include="图片1.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

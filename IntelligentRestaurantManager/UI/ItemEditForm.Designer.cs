@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ItemEditForm));
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
             this.txtDescription = new System.Windows.Forms.TextBox();
@@ -191,6 +192,7 @@
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.labelPass);
             this.Controls.Add(this.labelName);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ItemEditForm";
             this.Text = "Input Item Information";
             ((System.ComponentModel.ISupportInitialize)(this.nudPrice)).EndInit();
