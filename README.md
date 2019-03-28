@@ -7,6 +7,7 @@ It optimizes seat placement during busy hours and offloads work from managing pe
 The system provides four seperate modules for the manager, waiter, cook, and guest.
 
 *  Login
+
     ![](./README/login.png)
 
 *  Manager module
