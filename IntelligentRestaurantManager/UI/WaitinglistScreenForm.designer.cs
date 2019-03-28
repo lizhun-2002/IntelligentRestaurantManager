@@ -52,9 +52,9 @@
             this.lbWaitingPerson.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbWaitingPerson.FormattingEnabled = true;
             this.lbWaitingPerson.ItemHeight = 23;
-            this.lbWaitingPerson.Location = new System.Drawing.Point(0, 144);
+            this.lbWaitingPerson.Location = new System.Drawing.Point(0, 135);
             this.lbWaitingPerson.Name = "lbWaitingPerson";
-            this.lbWaitingPerson.Size = new System.Drawing.Size(409, 391);
+            this.lbWaitingPerson.Size = new System.Drawing.Size(489, 529);
             this.lbWaitingPerson.TabIndex = 1;
             // 
             // lbCurrentTime
@@ -72,12 +72,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(409, 535);
+            this.ClientSize = new System.Drawing.Size(489, 664);
             this.Controls.Add(this.lbCurrentTime);
             this.Controls.Add(this.lbWaitingPerson);
             this.Controls.Add(this.lbNumWaiting);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "WaitinglistScreenForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WaitinglistScreenForm";
             this.Load += new System.EventHandler(this.WaitinglistScreenForm_Load);
             this.ResumeLayout(false);
