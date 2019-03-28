@@ -13,7 +13,7 @@ The system provides four seperate modules for the manager, waiter, cook, and gue
 ![](./README/manager.png)
 
 *  Waiter module
-  * Manage waiting list and assign seats automatically 
-  ![](./README/waiting_list.png)
-  * Manage orders and table status
-  ![](./README/waiter.png)
+    * Manage waiting list and assign seats automatically 
+    ![](./README/waiting_list.png)
+    * Manage orders and table status
+    ![](./README/waiter.png)
